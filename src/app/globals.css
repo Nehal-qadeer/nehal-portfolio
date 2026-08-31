@@ -5,6 +5,33 @@
 :root {
   --tw-grid-line: rgba(237, 241, 247, 0.05);
   color-scheme: dark;
+  --color-ink: #0D1420;
+  --color-panel: #141C2B;
+  --color-panel-raised: #1B2438;
+  --color-line: #24304A;
+  --color-text: #EDF1F7;
+  --color-text-muted: #8C99AF;
+  --color-text-faint: #5B6780;
+  --color-signal: #E8A33D;
+  --color-signal-dim: #8A6428;
+  --color-verify: #6FE3D9;
+  --color-verify-dim: #3D8B84;
+}
+
+html.light-mode, :root.light-mode {
+  --tw-grid-line: rgba(15, 23, 42, 0.06);
+  color-scheme: light;
+  --color-ink: #F4F6F9;
+  --color-panel: #FFFFFF;
+  --color-panel-raised: #EAEFF6;
+  --color-line: #D0D9E6;
+  --color-text: #0F172A;
+  --color-text-muted: #475569;
+  --color-text-faint: #8292A6;
+  --color-signal: #D97706;
+  --color-signal-dim: #B45309;
+  --color-verify: #0D9488;
+  --color-verify-dim: #115E59;
 }
 
 * {

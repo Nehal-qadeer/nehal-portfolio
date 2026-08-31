@@ -6,22 +6,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#0D1420",
-        panel: "#141C2B",
-        "panel-raised": "#1B2438",
-        line: "#24304A",
+        ink: "var(--color-ink)",
+        panel: "var(--color-panel)",
+        "panel-raised": "var(--color-panel-raised)",
+        line: "var(--color-line)",
         text: {
-          DEFAULT: "#EDF1F7",
-          muted: "#8C99AF",
-          faint: "#5B6780"
+          DEFAULT: "var(--color-text)",
+          muted: "var(--color-text-muted)",
+          faint: "var(--color-text-faint)"
         },
         signal: {
-          DEFAULT: "#E8A33D",
-          dim: "#8A6428"
+          DEFAULT: "var(--color-signal)",
+          dim: "var(--color-signal-dim)"
         },
         verify: {
-          DEFAULT: "#6FE3D9",
-          dim: "#3D8B84"
+          DEFAULT: "var(--color-verify)",
+          dim: "var(--color-verify-dim)"
         }
       },
       fontFamily: {
