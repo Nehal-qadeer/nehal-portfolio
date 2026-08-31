@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArchitectureFlowCard } from "@/components/ui/ArchitectureFlowCard";
+import { MorphingPipelineVisualizer } from "@/components/ui/MorphingPipelineVisualizer";
 import { profile } from "@/data/profile";
 import { MapPin, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 
@@ -106,9 +106,9 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right Column: Clear Visual Architecture Flow Card */}
+          {/* Right Column: Interactive Morphing Pipeline Visualizer */}
           <div className="w-full flex items-center justify-center">
-            <ArchitectureFlowCard />
+            <MorphingPipelineVisualizer />
           </div>
         </div>
       </div>
