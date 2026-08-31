@@ -46,16 +46,25 @@ export function TerminalContact() {
       output = (
         <div className="space-y-1 text-ash font-mono text-xs">
           <p className="text-bone font-semibold">Core Stack:</p>
-          <p>• <strong className="text-amber">AI/CV:</strong> PyTorch, OpenCV, Intel OpenVINO (Inference Quantization)</p>
+          <p>• <strong className="text-amber">AI/CV:</strong> Ultralytics YOLOv8, PyTorch, OpenCV, Intel OpenVINO Toolkit (25+ FPS CPU Optimization)</p>
           <p>• <strong className="text-amber">Automation:</strong> Python, Selenium WebDriver, Apify REST API, Make.com, Zapier</p>
           <p>• <strong className="text-amber">Data & Infra:</strong> PostgreSQL, MySQL, Redis, Docker, Linux CLI, Git</p>
+        </div>
+      );
+    } else if (cleanCmd === "thesis" || cleanCmd === "game") {
+      output = (
+        <div className="space-y-1 text-ash font-mono text-xs">
+          <p className="text-amber font-semibold">🎮 Object Detection Game for Hearing-Impaired Children</p>
+          <p>• Purpose: AI visual recognition educational tool to bridge communication gap without audio cues.</p>
+          <p>• Architecture: Custom YOLOv8 + Intel OpenVINO (25+ FPS on standard CPU) + PyQt6 desktop interface.</p>
+          <p>• Run Command: <span className="text-amber font-bold">pip install opencv-python ultralytics openvino pyqt6</span></p>
         </div>
       );
     } else if (cleanCmd === "projects") {
       output = (
         <div className="space-y-1 text-ash font-mono text-xs">
           <p className="text-bone font-semibold">Key Systems:</p>
-          <p>1. <span className="text-amber">AI-Driven Object Verification System</span> (Master&apos;s Thesis · OpenVINO 30% speedup)</p>
+          <p>1. <span className="text-amber">🎮 Object Detection Game for Hearing-Impaired Children</span> (Master&apos;s Thesis · YOLOv8 + OpenVINO 25+ FPS)</p>
           <p>2. <span className="text-amber">Multi-Platform Scraping & Ingestion Engine</span> (Apify + PostgreSQL · 3.4K recs/run)</p>
           <p>3. <span className="text-amber">Application Tracker & Satellite Tracker</span> (Zapier OAuth + Redis State)</p>
         </div>
@@ -69,6 +78,7 @@ export function TerminalContact() {
         <div className="space-y-1 text-ash font-mono text-xs">
           <p>Supported commands:</p>
           <p>• <strong className="text-amber">contact --initiate</strong> : Open direct email form</p>
+          <p>• <strong className="text-amber">thesis</strong> : Inspect Master&apos;s Thesis Object Detection Game</p>
           <p>• <strong className="text-bone">skills</strong> : View technical capabilities</p>
           <p>• <strong className="text-bone">projects</strong> : View selected engineering case studies</p>
           <p>• <strong className="text-bone">clear</strong> : Reset console screen</p>

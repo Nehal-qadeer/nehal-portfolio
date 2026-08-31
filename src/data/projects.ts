@@ -1,73 +1,89 @@
 export interface Project {
   slug: string;
   title: string;
-  period: string;
-  durationBadge: string;
-  category: string;
-  stack: string[];
+  badge: string;
+  role: string;
+  metric: string;
+  metricDesc: string;
   summary: string;
-  highlights: string[];
-  metrics: { label: string; value: string };
+  purpose?: string;
+  features: string[];
+  techStack: string[];
+  gameSteps?: { step: string; title: string; desc: string }[];
+  repoStructure?: { dir: string; desc: string }[];
+  installCommand?: string;
   repos: { label: string; url: string }[];
-  visual: "scan" | "network" | "flow";
 }
 
 export const projects: Project[] = [
   {
-    slug: "object-verification",
-    title: "AI-Driven Object Verification System",
-    period: "May 2025 — Nov 2025",
-    durationBadge: "Master's Thesis · 6 Months",
-    category: "Computer Vision & Model Optimization",
-    stack: ["Python", "PyTorch", "OpenCV", "Intel OpenVINO", "Docker", "PyCharm"],
+    slug: "object-detection-game",
+    title: "🎮 Object Detection Game for Hearing-Impaired Children",
+    badge: "Master's Thesis · AI Assistive Education",
+    role: "Computer Vision & CPU Optimization",
+    metric: "25+ FPS",
+    metricDesc: "CPU Optimized (Intel OpenVINO)",
     summary:
-      "End-to-end computer vision verification pipeline. Preprocesses image streams via OpenCV, trains PyTorch deep learning models, and cuts latency by 30% through Intel OpenVINO runtime quantization.",
-    highlights: [
-      "Built full preprocessing and training pipeline in PyCharm using OpenCV & PyTorch.",
-      "Optimized inference runtime with Intel OpenVINO for a 30% latency reduction.",
-      "Containerized preprocessing + serving into lightweight, portable Docker containers."
+      "An interactive educational tool using AI to bridge the communication gap through visual recognition. Built as an engaging detection game for children with hearing impairments to learn and identify surrounding objects without relying on audio cues.",
+    purpose:
+      "Developed to help children with hearing impairments learn and identify objects in their surroundings through an engaging 'Detection Game' providing instant visual reinforcement.",
+    features: [
+      "Live Detection: Real-time object recognition using a custom YOLOv8 model.",
+      "CPU Optimized: Integrated with Intel OpenVINO Toolkit to ensure 25+ FPS smooth gameplay on standard laptops without needing a dedicated GPU.",
+      "Interactive UI: User-friendly, accessible desktop interface built with PyQt6 and OpenCV.",
+      "Learning Reinforcement: Immediate large visual labels upon detection, providing effective educational reinforcement."
     ],
-    metrics: { label: "Inference Speedup", value: "-30% Latency" },
-    repos: [],
-    visual: "scan"
+    gameSteps: [
+      { step: "Step 01", title: "Target Environment", desc: "The child points the webcam/camera at an everyday object in their surroundings." },
+      { step: "Step 02", title: "YOLOv8 + OpenVINO Inference", desc: "The AI detects the object in real-time from its saved library of trained neural models at 25+ FPS on standard CPU." },
+      { step: "Step 03", title: "Visual Capture & Label", desc: "The game 'captures' the object and displays the name in a large, easy-to-read font for clear visual reinforcement." }
+    ],
+    repoStructure: [
+      { dir: "/Object-Detector", desc: "Core computer vision logic & YOLOv8/OpenVINO inference pipeline" },
+      { dir: "/frontend", desc: "Accessible desktop graphical user interface built with PyQt6" },
+      { dir: "/models", desc: "Trained YOLOv8 weights and OpenVINO IR optimized files" }
+    ],
+    installCommand: "pip install opencv-python ultralytics openvino pyqt6",
+    techStack: ["Python 3.10+", "Ultralytics YOLOv8", "Intel OpenVINO", "PyQt6", "OpenCV"],
+    repos: []
   },
   {
     slug: "scraping-engine",
     title: "Multi-Platform Scraping & Ingestion Engine",
-    period: "2025 — 2026",
-    durationBadge: "Independent Production System",
-    category: "Python Automation & Cloud Data Pipelines",
-    stack: ["Python", "Selenium WebDriver", "Apify REST API", "Make.com", "PostgreSQL"],
+    badge: "Production Data Architecture",
+    role: "Python Automation & Cloud Pipelines",
+    metric: "2K–4K Records",
+    metricDesc: "Harvested per Run",
     summary:
-      "High-volume data harvesting infrastructure. Deploys custom Python Selenium scrapers as cloud Apify Actors with Make.com JSON validation, ingesting 2,000–4,000 normalized commercial records per run into PostgreSQL.",
-    highlights: [
-      "Deployed custom Python scrapers as cloud Apify Actors running on scheduled cron intervals.",
+      "High-throughput automated data harvesting infrastructure. Deploys custom Python Selenium scrapers as cloud Apify Actors with automated cron triggers, Make.com JSON validation, and direct PostgreSQL relational database storage.",
+    features: [
+      "Deployed custom Python Selenium scrapers as cloud Apify Actors with dynamic pagination & anti-bot bypass.",
       "Engineered Make.com scenarios with JSON transformation logic to parse, clean, and validate payloads.",
-      "Wired automated storage directly into PostgreSQL relational databases to power analytical dashboards."
+      "Wired storage directly into PostgreSQL relational databases to power analytical dashboards."
     ],
-    metrics: { label: "Harvest Velocity", value: "2K–4K Records / Run" },
+    techStack: ["Python 3", "Selenium WebDriver", "Apify REST API", "Make.com", "PostgreSQL"],
     repos: [
       { label: "Booking.com Dynamic Scraper", url: "https://github.com/Nehal-qadeer/Booking-Automation-Selenium" },
       { label: "Lead-Gen Business Extractor", url: "https://github.com/Nehal-qadeer/Yell-Business-Data-Extractor" }
-    ],
-    visual: "network"
+    ]
   },
   {
-    slug: "application-tracker",
-    title: "Multi-App Workflow Automation — Application Tracker",
-    period: "2026",
-    durationBadge: "No-Code / Pro-Code Automation",
-    category: "Workflow Automation & API Integration",
-    stack: ["Zapier", "Google Workspace APIs", "Webhooks", "OAuth 2.0", "Gmail API"],
+    slug: "automation-satellite",
+    title: "Application Tracker Automation & Satellite Tracking System",
+    badge: "Full-Stack Caching & Process Flow",
+    role: "Systems Integration & Real-Time State",
+    metric: "Real-Time / 100%",
+    metricDesc: "Automated & Redis Cached",
     summary:
-      "Seamless 4-app automation pipeline. Ingests Google Form submissions into Google Sheets, schedules Google Calendar follow-ups, and dispatches personalized Gmail notifications with zero manual handling.",
-    highlights: [
-      "Architected a 4-step Zapier flow: Google Forms → Sheets → Calendar → Gmail, fully automated.",
-      "Authored custom inline transformation formulas mapping multi-variable payload fields.",
-      "Configured multi-account OAuth authentication with end-to-end data integrity validation."
+      "Dual systems engineering: A 4-step multi-app Zapier workflow with OAuth webhooks (Forms ➔ Sheets ➔ Calendar ➔ Gmail) combined with a full-stack real-time Satellite Tracking system leveraging Node.js, React, and Redis as the distributed state and cache layer.",
+    features: [
+      "Architected 4-app Zapier automation pipeline: Google Forms ➔ Sheets ➔ Calendar ➔ Gmail with inline formula mapping.",
+      "Configured multi-account OAuth authentication with end-to-end data integrity validation.",
+      "Built full-stack real-time tracking architecture using Redis as the shared caching/state layer between Node.js backend and React client."
     ],
-    metrics: { label: "Manual Effort Saved", value: "100% Automated" },
-    repos: [],
-    visual: "flow"
+    techStack: ["Zapier", "OAuth 2.0", "Google Workspace APIs", "Node.js", "React", "Redis"],
+    repos: [
+      { label: "Satellite Tracking System", url: "https://github.com/Nehal-qadeer/satellite-trackingsystem" }
+    ]
   }
 ];
