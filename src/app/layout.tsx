@@ -54,7 +54,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable} ${data.variable}`}>
-      <body className="bg-obsidian font-body text-text antialiased selection:bg-cyan selection:text-obsidian">
+      <body className="bg-graphite font-body text-bone antialiased selection:bg-amber selection:text-graphite">
         <SmoothScrollProvider>
           <Nav />
           <div className="pt-2">{children}</div>

@@ -6,41 +6,45 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        obsidian: "#0B0C10",
-        surface: {
+        graphite: {
+          DEFAULT: "#0B0C10",
+          dark: "#07080A"
+        },
+        charcoal: {
           DEFAULT: "#1F2833",
-          raised: "#263242",
+          light: "#2A3644",
           dark: "#141A22"
         },
-        cyan: {
-          DEFAULT: "#66FCF1",
-          electric: "#66FCF1",
-          steel: "#45A29E",
-          dim: "rgba(102, 252, 241, 0.15)"
+        amber: {
+          DEFAULT: "#E5A93C",
+          gold: "#E5A93C",
+          dim: "rgba(229, 169, 60, 0.15)",
+          subtle: "rgba(229, 169, 60, 0.08)"
         },
-        text: {
-          DEFAULT: "#FFFFFF",
-          muted: "#C5C6C7",
-          faint: "#6D7E8F"
+        ice: {
+          DEFAULT: "#45A29E",
+          dim: "rgba(69, 162, 158, 0.15)"
         },
-        line: {
-          DEFAULT: "rgba(102, 252, 241, 0.12)",
-          subtle: "rgba(69, 162, 158, 0.2)",
-          solid: "#1F2833"
+        bone: {
+          DEFAULT: "#F4F4F5",
+          pure: "#FFFFFF"
+        },
+        ash: {
+          DEFAULT: "#A1A1AA",
+          dark: "#71717A",
+          faint: "#52525B"
         }
       },
       fontFamily: {
         display: ["var(--font-display)", "sans-serif"],
         body: ["var(--font-body)", "sans-serif"],
+        mono: ["var(--font-data)", "monospace"],
         data: ["var(--font-data)", "monospace"]
       },
-      backgroundImage: {
-        "cyan-glow": "radial-gradient(ellipse at center, rgba(102, 252, 241, 0.15) 0%, transparent 70%)",
-        "mesh-obsidian": "linear-gradient(to bottom, #0B0C10, #141A22)"
-      },
       boxShadow: {
-        cyan: "0 0 25px -5px rgba(102, 252, 241, 0.25)",
-        "cyan-sm": "0 0 15px -3px rgba(102, 252, 241, 0.2)"
+        amber: "0 0 25px -5px rgba(229, 169, 60, 0.25)",
+        "amber-sm": "0 0 15px -3px rgba(229, 169, 60, 0.18)",
+        keycap: "0 8px 16px -2px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
       }
     }
   },

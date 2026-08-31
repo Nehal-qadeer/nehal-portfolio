@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { Sparkles, CheckCircle2 } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 export function TechnicalStack() {
   const groups = [
@@ -33,14 +32,14 @@ export function TechnicalStack() {
 
   return (
     <section id="stack" className="px-6 py-20 md:px-10 lg:pl-24 max-w-6xl mx-auto space-y-8">
-      <div className="border-b border-line pb-6">
+      <div className="border-b border-charcoal pb-6">
         <div className="flex items-center gap-2">
-          <Sparkles size={14} className="text-cyan" />
-          <span className="font-data text-xs tracking-widest text-cyan font-semibold uppercase">
+          <Sparkles size={14} className="text-amber" />
+          <span className="font-mono text-xs tracking-widest text-amber font-semibold uppercase">
             Technical Architecture
           </span>
         </div>
-        <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-white">
+        <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-bone">
           Languages, Tooling & Infrastructure
         </h2>
       </div>
@@ -49,15 +48,15 @@ export function TechnicalStack() {
         {groups.map((group) => (
           <div
             key={group.category}
-            className="rounded-2xl border border-line bg-surface/80 p-6 backdrop-blur-xl transition-all hover:border-cyan/50 hover:shadow-cyan-sm space-y-4"
+            className="rounded-2xl border border-charcoal bg-charcoal/80 p-6 backdrop-blur-xl transition-all hover:border-amber/50 hover:shadow-amber-sm space-y-4"
           >
-            <h3 className="font-data text-xs font-bold tracking-wider text-cyan uppercase border-b border-line/60 pb-3">
+            <h3 className="font-mono text-xs font-bold tracking-wider text-amber uppercase border-b border-charcoal pb-3">
               {group.category}
             </h3>
             <ul className="space-y-2">
               {group.skills.map((skill) => (
-                <li key={skill} className="flex items-center gap-2 font-body text-xs sm:text-sm text-text-muted">
-                  <span className="h-1.5 w-1.5 rounded-full bg-cyan shrink-0" />
+                <li key={skill} className="flex items-center gap-2 font-body text-xs sm:text-sm text-ash">
+                  <span className="h-1.5 w-1.5 rounded-full bg-amber shrink-0" />
                   {skill}
                 </li>
               ))}

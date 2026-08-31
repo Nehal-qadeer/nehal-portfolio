@@ -1,83 +1,65 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { profile } from "@/data/profile";
-import { ArrowLeft, Sparkles, MapPin, CheckCircle2, Compass, Shield, Zap, Globe, Mail } from "lucide-react";
+import { ArrowLeft, Sparkles, MapPin, Mail, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "The Journey & Philosophy — Nehal Qadeer",
+  title: "The Engine Behind the Automation — Nehal Qadeer",
   description:
-    "The story behind the automation: from relocation and cultural adaptation to engineering deep learning inference pipelines and resilient systems in Germany."
+    "The story behind the automation: navigating relocation to Germany, forging resilience, and engineering deep learning inference and data pipelines."
 };
 
 export default function StoryPage() {
-  const milestones = [
+  const timelineMilestones = [
     {
-      stage: "STAGE 01",
-      location: "Pakistan",
+      index: "01",
+      title: "B.Sc. CS Foundation",
+      institution: "IQRA University · Grade 2.65",
       period: "2015 — 2019",
-      title: "B.Sc. Computer Science Foundation",
-      school: "IQRA University · Grade 2.65",
-      description:
-        "Built core foundations in data structures, algorithms, object-oriented programming (C++ / Python), and relational database systems.",
-      tags: ["Algorithms", "Data Structures", "OOP", "Database Design"]
+      location: "Pakistan",
+      summary:
+        "Rigorous foundation in computer science core principles: algorithms, data structures, object-oriented programming (C++ / Python), and relational database systems.",
+      tags: ["Algorithms", "Data Structures", "OOP", "Database Systems"]
     },
     {
-      stage: "STAGE 02",
-      location: "Stuttgart, Germany",
-      period: "2023",
+      index: "02",
       title: "Relocation & Cultural Adaptation",
-      school: "The Crucible of Growth",
-      description:
-        "Relocated from Pakistan to Germany. Navigating the intense friction of settling in a new country, mastering language fundamentals, and turning early obstacles into relentless engineering grit.",
-      tags: ["Relocation", "Resilience", "Cross-Cultural Adaptation", "Grit"]
+      institution: "Stuttgart, Germany",
+      period: "2023",
+      location: "Germany",
+      summary:
+        "Relocated to Germany. Navigating the complex transitions of settling in a new country, mastering language fundamentals, and turning early friction into relentless engineering grit.",
+      tags: ["Relocation", "Resilience", "Cross-Cultural Adaptation"]
     },
     {
-      stage: "STAGE 03",
-      location: "Mannheim & Heidelberg, Germany",
+      index: "03",
+      title: "M.Sc. Computer Vision & Production Systems",
+      institution: "SRH Hochschule Heidelberg · Grade 2.2",
       period: "2023 — 2025",
-      title: "M.Sc. Applied Computer Science & Thesis",
-      school: "SRH Hochschule Heidelberg · Grade 2.2",
-      description:
-        "Master's degree focused on distributed systems and cloud architectures. Engineered the Master's Thesis: an end-to-end computer vision verification pipeline quantized through Intel OpenVINO for a 30% inference speedup.",
+      location: "Mannheim / Heidelberg",
+      summary:
+        "Master of Science degree focusing on distributed systems and cloud architectures. Engineered Master's Thesis: an end-to-end computer vision verification pipeline quantized via Intel OpenVINO for a 30% inference speedup.",
       tags: ["Computer Vision", "Intel OpenVINO", "PyTorch", "Docker", "Grade 2.2"]
     },
     {
-      stage: "STAGE 04",
-      location: "Mannheim, Germany",
+      index: "04",
+      title: "Production Automation & Cloud Pipelines",
+      institution: "Independent Systems & Deployments",
       period: "2025 — 2026",
-      title: "Production Automation & AI Pipelines",
-      school: "Independent Systems & Client Deployments",
-      description:
+      location: "Mannheim, Germany",
+      summary:
         "Architecting high-throughput cloud scraping engines (2,000–4,000 records/run), automated Make.com & PostgreSQL storage pipelines, and multi-app Zapier workflow automations.",
       tags: ["Apify Actors", "Selenium", "PostgreSQL", "Zapier", "REST APIs"]
     }
   ];
 
-  const pillars = [
-    {
-      title: "Built Outside the Notebook",
-      icon: Shield,
-      desc: "Anyone can run code in a demo. I build systems that withstand messy network payloads, dynamic page rendering, and real-world failure states."
-    },
-    {
-      title: "Friction as Fuel",
-      icon: Zap,
-      desc: "Every complex pipeline is an uphill climb on the first run. The discipline learned through relocation is applied to troubleshooting until systems run autonomously."
-    },
-    {
-      title: "Systems Over Silos",
-      icon: Compass,
-      desc: "Plumbing matters. Connecting CV models, REST APIs, and database schemas with bulletproof data integrity is what turns prototypes into production assets."
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-obsidian text-text pt-28 pb-20 px-6 md:px-10 lg:pl-24 max-w-6xl mx-auto space-y-16">
+    <div className="min-h-screen bg-graphite text-bone pt-28 pb-20 px-6 md:px-10 lg:pl-24 max-w-5xl mx-auto space-y-16">
       {/* Top Breadcrumb */}
       <div>
         <Link
           href="/"
-          className="inline-flex items-center gap-2 font-data text-xs text-text-muted hover:text-cyan transition-colors"
+          className="inline-flex items-center gap-2 font-mono text-xs text-ash hover:text-amber transition-colors"
         >
           <ArrowLeft size={14} />
           Back to Engineering & Profile
@@ -87,85 +69,83 @@ export default function StoryPage() {
       {/* Main Narrative Hero */}
       <div className="space-y-6 max-w-3xl">
         <div className="flex items-center gap-2">
-          <Sparkles size={14} className="text-cyan" />
-          <span className="font-data text-xs tracking-widest text-cyan font-semibold uppercase">
+          <Sparkles size={14} className="text-amber" />
+          <span className="font-mono text-xs tracking-widest text-amber font-semibold uppercase">
             The Journey & Philosophy
           </span>
         </div>
 
-        <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.08]">
-          The Engine Behind the Automation
+        <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-bone tracking-tight leading-[1.06]">
+          The Engine Behind the Automation.
         </h1>
 
         {/* The Exact Core Narrative Block */}
-        <div className="rounded-2xl border border-cyan/30 bg-surface/90 p-8 sm:p-10 shadow-2xl backdrop-blur-xl relative overflow-hidden space-y-6">
-          <div className="absolute top-0 right-0 w-48 h-48 bg-cyan/5 rounded-full blur-3xl pointer-events-none" />
-
-          <blockquote className="font-body text-base sm:text-lg lg:text-xl text-white leading-relaxed space-y-5">
+        <div className="rounded-2xl border border-charcoal bg-charcoal/80 p-8 sm:p-12 shadow-2xl backdrop-blur-xl relative overflow-hidden space-y-6">
+          <blockquote className="font-body text-base sm:text-lg lg:text-xl text-bone leading-relaxed space-y-5">
             <p>
-              &ldquo;The best systems are built under pressure. In 2023, I relocated from Pakistan to Germany, landing first in Stuttgart before establishing my base in Mannheim. Adapting to a new country was exactly like architecting my first complex data pipelines: every early project was an uphill battle, and nothing worked perfectly on the first run.&rdquo;
+              &ldquo;The best systems are built under pressure. Relocating to Germany and establishing my base in Mannheim meant navigating complex transitions. Adapting to a new country was exactly like architecting my first data pipelines: every early project was an uphill battle.&rdquo;
             </p>
-            <p className="text-text-muted">
-              &ldquo;That friction is where I learned to build systems that hold up outside a notebook. The relentless troubleshooting it took to navigate those first six months is the exact same mindset I apply to deep learning inference and automation engineering today. <strong className="text-cyan font-semibold">I don&apos;t just write code; I engineer resilience.</strong>&rdquo;
+            <p className="text-ash">
+              &ldquo;That friction is where I learned to build systems that hold up outside a notebook. The relentless troubleshooting it took to navigate those first six months is the exact same mindset I apply to deep learning inference and automation engineering today. <strong className="text-amber font-semibold">I don&apos;t just write code; I engineer resilience.</strong>&rdquo;
             </p>
           </blockquote>
 
-          <div className="flex items-center gap-3 pt-4 border-t border-line font-data text-xs text-text-faint">
-            <span className="h-2 w-2 rounded-full bg-cyan" />
-            <span>Nehal Qadeer · Mannheim, Germany</span>
+          <div className="flex items-center justify-between pt-6 border-t border-charcoal font-mono text-xs text-ash-dark">
+            <span className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-amber" />
+              Nehal Qadeer
+            </span>
+            <span className="text-amber">Mannheim, Germany</span>
           </div>
         </div>
       </div>
 
-      {/* Interactive Milestone Timeline */}
-      <div className="space-y-10">
-        <div className="border-b border-line pb-6">
-          <span className="font-data text-xs tracking-widest text-cyan font-semibold uppercase">
-            Evolution of an Engineer
+      {/* Text & Layout-Driven Minimalist Vertical Timeline */}
+      <div className="space-y-10 pt-4">
+        <div className="border-b border-charcoal pb-6">
+          <span className="font-mono text-xs tracking-widest text-amber font-semibold uppercase">
+            Milestone Trajectory
           </span>
-          <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-white">
-            Milestone Timeline
+          <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-bone">
+            Timeline of Evolution
           </h2>
         </div>
 
-        <div className="space-y-8">
-          {milestones.map((m, idx) => (
-            <div
-              key={m.stage}
-              className="rounded-2xl border border-line bg-surface/80 p-6 sm:p-8 backdrop-blur-xl transition-all duration-300 hover:border-cyan/50 hover:shadow-cyan-sm grid md:grid-cols-[12rem_1fr] gap-6 items-start"
-            >
-              {/* Stage & Location */}
-              <div className="space-y-1 border-b md:border-b-0 md:border-r border-line/60 pb-4 md:pb-0 md:pr-6">
-                <span className="font-data text-[11px] font-bold text-cyan tracking-widest">
-                  {m.stage}
-                </span>
-                <div className="font-display text-lg font-bold text-white flex items-center gap-1.5">
-                  <MapPin size={15} className="text-cyan" />
-                  {m.location}
-                </div>
-                <div className="font-data text-xs text-text-faint tabular">{m.period}</div>
-              </div>
+        {/* Vertical Line Timeline */}
+        <div className="relative border-l border-charcoal/80 ml-4 sm:ml-6 space-y-12 pl-6 sm:pl-10">
+          {timelineMilestones.map((milestone) => (
+            <div key={milestone.index} className="relative group">
+              {/* Timeline Marker Node */}
+              <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-amber bg-graphite transition-transform group-hover:scale-125" />
 
-              {/* Description & Tags */}
-              <div className="space-y-3">
-                <div>
-                  <h3 className="font-display text-xl sm:text-2xl font-bold text-white">
-                    {m.title}
-                  </h3>
-                  <p className="font-body text-xs sm:text-sm font-medium text-cyan/90">
-                    {m.school}
-                  </p>
+              <div className="space-y-2">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="font-mono text-xs font-bold text-amber">
+                    {milestone.index}. {milestone.period}
+                  </span>
+                  <span className="font-mono text-xs text-ash-dark">·</span>
+                  <span className="font-mono text-xs text-ash flex items-center gap-1">
+                    <MapPin size={11} className="text-amber" />
+                    {milestone.location}
+                  </span>
                 </div>
 
-                <p className="font-body text-sm sm:text-base text-text-muted leading-relaxed">
-                  {m.description}
+                <h3 className="font-display text-2xl font-bold text-bone">
+                  {milestone.title}
+                </h3>
+                <p className="font-mono text-xs font-semibold text-amber/90">
+                  {milestone.institution}
                 </p>
 
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {m.tags.map((tag) => (
+                <p className="font-body text-sm sm:text-base text-ash leading-relaxed max-w-2xl pt-1">
+                  {milestone.summary}
+                </p>
+
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {milestone.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-md border border-line bg-obsidian/70 px-2.5 py-1 font-data text-[11px] text-text-muted"
+                      className="rounded border border-charcoal bg-charcoal/60 px-2.5 py-1 font-mono text-[11px] text-ash"
                     >
                       {tag}
                     </span>
@@ -177,57 +157,55 @@ export default function StoryPage() {
         </div>
       </div>
 
-      {/* Engineering Philosophy Pillars */}
-      <div className="space-y-8">
-        <div className="border-b border-line pb-6">
-          <span className="font-data text-xs tracking-widest text-cyan font-semibold uppercase">
-            Core Values
-          </span>
-          <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-white">
-            Engineering Principles
-          </h2>
+      {/* Editorial Principles */}
+      <div className="grid sm:grid-cols-3 gap-6 pt-4">
+        <div className="rounded-2xl border border-charcoal bg-charcoal/60 p-6 space-y-3">
+          <span className="font-mono text-xs text-amber font-bold">PRINCIPLE 01</span>
+          <h4 className="font-display text-lg font-bold text-bone">Outside the Notebook</h4>
+          <p className="font-body text-xs sm:text-sm text-ash leading-relaxed">
+            I engineer models and automations to survive real-world network latency, API rate limits, and unformatted inputs.
+          </p>
         </div>
 
-        <div className="grid sm:grid-cols-3 gap-6">
-          {pillars.map((pillar) => {
-            const Icon = pillar.icon;
-            return (
-              <div
-                key={pillar.title}
-                className="rounded-2xl border border-line bg-surface/80 p-6 backdrop-blur-xl space-y-4 hover:border-cyan/40 transition-all"
-              >
-                <div className="h-10 w-10 rounded-xl bg-obsidian border border-cyan/30 flex items-center justify-center text-cyan">
-                  <Icon size={20} />
-                </div>
-                <h3 className="font-display text-lg font-bold text-white">{pillar.title}</h3>
-                <p className="font-body text-sm text-text-muted leading-relaxed">{pillar.desc}</p>
-              </div>
-            );
-          })}
+        <div className="rounded-2xl border border-charcoal bg-charcoal/60 p-6 space-y-3">
+          <span className="font-mono text-xs text-amber font-bold">PRINCIPLE 02</span>
+          <h4 className="font-display text-lg font-bold text-bone">Friction as Fuel</h4>
+          <p className="font-body text-xs sm:text-sm text-ash leading-relaxed">
+            Relocating taught me that every early failure is simply diagnostic data guiding the next optimization.
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-charcoal bg-charcoal/60 p-6 space-y-3">
+          <span className="font-mono text-xs text-amber font-bold">PRINCIPLE 03</span>
+          <h4 className="font-display text-lg font-bold text-bone">Systems Plumbing</h4>
+          <p className="font-body text-xs sm:text-sm text-ash leading-relaxed">
+            Connecting deep learning inference to relational databases and automated webhooks with 100% data integrity.
+          </p>
         </div>
       </div>
 
       {/* Bottom Connect CTA */}
-      <div className="rounded-2xl border border-cyan/30 bg-surface/90 p-8 sm:p-12 text-center space-y-6 backdrop-blur-xl">
-        <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-white">
+      <div className="rounded-2xl border border-charcoal bg-charcoal/80 p-8 sm:p-12 text-center space-y-6 backdrop-blur-xl">
+        <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-bone">
           Let&apos;s Build Resilient Systems Together
         </h2>
-        <p className="font-body text-base text-text-muted max-w-xl mx-auto">
-          Currently open to <strong className="text-white">Junior & Full-Time AI & Automation, Python Developer, and QA Engineering</strong> roles across Germany and remote in the EU.
+        <p className="font-body text-base text-ash max-w-xl mx-auto">
+          Currently open to <strong className="text-bone">Junior & Full-Time AI & Automation, Python Developer, and QA Engineering</strong> roles across Germany and remote in the EU.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
           <a
             href={`mailto:${profile.email}`}
-            className="inline-flex items-center gap-2 rounded-xl bg-cyan px-7 py-3.5 font-body text-sm font-bold text-obsidian shadow-cyan hover:scale-105 transition-all"
+            className="inline-flex items-center gap-2 rounded-xl bg-amber px-7 py-3.5 font-mono text-xs font-bold text-graphite shadow-amber hover:scale-105 transition-all"
           >
-            <Mail size={16} />
+            <Mail size={15} />
             Email {profile.email}
           </a>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-xl border border-line bg-surface px-6 py-3.5 font-body text-sm font-medium text-white hover:border-cyan transition-colors"
+            className="inline-flex items-center gap-2 rounded-xl border border-charcoal bg-charcoal px-6 py-3.5 font-body text-sm font-medium text-bone hover:border-amber transition-colors"
           >
-            View Engineering Portfolio
+            View Engineering Systems
+            <ArrowUpRight size={14} />
           </Link>
         </div>
       </div>
