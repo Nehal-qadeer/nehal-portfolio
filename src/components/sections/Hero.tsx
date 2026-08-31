@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { SchematicPipelineSVG } from "@/components/ui/SchematicPipelineSVG";
+import { ArchitectureFlowCard } from "@/components/ui/ArchitectureFlowCard";
 import { profile } from "@/data/profile";
 import { MapPin, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 
@@ -106,9 +106,9 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right Column: Interactive Schematic Diagram */}
+          {/* Right Column: Clear Visual Architecture Flow Card */}
           <div className="w-full flex items-center justify-center">
-            <SchematicPipelineSVG />
+            <ArchitectureFlowCard />
           </div>
         </div>
       </div>
