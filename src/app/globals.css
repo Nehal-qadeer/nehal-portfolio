@@ -3,59 +3,131 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  --bg: #EDF1F6;
+  --surface: #FFFFFF;
+  --ink: #16233D;
+  --ink-soft: #4A5A76;
+  --line: #C7D3E0;
+  --line-strong: #A6B6C9;
+  --signal: #2B6CB0;
+  --signal-dim: #E4ECF6;
+  --amber: #E8A33D;
+  --teal: #2F9E8F;
+  --grid: rgba(43, 108, 176, 0.08);
+  --glow: rgba(43, 108, 176, 0.16);
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-  background-color: #0B0C10;
-  color: #F4F4F5;
   scroll-behavior: smooth;
+  background-color: var(--bg);
+  color: var(--ink);
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 
 body {
-  background-color: #0B0C10;
-  color: #A1A1AA;
+  background:
+    radial-gradient(ellipse 900px 500px at 15% -5%, rgba(43, 108, 176, 0.07), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 30%, rgba(47, 158, 143, 0.06), transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
   overflow-x: hidden;
-  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  position: relative;
 }
 
 ::selection {
-  background-color: #E5A93C;
-  color: #0B0C10;
+  background-color: var(--signal);
+  color: #FFFFFF;
 }
 
 :focus-visible {
-  outline: 2px solid #E5A93C;
+  outline: 2px solid var(--signal);
   outline-offset: 3px;
-  border-radius: 4px;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0B0C10;
+  background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1F2833;
-  border-radius: 3px;
+  background: var(--line-strong);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #E5A93C;
+  background: var(--signal);
 }
 
 .tabular {
   font-variant-numeric: tabular-nums;
+}
+
+/* Blueprint crosshair */
+.crosshair {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  opacity: 0.55;
+}
+.crosshair::before,
+.crosshair::after {
+  content: '';
+  position: absolute;
+  background: var(--line-strong);
+}
+.crosshair::before {
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  left: 0;
+}
+.crosshair::after {
+  height: 100%;
+  width: 1px;
+  left: 50%;
+  top: 0;
+}
+
+.coord {
+  position: absolute;
+  font-family: var(--font-data), monospace;
+  font-size: 9.5px;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+/* Keyframes */
+@keyframes pulseBlip {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.25); }
+}
+
+.animate-pulse-blip {
+  animation: pulseBlip 1.8s ease-in-out infinite;
+}
+
+@keyframes flowDash {
+  to { stroke-dashoffset: -56; }
+}
+
+.animate-flow-dash {
+  stroke-dasharray: 6 8;
+  animation: flowDash 1.6s linear infinite;
 }
 
 @keyframes cursorBlink {
@@ -64,5 +136,5 @@ body {
 }
 
 .animate-cursor-blink {
-  animation: cursorBlink 1s step-start infinite;
+  animation: cursorBlink 1s steps(1) infinite;
 }

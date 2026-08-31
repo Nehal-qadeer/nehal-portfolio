@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { profile } from "@/data/profile";
-import { GeekyMatrixBackground } from "@/components/canvas/GeekyMatrixBackground";
 import { ArrowLeft, Sparkles, MapPin, Mail, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -55,164 +54,103 @@ export default function StoryPage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-graphite text-bone pt-28 pb-20 px-6 md:px-10 lg:pl-24 max-w-5xl mx-auto space-y-16">
-      {/* Ambient Geeky Tensor Background */}
-      <GeekyMatrixBackground />
+    <div className="relative min-h-screen pt-28 pb-20 px-6 md:px-10 max-w-[1040px] mx-auto space-y-16">
+      {/* Top Breadcrumb */}
+      <div>
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 font-mono text-xs text-ink-soft hover:text-signal transition-colors"
+        >
+          <ArrowLeft size={14} />
+          Back to Engineering Portfolio
+        </Link>
+      </div>
 
-      <div className="relative z-10 space-y-16">
-        {/* Top Breadcrumb */}
-        <div>
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 font-mono text-xs text-ash hover:text-amber transition-colors"
-          >
-            <ArrowLeft size={14} />
-            Back to Engineering & Profile
-          </Link>
+      {/* Main Narrative Hero */}
+      <div className="space-y-6 max-w-3xl">
+        <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold">
+          <span className="w-4 h-px bg-signal" />
+          The Journey & Philosophy
         </div>
 
-        {/* Main Narrative Hero */}
-        <div className="space-y-6 max-w-3xl">
-          <div className="flex items-center gap-2">
-            <Sparkles size={14} className="text-amber" />
-            <span className="font-mono text-xs tracking-widest text-amber font-semibold uppercase">
-              The Journey & Philosophy
+        <h1 className="font-display text-4xl sm:text-5xl font-bold text-ink tracking-tight leading-[1.06]">
+          The Engine Behind the Automation.
+        </h1>
+
+        {/* Narrative Box */}
+        <div className="rounded-xl border border-line bg-surface p-8 sm:p-10 shadow-blueprint space-y-5">
+          <blockquote className="font-body text-base sm:text-lg text-ink leading-relaxed space-y-4">
+            <p>
+              &ldquo;The best systems are built under pressure. Relocating to Germany and establishing my base in Mannheim meant navigating complex transitions. Adapting to a new country was exactly like architecting my first data pipelines: every early project was an uphill battle.&rdquo;
+            </p>
+            <p className="text-ink-soft">
+              &ldquo;That friction is where I learned to build systems that hold up outside a notebook. The relentless troubleshooting it took to navigate those first six months is the exact same mindset I apply to deep learning inference and automation engineering today. <strong className="text-signal font-semibold">I don&apos;t just write code; I engineer resilience.</strong>&rdquo;
+            </p>
+          </blockquote>
+
+          <div className="flex items-center justify-between pt-5 border-t border-line font-mono text-xs text-ink-soft">
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-teal animate-pulse-blip" />
+              Nehal Qadeer
             </span>
-          </div>
-
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-bone tracking-tight leading-[1.06]">
-            The Engine Behind the Automation.
-          </h1>
-
-          {/* The Exact Core Narrative Block */}
-          <div className="rounded-2xl border border-charcoal bg-charcoal/80 p-8 sm:p-12 shadow-2xl backdrop-blur-xl relative overflow-hidden space-y-6">
-            <blockquote className="font-body text-base sm:text-lg lg:text-xl text-bone leading-relaxed space-y-5">
-              <p>
-                &ldquo;The best systems are built under pressure. Relocating to Germany and establishing my base in Mannheim meant navigating complex transitions. Adapting to a new country was exactly like architecting my first data pipelines: every early project was an uphill battle.&rdquo;
-              </p>
-              <p className="text-ash">
-                &ldquo;That friction is where I learned to build systems that hold up outside a notebook. The relentless troubleshooting it took to navigate those first six months is the exact same mindset I apply to deep learning inference and automation engineering today. <strong className="text-amber font-semibold">I don&apos;t just write code; I engineer resilience.</strong>&rdquo;
-              </p>
-            </blockquote>
-
-            <div className="flex items-center justify-between pt-6 border-t border-charcoal font-mono text-xs text-ash-dark">
-              <span className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-amber" />
-                Nehal Qadeer
-              </span>
-              <span className="text-amber">Mannheim, Germany</span>
-            </div>
+            <span className="text-signal">Mannheim, Germany</span>
           </div>
         </div>
+      </div>
 
-        {/* Text & Layout-Driven Minimalist Vertical Timeline */}
-        <div className="space-y-10 pt-4">
-          <div className="border-b border-charcoal pb-6">
-            <span className="font-mono text-xs tracking-widest text-amber font-semibold uppercase">
-              Milestone Trajectory
-            </span>
-            <h2 className="mt-2 font-display text-3xl sm:text-4xl font-extrabold text-bone">
-              Timeline of Evolution
-            </h2>
-          </div>
+      {/* Vertical Line Timeline */}
+      <div className="space-y-8 pt-4">
+        <div className="border-b border-line pb-4">
+          <span className="font-mono text-xs tracking-widest text-signal font-semibold uppercase">
+            Milestone Trajectory
+          </span>
+          <h2 className="mt-1 font-display text-2xl sm:text-3xl font-bold text-ink">
+            Timeline of Evolution
+          </h2>
+        </div>
 
-          {/* Vertical Line Timeline */}
-          <div className="relative border-l border-charcoal/80 ml-4 sm:ml-6 space-y-12 pl-6 sm:pl-10">
-            {timelineMilestones.map((milestone) => (
-              <div key={milestone.index} className="relative group">
-                {/* Timeline Marker Node */}
-                <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-amber bg-graphite transition-transform group-hover:scale-125" />
+        <div className="relative border-l border-line-strong ml-4 sm:ml-6 space-y-10 pl-6 sm:pl-8">
+          {timelineMilestones.map((milestone) => (
+            <div key={milestone.index} className="relative group">
+              {/* Marker */}
+              <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full border-2 border-signal bg-surface transition-transform group-hover:scale-125" />
 
-                <div className="space-y-2">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className="font-mono text-xs font-bold text-amber">
-                      {milestone.index}. {milestone.period}
+              <div className="space-y-1.5">
+                <div className="flex flex-wrap items-center gap-2.5 font-mono text-xs">
+                  <span className="font-bold text-signal">
+                    {milestone.index}. {milestone.period}
+                  </span>
+                  <span className="text-line-strong">·</span>
+                  <span className="text-ink-soft flex items-center gap-1">
+                    <MapPin size={11} className="text-teal" />
+                    {milestone.location}
+                  </span>
+                </div>
+
+                <h3 className="font-display text-xl font-bold text-ink">
+                  {milestone.title}
+                </h3>
+                <p className="font-mono text-xs font-medium text-signal">
+                  {milestone.institution}
+                </p>
+
+                <p className="font-body text-sm text-ink-soft leading-relaxed max-w-2xl pt-0.5">
+                  {milestone.summary}
+                </p>
+
+                <div className="flex flex-wrap gap-1.5 pt-2">
+                  {milestone.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded bg-signal-dim px-2 py-0.5 font-mono text-[10.5px] text-signal"
+                    >
+                      {tag}
                     </span>
-                    <span className="font-mono text-xs text-ash-dark">·</span>
-                    <span className="font-mono text-xs text-ash flex items-center gap-1">
-                      <MapPin size={11} className="text-amber" />
-                      {milestone.location}
-                    </span>
-                  </div>
-
-                  <h3 className="font-display text-2xl font-bold text-bone">
-                    {milestone.title}
-                  </h3>
-                  <p className="font-mono text-xs font-semibold text-amber/90">
-                    {milestone.institution}
-                  </p>
-
-                  <p className="font-body text-sm sm:text-base text-ash leading-relaxed max-w-2xl pt-1">
-                    {milestone.summary}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {milestone.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded border border-charcoal bg-charcoal/60 px-2.5 py-1 font-mono text-[11px] text-ash"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Editorial Principles */}
-        <div className="grid sm:grid-cols-3 gap-6 pt-4">
-          <div className="rounded-2xl border border-charcoal bg-charcoal/60 p-6 space-y-3">
-            <span className="font-mono text-xs text-amber font-bold">PRINCIPLE 01</span>
-            <h4 className="font-display text-lg font-bold text-bone">Outside the Notebook</h4>
-            <p className="font-body text-xs sm:text-sm text-ash leading-relaxed">
-              I engineer models and automations to survive real-world network latency, API rate limits, and unformatted inputs.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-charcoal bg-charcoal/60 p-6 space-y-3">
-            <span className="font-mono text-xs text-amber font-bold">PRINCIPLE 02</span>
-            <h4 className="font-display text-lg font-bold text-bone">Friction as Fuel</h4>
-            <p className="font-body text-xs sm:text-sm text-ash leading-relaxed">
-              Relocating taught me that every early failure is simply diagnostic data guiding the next optimization.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-charcoal bg-charcoal/60 p-6 space-y-3">
-            <span className="font-mono text-xs text-amber font-bold">PRINCIPLE 03</span>
-            <h4 className="font-display text-lg font-bold text-bone">Systems Plumbing</h4>
-            <p className="font-body text-xs sm:text-sm text-ash leading-relaxed">
-              Connecting deep learning inference to relational databases and automated webhooks with 100% data integrity.
-            </p>
-          </div>
-        </div>
-
-        {/* Bottom Connect CTA */}
-        <div className="rounded-2xl border border-charcoal bg-charcoal/80 p-8 sm:p-12 text-center space-y-6 backdrop-blur-xl">
-          <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-bone">
-            Let&apos;s Build Resilient Systems Together
-          </h2>
-          <p className="font-body text-base text-ash max-w-xl mx-auto">
-            Currently open to <strong className="text-bone">Junior & Full-Time AI & Automation, Python Developer, and QA Engineering</strong> roles across Germany and remote in the EU.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <a
-              href={`mailto:${profile.email}`}
-              className="inline-flex items-center gap-2 rounded-xl bg-amber px-7 py-3.5 font-mono text-xs font-bold text-graphite shadow-amber hover:scale-105 transition-all"
-            >
-              <Mail size={15} />
-              Email {profile.email}
-            </a>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 rounded-xl border border-charcoal bg-charcoal px-6 py-3.5 font-body text-sm font-medium text-bone hover:border-amber transition-colors"
-            >
-              View Engineering Systems
-              <ArrowUpRight size={14} />
-            </Link>
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

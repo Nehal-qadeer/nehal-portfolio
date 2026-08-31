@@ -1,52 +1,53 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
-import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import { Nav } from "@/components/ui/Nav";
-import { Footer } from "@/components/ui/Footer";
+import { ContactFooter } from "@/components/ui/ContactFooter";
+import { BlueprintParticleCanvas } from "@/components/canvas/BlueprintParticleCanvas";
 import { profile } from "@/data/profile";
 import "./globals.css";
 
-const display = Bricolage_Grotesque({
+const display = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap"
 });
 
-const body = IBM_Plex_Sans({
+const body = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
   variable: "--font-body",
   display: "swap"
 });
 
-const data = IBM_Plex_Mono({
+const data = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
   variable: "--font-data",
   display: "swap"
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(profile.links.portfolio),
-  title: `${profile.name} — ${profile.role}`,
-  description: profile.summary,
-  authors: [{ name: profile.name, url: profile.links.portfolio }],
+  metadataBase: new URL("https://nehal-qadeer.github.io"),
+  title: "Nehal Qadeer — AI & Automation Engineer",
+  description:
+    "M.Sc. Applied Computer Science graduate from SRH Heidelberg. I design high-throughput Python scraping engines, optimize Computer Vision inference (-30% latency via OpenVINO), and build bulletproof automations that run reliably in production.",
+  authors: [{ name: "Nehal Qadeer", url: "https://nehal-qadeer.github.io" }],
   openGraph: {
-    title: `${profile.name} — ${profile.role}`,
-    description: profile.summary,
-    url: profile.links.portfolio,
-    siteName: profile.name,
+    title: "Nehal Qadeer — AI & Automation Engineer",
+    description:
+      "M.Sc. Applied Computer Science graduate from SRH Heidelberg. I design high-throughput Python scraping engines, optimize Computer Vision inference, and build bulletproof automations.",
+    url: "https://nehal-qadeer.github.io",
+    siteName: "Nehal Qadeer",
     type: "website"
   },
   twitter: {
     card: "summary_large_image",
-    title: `${profile.name} — ${profile.role}`,
-    description: profile.summary
+    title: "Nehal Qadeer — AI & Automation Engineer",
+    description:
+      "M.Sc. Applied Computer Science graduate from SRH Heidelberg. I design high-throughput Python scraping engines, optimize Computer Vision inference, and build bulletproof automations."
   }
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0B0C10",
+  themeColor: "#EDF1F6",
   width: "device-width",
   initialScale: 1
 };
@@ -54,12 +55,11 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable} ${data.variable}`}>
-      <body className="bg-graphite font-body text-bone antialiased selection:bg-amber selection:text-graphite">
-        <SmoothScrollProvider>
-          <Nav />
-          <div className="pt-2">{children}</div>
-          <Footer />
-        </SmoothScrollProvider>
+      <body className="bg-bg font-body text-ink antialiased selection:bg-signal selection:text-white relative">
+        <BlueprintParticleCanvas />
+        <Nav />
+        <main className="relative z-10">{children}</main>
+        <ContactFooter />
       </body>
     </html>
   );

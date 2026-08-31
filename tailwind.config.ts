@@ -6,45 +6,48 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        graphite: {
-          DEFAULT: "#0B0C10",
-          dark: "#07080A"
+        bg: {
+          DEFAULT: "#EDF1F6",
+          dark: "#0D1420"
         },
-        charcoal: {
-          DEFAULT: "#1F2833",
-          light: "#2A3644",
-          dark: "#141A22"
+        surface: {
+          DEFAULT: "#FFFFFF",
+          dark: "#141C2B"
+        },
+        ink: {
+          DEFAULT: "#16233D",
+          soft: "#4A5A76",
+          light: "#A6B6C9"
+        },
+        line: {
+          DEFAULT: "#C7D3E0",
+          strong: "#A6B6C9",
+          subtle: "rgba(199, 211, 224, 0.6)"
+        },
+        signal: {
+          DEFAULT: "#2B6CB0",
+          dim: "#E4ECF6",
+          hover: "#1A4971"
+        },
+        teal: {
+          DEFAULT: "#2F9E8F",
+          dim: "rgba(47, 158, 143, 0.12)"
         },
         amber: {
-          DEFAULT: "#E5A93C",
-          gold: "#E5A93C",
-          dim: "rgba(229, 169, 60, 0.15)",
-          subtle: "rgba(229, 169, 60, 0.08)"
-        },
-        ice: {
-          DEFAULT: "#45A29E",
-          dim: "rgba(69, 162, 158, 0.15)"
-        },
-        bone: {
-          DEFAULT: "#F4F4F5",
-          pure: "#FFFFFF"
-        },
-        ash: {
-          DEFAULT: "#A1A1AA",
-          dark: "#71717A",
-          faint: "#52525B"
+          DEFAULT: "#E8A33D",
+          dim: "rgba(232, 163, 61, 0.15)"
         }
       },
       fontFamily: {
-        display: ["var(--font-display)", "sans-serif"],
-        body: ["var(--font-body)", "sans-serif"],
-        mono: ["var(--font-data)", "monospace"],
-        data: ["var(--font-data)", "monospace"]
+        display: ["var(--font-display)", "Space Grotesk", "sans-serif"],
+        body: ["var(--font-body)", "Inter", "sans-serif"],
+        mono: ["var(--font-data)", "JetBrains Mono", "monospace"],
+        data: ["var(--font-data)", "JetBrains Mono", "monospace"]
       },
       boxShadow: {
-        amber: "0 0 25px -5px rgba(229, 169, 60, 0.25)",
-        "amber-sm": "0 0 15px -3px rgba(229, 169, 60, 0.18)",
-        keycap: "0 8px 16px -2px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
+        blueprint: "0 4px 20px -8px rgba(22, 35, 61, 0.12)",
+        "blueprint-lg": "0 14px 32px -12px rgba(22, 35, 61, 0.18)",
+        glow: "0 0 24px -4px rgba(43, 108, 176, 0.25)"
       }
     }
   },
