@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { Nav } from "@/components/ui/Nav";
-import { TelemetryRail } from "@/components/ui/TelemetryRail";
+import { Footer } from "@/components/ui/Footer";
 import { profile } from "@/data/profile";
 import "./globals.css";
 
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0D1420",
+  themeColor: "#0B0C10",
   width: "device-width",
   initialScale: 1
 };
@@ -54,11 +54,11 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable} ${data.variable}`}>
-      <body className="bg-ink font-body text-text antialiased">
+      <body className="bg-obsidian font-body text-text antialiased selection:bg-cyan selection:text-obsidian">
         <SmoothScrollProvider>
-          <TelemetryRail />
           <Nav />
-          <main>{children}</main>
+          <div className="pt-2">{children}</div>
+          <Footer />
         </SmoothScrollProvider>
       </body>
     </html>

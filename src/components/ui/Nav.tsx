@@ -1,26 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
-import { useSandboxStore } from "@/hooks/useSandboxStore";
-import { Cpu, Database, Workflow, Sun, Moon } from "lucide-react";
-
-const LINKS = [
-  { href: "#work", label: "Projects" },
-  { href: "#stack", label: "Skills" },
-  { href: "#experience", label: "Experience" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" }
-];
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { profile } from "@/data/profile";
+import { Sparkles, ArrowUpRight, BookOpen, Layers } from "lucide-react";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
-  const { theme, toggleTheme, mode, setMode } = useSandboxStore();
-  const isLight = theme === "light";
+  const pathname = usePathname();
 
   useEffect(() => {
     function onScroll() {
-      setScrolled(window.scrollY > 24);
+      setScrolled(window.scrollY > 20);
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -28,82 +20,57 @@ export function Nav() {
 
   return (
     <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300 md:px-10",
+      className={`fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300 md:px-10 lg:px-24 ${
         scrolled
-          ? isLight
-            ? "bg-white/90 shadow-sm backdrop-blur-md border-b border-slate-200"
-            : "bg-ink/90 shadow-md backdrop-blur-md border-b border-line"
+          ? "bg-obsidian/90 backdrop-blur-xl border-b border-line shadow-2xl"
           : "bg-transparent"
-      )}
+      }`}
     >
-      <div className="flex items-center gap-4">
-        <a href="#top" className="font-display text-lg font-bold tracking-tight text-text">
-          NQ
-          <span className="ml-0.5 text-signal">.</span>
-        </a>
+      {/* Brand logo */}
+      <Link href="/" className="flex items-center gap-2 group">
+        <span className="font-display text-xl font-extrabold text-white tracking-tight">
+          NEHAL
+          <span className="text-cyan ml-0.5 font-bold">.</span>
+        </span>
+        <span className="hidden sm:inline-block rounded-full bg-cyan/10 border border-cyan/30 px-2.5 py-0.5 font-data text-[10px] text-cyan font-medium">
+          AI & AUTOMATION
+        </span>
+      </Link>
 
-        {/* Quick Simulator Switcher Pills */}
-        <div className="hidden lg:flex items-center gap-1.5 rounded-full border border-line bg-panel-raised/80 px-2 py-1">
-          <button
-            onClick={() => setMode("cv_vision")}
-            className={cn(
-              "flex items-center gap-1 px-2.5 py-0.5 rounded-full font-data text-[10px] transition-all",
-              mode === "cv_vision" ? "bg-signal text-ink font-bold" : "text-text-muted hover:text-text"
-            )}
-          >
-            <Cpu size={11} />
-            CV Vision
-          </button>
-          <button
-            onClick={() => setMode("data_pipeline")}
-            className={cn(
-              "flex items-center gap-1 px-2.5 py-0.5 rounded-full font-data text-[10px] transition-all",
-              mode === "data_pipeline" ? "bg-signal text-ink font-bold" : "text-text-muted hover:text-text"
-            )}
-          >
-            <Database size={11} />
-            Scraping Pipeline
-          </button>
-          <button
-            onClick={() => setMode("workflow_automation")}
-            className={cn(
-              "flex items-center gap-1 px-2.5 py-0.5 rounded-full font-data text-[10px] transition-all",
-              mode === "workflow_automation" ? "bg-signal text-ink font-bold" : "text-text-muted hover:text-text"
-            )}
-          >
-            <Workflow size={11} />
-            Zapier Flow
-          </button>
-        </div>
-      </div>
-
-      <nav className="hidden gap-8 font-body text-sm text-text-muted md:flex items-center">
-        {LINKS.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className="transition-colors duration-300 hover:text-text"
-          >
-            {link.label}
-          </a>
-        ))}
+      {/* 2-Page Navigation Pills */}
+      <nav className="flex items-center gap-1.5 rounded-full border border-line bg-surface/80 p-1.5 backdrop-blur-xl">
+        <Link
+          href="/"
+          className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 font-body text-xs font-semibold transition-all ${
+            pathname === "/"
+              ? "bg-cyan text-obsidian shadow-cyan-sm"
+              : "text-text-muted hover:text-white"
+          }`}
+        >
+          <Layers size={13} />
+          Engineering
+        </Link>
+        <Link
+          href="/story"
+          className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 font-body text-xs font-semibold transition-all ${
+            pathname === "/story"
+              ? "bg-cyan text-obsidian shadow-cyan-sm"
+              : "text-text-muted hover:text-white"
+          }`}
+        >
+          <BookOpen size={13} />
+          The Story
+        </Link>
       </nav>
 
+      {/* Direct Contact Button */}
       <div className="flex items-center gap-3">
-        <button
-          onClick={toggleTheme}
-          aria-label="Toggle Theme"
-          className="p-2 rounded-full border border-line text-text-muted hover:text-signal hover:border-signal transition-colors"
-          title={isLight ? "Switch to Dark Lab" : "Switch to Light Studio"}
-        >
-          {isLight ? <Moon size={15} /> : <Sun size={15} />}
-        </button>
         <a
-          href="mailto:nehal.q.s@gmail.com"
-          className="rounded-full border border-signal/40 bg-signal/10 px-4 py-2 font-body text-xs font-semibold text-signal transition-all duration-300 hover:bg-signal hover:text-ink"
+          href={`mailto:${profile.email}`}
+          className="hidden sm:inline-flex items-center gap-1 rounded-full border border-cyan/40 bg-cyan/10 px-4 py-2 font-body text-xs font-bold text-cyan hover:bg-cyan hover:text-obsidian transition-all shadow-cyan-sm"
         >
-          Hire Nehal
+          Connect
+          <ArrowUpRight size={13} />
         </a>
       </div>
     </header>

@@ -3,35 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --tw-grid-line: rgba(237, 241, 247, 0.05);
   color-scheme: dark;
-  --color-ink: #0D1420;
-  --color-panel: #141C2B;
-  --color-panel-raised: #1B2438;
-  --color-line: #24304A;
-  --color-text: #EDF1F7;
-  --color-text-muted: #8C99AF;
-  --color-text-faint: #5B6780;
-  --color-signal: #E8A33D;
-  --color-signal-dim: #8A6428;
-  --color-verify: #6FE3D9;
-  --color-verify-dim: #3D8B84;
-}
-
-html.light-mode, :root.light-mode {
-  --tw-grid-line: rgba(15, 23, 42, 0.06);
-  color-scheme: light;
-  --color-ink: #F4F6F9;
-  --color-panel: #FFFFFF;
-  --color-panel-raised: #EAEFF6;
-  --color-line: #D0D9E6;
-  --color-text: #0F172A;
-  --color-text-muted: #475569;
-  --color-text-faint: #8292A6;
-  --color-signal: #D97706;
-  --color-signal-dim: #B45309;
-  --color-verify: #0D9488;
-  --color-verify-dim: #115E59;
 }
 
 * {
@@ -39,55 +11,64 @@ html.light-mode, :root.light-mode {
 }
 
 html {
-  scroll-behavior: auto;
-}
-
-html.lenis {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-body {
-  background-color: theme("colors.ink");
-  color: theme("colors.text.DEFAULT");
-  font-family: var(--font-body), sans-serif;
+  background-color: #0B0C10;
+  color: #FFFFFF;
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
+body {
+  background-color: #0B0C10;
+  color: #C5C6C7;
+  overflow-x: hidden;
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
 ::selection {
-  background-color: theme("colors.signal.DEFAULT");
-  color: theme("colors.ink");
+  background-color: #66FCF1;
+  color: #0B0C10;
 }
 
 :focus-visible {
-  outline: 2px solid theme("colors.signal.DEFAULT");
+  outline: 2px solid #66FCF1;
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: 4px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0C10;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1F2833;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #45A29E;
 }
 
 .tabular {
   font-variant-numeric: tabular-nums;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
   }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
 }
