@@ -2,37 +2,36 @@
 
 import { useEffect, useState } from "react";
 
-export type RenderMode = "standard" | "exploded" | "xray" | "lidar";
-export type CameraPreset = "iso" | "front" | "core" | "top";
+export type SimulationMode = "cv_vision" | "data_pipeline" | "workflow_automation";
 export type ThemeMode = "dark" | "light";
 
-interface SandboxState {
-  explosionProgress: number; // 0.0 to 1.0
-  manualControl: boolean;
-  renderMode: RenderMode;
-  cameraPreset: CameraPreset;
-  activeComponent: string | null;
-  theme: ThemeMode;
-  laserScanActive: boolean;
-  autoRotate: boolean;
-  telemetry: {
-    fps: number;
-    rotationSpeed: number;
-    displacementMm: number;
-    sensorState: string;
-  };
-  setExplosionProgress: (val: number, manual?: boolean) => void;
-  setRenderMode: (mode: RenderMode) => void;
-  setCameraPreset: (preset: CameraPreset) => void;
-  setActiveComponent: (component: string | null) => void;
-  setTheme: (theme: ThemeMode) => void;
-  toggleTheme: () => void;
-  setLaserScanActive: (active: boolean) => void;
-  toggleAutoRotate: () => void;
-  updateTelemetry: (partial: Partial<SandboxState["telemetry"]>) => void;
+export interface PipelineNode {
+  id: string;
+  label: string;
+  category: "ingest" | "transform" | "storage" | "ai" | "automation";
+  status: "idle" | "active" | "processing";
+  dataRate: string;
+  metric: string;
+  tech: string;
 }
 
-// Simple lightweight state hook without needing heavy external state library
+export interface SandboxState {
+  mode: SimulationMode;
+  theme: ThemeMode;
+  streamSpeed: number; // 1, 2, 4
+  activeNode: string | null;
+  recordsHarvested: number;
+  inferenceLatency: number; // in ms
+  cvConfidence: number; // in %
+  isStreaming: boolean;
+  setMode: (mode: SimulationMode) => void;
+  setTheme: (theme: ThemeMode) => void;
+  toggleTheme: () => void;
+  setStreamSpeed: (speed: number) => void;
+  setActiveNode: (nodeId: string | null) => void;
+  toggleStreaming: () => void;
+  triggerBurst: () => void;
+}
 
 class SimpleEmitter {
   private listeners: (() => void)[] = [];
@@ -50,40 +49,16 @@ class SimpleEmitter {
 const emitter = new SimpleEmitter();
 
 let state: SandboxState = {
-  explosionProgress: 0,
-  manualControl: false,
-  renderMode: "standard",
-  cameraPreset: "iso",
-  activeComponent: null,
+  mode: "cv_vision",
   theme: "dark",
-  laserScanActive: true,
-  autoRotate: true,
-  telemetry: {
-    fps: 60,
-    rotationSpeed: 0.2,
-    displacementMm: 0,
-    sensorState: "NOMINAL"
-  },
-  setExplosionProgress: (val: number, manual = true) => {
-    state.explosionProgress = Math.max(0, Math.min(1, val));
-    if (manual) state.manualControl = true;
-    state.telemetry.displacementMm = Math.round(state.explosionProgress * 125);
-    emitter.notify();
-  },
-  setRenderMode: (mode: RenderMode) => {
-    state.renderMode = mode;
-    if (mode === "exploded" && state.explosionProgress < 0.2) {
-      state.explosionProgress = 0.85;
-      state.telemetry.displacementMm = Math.round(0.85 * 125);
-    }
-    emitter.notify();
-  },
-  setCameraPreset: (preset: CameraPreset) => {
-    state.cameraPreset = preset;
-    emitter.notify();
-  },
-  setActiveComponent: (component: string | null) => {
-    state.activeComponent = component;
+  streamSpeed: 1,
+  activeNode: null,
+  recordsHarvested: 2840,
+  inferenceLatency: 14.2,
+  cvConfidence: 99.2,
+  isStreaming: true,
+  setMode: (mode: SimulationMode) => {
+    state.mode = mode;
     emitter.notify();
   },
   setTheme: (theme: ThemeMode) => {
@@ -102,16 +77,22 @@ let state: SandboxState = {
   toggleTheme: () => {
     state.setTheme(state.theme === "dark" ? "light" : "dark");
   },
-  setLaserScanActive: (active: boolean) => {
-    state.laserScanActive = active;
+  setStreamSpeed: (speed: number) => {
+    state.streamSpeed = speed;
     emitter.notify();
   },
-  toggleAutoRotate: () => {
-    state.autoRotate = !state.autoRotate;
+  setActiveNode: (nodeId: string | null) => {
+    state.activeNode = nodeId;
     emitter.notify();
   },
-  updateTelemetry: (partial) => {
-    state.telemetry = { ...state.telemetry, ...partial };
+  toggleStreaming: () => {
+    state.isStreaming = !state.isStreaming;
+    emitter.notify();
+  },
+  triggerBurst: () => {
+    state.recordsHarvested += 120;
+    state.inferenceLatency = Number((11.5 + Math.random() * 4).toFixed(1));
+    state.cvConfidence = Number((98.5 + Math.random() * 1.4).toFixed(1));
     emitter.notify();
   }
 };

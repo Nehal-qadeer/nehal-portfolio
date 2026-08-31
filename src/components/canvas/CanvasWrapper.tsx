@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { useSandboxStore } from "@/hooks/useSandboxStore";
 
-const SpatialSandboxScene = dynamic(() => import("./SpatialSandboxScene"), {
+const IntelligentPipelineCanvas = dynamic(() => import("./IntelligentPipelineCanvas"), {
   ssr: false,
   loading: () => <div className="absolute inset-0 bg-ink transition-colors duration-500" />
 });
@@ -19,7 +19,7 @@ export function CanvasWrapper() {
       }`}
       aria-hidden="true"
     >
-      <SpatialSandboxScene />
+      <IntelligentPipelineCanvas />
     </div>
   );
 }

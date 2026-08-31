@@ -5,27 +5,65 @@ export interface StackGroup {
 
 export const stackGroups: StackGroup[] = [
   {
-    label: "Languages & core",
-    items: ["Python 3", "C++", "OOP", "Data Structures & Algorithms"]
+    label: "Languages & Core",
+    items: [
+      "Python 3",
+      "C++",
+      "Object-Oriented Programming (OOP)",
+      "Data Structures & Algorithms",
+      "Clean Code Principles"
+    ]
   },
   {
-    label: "AI / computer vision",
-    items: ["PyTorch", "OpenCV", "Intel OpenVINO", "Model training & evaluation"]
+    label: "AI/ML & Computer Vision",
+    items: [
+      "PyTorch",
+      "OpenCV",
+      "Intel OpenVINO (Inference & Model Optimization)",
+      "Deep Learning Model Training & Evaluation",
+      "Neural Network Verification Pipelines"
+    ]
   },
   {
-    label: "Automation & integration",
-    items: ["Apify REST API", "Zapier", "Make.com", "Selenium WebDriver", "Webhooks", "REST API design"]
+    label: "Automation & Integrations",
+    items: [
+      "Apify REST API & Custom Actors",
+      "Zapier (Multi-Step Zaps, Inline Formulas)",
+      "Make.com Scenarios",
+      "Selenium WebDriver & ChromeDriver",
+      "JSON Payloads & Schema Validation",
+      "Webhooks & RESTful API Design"
+    ]
   },
   {
-    label: "Data & infrastructure",
-    items: ["PostgreSQL", "MySQL", "Docker", "Linux CLI", "Git / GitHub"]
+    label: "Data & Infrastructure",
+    items: [
+      "PostgreSQL",
+      "MySQL",
+      "Structured Query Optimization",
+      "Docker & Containerization",
+      "Linux CLI / Bash",
+      "Git / GitHub Version Control"
+    ]
   },
   {
-    label: "AI-assisted tooling",
-    items: ["Claude Code", "Cursor IDE", "Agentic workflow orchestration", "Prompt engineering"]
+    label: "Agentic & AI-Assisted Tools",
+    items: [
+      "Claude Code",
+      "Cursor IDE",
+      "Agentic Workflow Orchestration",
+      "Advanced Prompt Engineering"
+    ]
   },
   {
-    label: "Process & QA",
-    items: ["Agile / Scrum", "Sprint planning", "UAC definition", "QA validation", "Incident diagnostics"]
+    label: "Methodologies & QA",
+    items: [
+      "Agile / Scrum Ceremonies",
+      "Sprint Planning",
+      "Technical API Specifications",
+      "User Acceptance Criteria (UAC)",
+      "QA Release Validation",
+      "Incident Diagnostics & Root Cause Analysis"
+    ]
   }
 ];

@@ -18,10 +18,10 @@ function ScanVisual() {
       />
       <line x1="200" y1="70" x2="200" y2="180" stroke={MUTED} strokeWidth="1" opacity="0.4" />
       <line x1="140" y1="110" x2="260" y2="110" stroke={MUTED} strokeWidth="1" opacity="0.4" />
-      <rect x="110" y="55" width="180" height="150" fill="none" stroke={SIGNAL} strokeWidth="1" opacity="0.6" />
-      <line x1="110" y1="55" x2="290" y2="55" stroke={VERIFY} strokeWidth="1.5" opacity="0.8" />
+      <rect x="110" y="55" width="180" height="150" fill="none" stroke={SIGNAL} strokeWidth="1.5" opacity="0.8" />
+      <line x1="110" y1="55" x2="290" y2="55" stroke={VERIFY} strokeWidth="2" opacity="0.9" />
       <text x="115" y="225" fill={VERIFY} fontSize="11" fontFamily="monospace" letterSpacing="1">
-        CONF 0.94
+        OPENVINO INFERENCE · 11.2ms
       </text>
     </svg>
   );
@@ -78,6 +78,9 @@ function NetworkVisual() {
           strokeWidth="1.5"
         />
       ))}
+      <text x="30" y="280" fill={SIGNAL} fontSize="10" fontFamily="monospace">
+        APIFY + SELENIUM · 2K–4K RECS/RUN
+      </text>
     </svg>
   );
 }
@@ -95,7 +98,7 @@ function FlowVisual() {
             y={126}
             width="48"
             height="48"
-            rx="2"
+            rx="4"
             fill="#0D1420"
             stroke={i === steps.length - 1 ? SIGNAL : VERIFY}
             strokeWidth="1.5"
@@ -105,20 +108,9 @@ function FlowVisual() {
           </text>
         </g>
       ))}
-    </svg>
-  );
-}
-
-function OrbitVisual() {
-  return (
-    <svg viewBox="0 0 400 300" className="h-full w-full">
-      <rect x="0" y="0" width="400" height="300" fill="#141C2B" />
-      <circle cx="200" cy="150" r="100" fill="none" stroke={LINE} strokeWidth="1" />
-      <circle cx="200" cy="150" r="65" fill="none" stroke={LINE} strokeWidth="1" />
-      <circle cx="200" cy="150" r="6" fill={SIGNAL} />
-      <circle cx="300" cy="150" r="5" fill={VERIFY} />
-      <circle cx="235" cy="72" r="4" fill={MUTED} />
-      <path d="M 200 50 A 100 100 0 0 1 279 194" fill="none" stroke={VERIFY} strokeWidth="1" strokeDasharray="3 4" />
+      <text x="30" y="280" fill={VERIFY} fontSize="10" fontFamily="monospace">
+        ZAPIER + GOOGLE OAUTH · 4-APP FLOW
+      </text>
     </svg>
   );
 }
@@ -126,11 +118,10 @@ function OrbitVisual() {
 const VISUALS: Record<Project["visual"], () => JSX.Element> = {
   scan: ScanVisual,
   network: NetworkVisual,
-  flow: FlowVisual,
-  orbit: OrbitVisual
+  flow: FlowVisual
 };
 
 export function ProjectVisual({ variant }: { variant: Project["visual"] }) {
-  const Visual = VISUALS[variant];
+  const Visual = VISUALS[variant] || ScanVisual;
   return <Visual />;
 }

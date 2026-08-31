@@ -1,16 +1,15 @@
 "use client";
 
-import { useSandboxStore, type RenderMode, type CameraPreset } from "@/hooks/useSandboxStore";
+import { useSandboxStore, type SimulationMode } from "@/hooks/useSandboxStore";
 import { 
-  Sliders, 
-  Layers, 
-  Eye, 
+  Cpu, 
+  Database, 
+  Workflow, 
+  Play, 
   Sun, 
   Moon, 
-  RotateCw, 
-  Compass, 
-  Radio, 
-  Scan,
+  Zap, 
+  Activity,
   Maximize2,
   Minimize2
 } from "lucide-react";
@@ -19,66 +18,50 @@ import { useState } from "react";
 export function SandboxHUD() {
   const [collapsed, setCollapsed] = useState(false);
   const {
-    explosionProgress,
-    setExplosionProgress,
-    renderMode,
-    setRenderMode,
-    cameraPreset,
-    setCameraPreset,
-    activeComponent,
-    setActiveComponent,
+    mode,
+    setMode,
     theme,
     toggleTheme,
-    laserScanActive,
-    setLaserScanActive,
-    autoRotate,
-    toggleAutoRotate,
-    telemetry
+    streamSpeed,
+    setStreamSpeed,
+    recordsHarvested,
+    inferenceLatency,
+    cvConfidence,
+    triggerBurst
   } = useSandboxStore();
 
   const isLight = theme === "light";
 
-  const MODES: { id: RenderMode; label: string; icon: typeof Layers }[] = [
-    { id: "standard", label: "Standard", icon: Eye },
-    { id: "exploded", label: "Exploded", icon: Layers },
-    { id: "xray", label: "X-Ray", icon: Scan },
-    { id: "lidar", label: "LiDAR", icon: Radio }
-  ];
-
-  const PRESETS: { id: CameraPreset; label: string }[] = [
-    { id: "iso", label: "Isometric" },
-    { id: "front", label: "Front Lens" },
-    { id: "core", label: "TPU Core" },
-    { id: "top", label: "Top Gimbal" }
-  ];
-
-  const COMPONENTS = [
-    { id: "optics", label: "Optics" },
-    { id: "radiator", label: "Cryo-Fins" },
-    { id: "core", label: "TPU Die" },
-    { id: "chassis", label: "Chassis" }
+  const MODES: { id: SimulationMode; label: string; icon: typeof Cpu; desc: string }[] = [
+    { id: "cv_vision", label: "Computer Vision & OpenVINO", icon: Cpu, desc: "Object Verification & Inference Scanner" },
+    { id: "data_pipeline", label: "Scraping & PostgreSQL", icon: Database, desc: "Multi-Platform Selenium / Apify Ingestion" },
+    { id: "workflow_automation", label: "Zapier & Webhook Flow", icon: Workflow, desc: "Multi-App Google Workspace / OAuth Pipeline" }
   ];
 
   return (
     <aside
-      aria-label="3D Spatial Sandbox Control Panel"
+      aria-label="Interactive Pipeline & Vision Simulator"
       className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-auto"
     >
-      {/* Mini Telemetry Status Bar */}
+      {/* Top Floating Status Pill */}
       <div
         className={`flex items-center gap-3 rounded-full border px-4 py-1.5 backdrop-blur-md transition-colors ${
           isLight
-            ? "border-slate-300 bg-white/90 text-slate-700 shadow-sm"
+            ? "border-slate-300 bg-white/95 text-slate-700 shadow-sm"
             : "border-line bg-panel/90 text-text shadow-lg"
         }`}
       >
         <span className="flex items-center gap-1.5 font-data text-[10px] tracking-wider text-signal font-semibold">
           <span className="h-2 w-2 rounded-full bg-signal animate-pulse" />
-          SPATIAL SANDBOX · LEVEL 4
+          PIPELINE SIMULATOR
         </span>
         <span className="text-line">|</span>
-        <span className="font-data text-[10px] tracking-widest text-text-faint">
-          DISP: {telemetry.displacementMm}mm
+        <span className="font-data text-[10px] tabular text-verify font-medium">
+          {mode === "cv_vision"
+            ? `${inferenceLatency}ms · ${cvConfidence}%`
+            : mode === "data_pipeline"
+              ? `${recordsHarvested.toLocaleString()} RECS`
+              : "4-APP SYNC"}
         </span>
         <span className="text-line">|</span>
         <button
@@ -100,7 +83,7 @@ export function SandboxHUD() {
         </button>
       </div>
 
-      {/* Main Interactive Control Dock */}
+      {/* Main Control Panel */}
       {!collapsed && (
         <div
           className={`w-80 sm:w-96 rounded-xl border p-4 shadow-2xl backdrop-blur-xl transition-all duration-300 ${
@@ -112,152 +95,76 @@ export function SandboxHUD() {
           {/* Header */}
           <div className="flex items-center justify-between border-b border-line pb-3">
             <div className="flex items-center gap-2">
-              <Sliders size={15} className="text-signal" />
+              <Activity size={15} className="text-signal" />
               <span className="font-display text-sm font-semibold tracking-wide">
-                Hardware Disassembly Matrix
+                Live Simulation Matrix
               </span>
             </div>
+            <button
+              onClick={triggerBurst}
+              className="inline-flex items-center gap-1 rounded bg-signal px-2.5 py-1 font-data text-[10px] font-semibold text-ink transition-transform hover:scale-105 active:scale-95"
+            >
+              <Play size={10} />
+              Run Pipeline
+            </button>
+          </div>
+
+          {/* 1. Mode Selectors */}
+          <div className="mt-3 space-y-1.5">
+            <span className="font-data text-[10px] text-text-faint tracking-widest uppercase block mb-1">
+              Select Architecture Mode
+            </span>
+            {MODES.map((m) => {
+              const Icon = m.icon;
+              const active = mode === m.id;
+              return (
+                <button
+                  key={m.id}
+                  onClick={() => setMode(m.id)}
+                  className={`w-full flex items-center gap-3 p-2.5 rounded-lg border text-left transition-all ${
+                    active
+                      ? "border-signal bg-signal/15 text-signal font-medium shadow-sm"
+                      : isLight
+                        ? "border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300"
+                        : "border-line bg-ink/70 text-text-muted hover:border-slate-600"
+                  }`}
+                >
+                  <Icon size={16} className={active ? "text-signal" : "text-text-muted"} />
+                  <div className="flex-1 min-w-0">
+                    <div className="font-display text-xs font-semibold">{m.label}</div>
+                    <div className="font-data text-[10px] text-text-faint truncate">{m.desc}</div>
+                  </div>
+                  {active && <span className="h-2 w-2 rounded-full bg-signal shrink-0" />}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* 2. Speed Controller & Metrics */}
+          <div className="mt-3 pt-3 border-t border-line flex items-center justify-between">
             <div className="flex items-center gap-1.5">
-              <button
-                onClick={toggleAutoRotate}
-                className={`rounded px-2 py-0.5 font-data text-[10px] uppercase transition-colors ${
-                  autoRotate
-                    ? "bg-signal/20 text-signal border border-signal/40"
-                    : isLight
-                      ? "bg-slate-100 text-slate-600"
-                      : "bg-ink text-text-muted"
-                }`}
-                title="Toggle Auto Spin"
-              >
-                <RotateCw size={10} className="inline mr-1" />
-                Spin
-              </button>
-              <button
-                onClick={() => setLaserScanActive(!laserScanActive)}
-                className={`rounded px-2 py-0.5 font-data text-[10px] uppercase transition-colors ${
-                  laserScanActive
-                    ? "bg-verify/20 text-verify border border-verify/40"
-                    : isLight
-                      ? "bg-slate-100 text-slate-600"
-                      : "bg-ink text-text-muted"
-                }`}
-                title="Toggle Laser Sweep"
-              >
-                Laser
-              </button>
+              <Zap size={13} className="text-signal" />
+              <span className="font-data text-[10px] text-text-faint uppercase">Speed:</span>
+              {[1, 2, 4].map((speed) => (
+                <button
+                  key={speed}
+                  onClick={() => setStreamSpeed(speed)}
+                  className={`px-2 py-0.5 rounded font-data text-[10px] transition-colors ${
+                    streamSpeed === speed
+                      ? "bg-signal text-ink font-bold"
+                      : isLight
+                        ? "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                        : "bg-ink text-text-muted hover:bg-panel-raised"
+                  }`}
+                >
+                  {speed}x
+                </button>
+              ))}
             </div>
-          </div>
 
-          {/* 1. Exploded Disassembly Slider */}
-          <div className="mt-3">
-            <div className="flex items-center justify-between text-xs mb-1.5">
-              <span className="font-data text-[11px] text-text-muted tracking-wider uppercase">
-                Assembly Explosion
-              </span>
-              <span className="font-data text-xs font-semibold text-signal tabular">
-                {Math.round(explosionProgress * 100)}%
-              </span>
-            </div>
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={explosionProgress}
-              onChange={(e) => setExplosionProgress(parseFloat(e.target.value), true)}
-              className="w-full h-1.5 bg-line rounded-lg appearance-none cursor-pointer accent-signal"
-            />
-            <div className="flex justify-between font-data text-[9px] text-text-faint mt-1">
-              <span>ASSEMBLED</span>
-              <span>INSPECTION</span>
-              <span>FULLY EXPLODED</span>
-            </div>
-          </div>
-
-          {/* 2. Visual Render Mode Chips */}
-          <div className="mt-4">
-            <span className="font-data text-[10px] text-text-faint tracking-widest uppercase block mb-1.5">
-              Exploration Mode
+            <span className="font-data text-[10px] text-text-faint">
+              Move cursor to scan
             </span>
-            <div className="grid grid-cols-4 gap-1.5">
-              {MODES.map((m) => {
-                const Icon = m.icon;
-                const active = renderMode === m.id;
-                return (
-                  <button
-                    key={m.id}
-                    onClick={() => setRenderMode(m.id)}
-                    className={`flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-md border text-center transition-all ${
-                      active
-                        ? "border-signal bg-signal/15 text-signal font-semibold"
-                        : isLight
-                          ? "border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300"
-                          : "border-line bg-ink/70 text-text-muted hover:border-slate-600"
-                    }`}
-                  >
-                    <Icon size={14} />
-                    <span className="font-data text-[10px]">{m.label}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* 3. Component Focus Pills */}
-          <div className="mt-3">
-            <span className="font-data text-[10px] text-text-faint tracking-widest uppercase block mb-1.5">
-              Highlight Sub-Assembly
-            </span>
-            <div className="flex flex-wrap gap-1.5">
-              {COMPONENTS.map((c) => {
-                const active = activeComponent === c.id;
-                return (
-                  <button
-                    key={c.id}
-                    onClick={() => setActiveComponent(active ? null : c.id)}
-                    className={`rounded-full px-2.5 py-0.5 font-data text-[10px] transition-all border ${
-                      active
-                        ? "border-signal bg-signal text-ink font-semibold"
-                        : isLight
-                          ? "border-slate-200 bg-slate-100 text-slate-700 hover:border-signal"
-                          : "border-line bg-ink text-text-muted hover:border-signal"
-                    }`}
-                  >
-                    {c.label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* 4. Camera Angle Presets */}
-          <div className="mt-3 pt-3 border-t border-line">
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="font-data text-[10px] text-text-faint tracking-widest uppercase flex items-center gap-1">
-                <Compass size={11} /> Perspective
-              </span>
-              <span className="font-data text-[9px] text-text-faint">Drag canvas to orbit</span>
-            </div>
-            <div className="grid grid-cols-4 gap-1">
-              {PRESETS.map((p) => {
-                const active = cameraPreset === p.id;
-                return (
-                  <button
-                    key={p.id}
-                    onClick={() => setCameraPreset(p.id)}
-                    className={`py-1 rounded text-center font-data text-[10px] border transition-all ${
-                      active
-                        ? "border-signal bg-signal/20 text-signal font-semibold"
-                        : isLight
-                          ? "border-slate-200 bg-slate-50 text-slate-600 hover:text-slate-900"
-                          : "border-line bg-ink/60 text-text-muted hover:text-text"
-                    }`}
-                  >
-                    {p.label}
-                  </button>
-                );
-              })}
-            </div>
           </div>
         </div>
       )}

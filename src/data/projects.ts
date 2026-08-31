@@ -2,77 +2,66 @@ export interface Project {
   slug: string;
   title: string;
   period: string;
+  category: string;
   stack: string[];
   summary: string;
   bullets: string[];
   /** Public code proof. Empty when the work is thesis/client IP and not publicly repo'd. */
   repos: { label: string; url: string }[];
-  /** Which generative visual to render for this card. */
-  visual: "scan" | "network" | "flow" | "orbit";
+  /** Which interactive simulation to run */
+  visual: "scan" | "network" | "flow";
 }
 
 export const projects: Project[] = [
   {
     slug: "object-verification",
     title: "AI-Driven Object Verification System",
-    period: "Master's Thesis · 2024 — 2025",
-    stack: ["Python", "PyTorch", "OpenCV", "Intel OpenVINO", "Docker"],
+    period: "Master's Thesis Project · 2024 — 2025",
+    category: "Computer Vision & Model Optimization",
+    stack: ["Python", "PyTorch", "OpenCV", "Intel OpenVINO", "Docker", "PyCharm"],
     summary:
-      "An end-to-end computer vision verification pipeline — image preprocessing through trained inference, optimized and containerized for real deployment rather than a notebook demo.",
+      "Engineered an end-to-end computer vision verification pipeline in PyCharm, handling image preprocessing with OpenCV and deep-learning model training with PyTorch, optimized for high-speed inference.",
     bullets: [
-      "Built the full pipeline in PyCharm: OpenCV preprocessing feeding PyTorch model training and evaluation.",
-      "Converted and ran inference through Intel OpenVINO, cutting inference latency by 30%.",
-      "Containerized preprocessing + serving into a portable Docker runtime."
+      "Engineered an end-to-end computer vision verification pipeline in PyCharm, handling image preprocessing with OpenCV and deep-learning model training with PyTorch.",
+      "Optimized model inference by 30% through conversion and runtime execution with the Intel OpenVINO toolkit.",
+      "Containerized the inference pipeline (data preprocessing + model serving runtime) into lightweight Docker containers for portable deployment."
     ],
     repos: [],
     visual: "scan"
   },
   {
     slug: "scraping-engine",
-    title: "Multi-Platform Scraping & Ingestion Engine",
-    period: "2026",
-    stack: ["Python", "Selenium", "Apify REST API", "Make.com", "PostgreSQL"],
+    title: "Multi-Platform Automated Scraping & Ingestion Engine",
+    period: "End-to-End Automation & Data Integration · 2026",
+    category: "Python Automation & Cloud Data Pipelines",
+    stack: ["Python", "Selenium WebDriver", "Apify REST API", "Make.com", "PostgreSQL"],
     summary:
-      "Cloud-deployed scrapers on scheduled intervals, with Make.com handling transform/validation logic before data lands in Postgres for reporting.",
+      "Architected cloud-deployed scraping and lead-generation pipelines using Python and Selenium, running automated Make.com transformations into PostgreSQL.",
     bullets: [
-      "Deployed custom Python scrapers as Apify Actors pulling live data on scheduled intervals.",
-      "Built Make.com scenarios with JSON transform logic to clean and validate raw payloads.",
-      "Wired storage directly into PostgreSQL to power analytics dashboards."
+      "Developed custom Python web scrapers deployed as cloud Apify Actors, utilizing Apify REST APIs to extract live dynamic data on scheduled intervals.",
+      "Constructed Make.com scenarios with JSON transformation logic to parse, clean, and validate raw payload responses.",
+      "Integrated automated data storage directly into PostgreSQL relational databases to power analytical dashboards and reporting pipelines."
     ],
     repos: [
-      { label: "Booking.com scraper", url: "https://github.com/Nehal-qadeer/Booking-Automation-Selenium" },
-      { label: "Lead-gen extractor", url: "https://github.com/Nehal-qadeer/Yell-Business-Data-Extractor" }
+      { label: "Booking.com Dynamic Scraper", url: "https://github.com/Nehal-qadeer/Booking-Automation-Selenium" },
+      { label: "Lead-Gen Business Extractor", url: "https://github.com/Nehal-qadeer/Yell-Business-Data-Extractor" }
     ],
     visual: "network"
   },
   {
     slug: "application-tracker",
     title: "Multi-App Workflow Automation — Application Tracker",
-    period: "2026",
-    stack: ["Zapier", "Google Workspace API", "Webhooks", "OAuth"],
+    period: "No-Code / Pro-Code Process Automation · 2026",
+    category: "Workflow Automation & API Integration",
+    stack: ["Zapier", "Google Workspace APIs", "Webhooks", "OAuth 2.0", "Gmail API"],
     summary:
-      "A 4-step Zapier workflow that turns a Google Form into a fully tracked pipeline — sheet row, calendar follow-up, and a personalized Gmail nudge, with zero manual handling.",
+      "Architected and deployed a 4-step multi-app Zapier workflow automating candidate and client tracking with dynamic Google Sheets recording, Calendar scheduling, and personalized Gmail alerts.",
     bullets: [
-      "Architected a 4-app Zapier flow: Form → Sheets → Calendar → Gmail, fully automated.",
-      "Wrote inline transformation formulas mapping multi-variable payload fields.",
-      "Configured multi-account OAuth and validated data integrity across every API touchpoint."
+      "Architected and deployed a 4-step multi-app Zapier workflow automating candidate and client tracking: dynamically records Google Form inputs into Google Sheets, schedules Google Calendar follow-ups, and triggers personalized Gmail notifications.",
+      "Implemented custom Zapier inline transformation formulas and mapped multi-variable payload fields (company, role, links, follow-up deadlines).",
+      "Configured multi-account OAuth authentication and validated end-to-end data integrity across all API touchpoints."
     ],
     repos: [],
     visual: "flow"
-  },
-  {
-    slug: "satellite-tracking",
-    title: "Satellite Tracking System",
-    period: "Systems / Full-Stack",
-    stack: ["Node.js", "Vite", "React", "Redis"],
-    summary:
-      "A full-stack real-time tracking system — Redis handling live state between a Node backend and a Vite/React frontend. The systems-integration half of the portfolio, not just the ML half.",
-    bullets: [
-      "Backend service tracking live positional data with Redis as the shared state/cache layer.",
-      "Vite + React frontend consuming live updates without polling the backend directly.",
-      "Structured as a proper client/server split rather than a monolith — built to scale past a demo."
-    ],
-    repos: [{ label: "Repository", url: "https://github.com/Nehal-qadeer/satellite-trackingsystem" }],
-    visual: "orbit"
   }
 ];
