@@ -108,5 +108,26 @@ export const projects: Project[] = [
     repos: [
       { label: "Satellite Tracking System", url: "https://github.com/Nehal-qadeer/satellite-trackingsystem" }
     ]
+  },
+  {
+    slug: "virtual-room-builder-german-game",
+    title: "Virtual Room Builder & German Vocabulary Game",
+    badge: "Full-Stack AI & Educational Gaming",
+    role: "Lead Architecture & Computer Vision",
+    metric: "15/15 Tests",
+    metricDesc: "FastAPI + React 18 + Gemini AI",
+    summary:
+      "Interactive German language learning application combining spatial virtual room construction with Computer Vision. Features an asynchronous FastAPI backend, a 60 FPS HTML5 Canvas drag-and-drop grid in React 18, and Google Gemini Multimodal Vision AI to identify physical room objects and generate grammatical gender (der, die, das), plurals, and contextual sentences with native audio pronunciation.",
+    features: [
+      "Interactive 2D Room Grid: 60 FPS HTML5 Canvas engine with smooth drag-and-drop, boundary collision prevention, and 90° item rotation.",
+      "Pedagogical Gender Color Association: Visual reinforcement using color-coded badges (der = Blue, die = Red, das = Green).",
+      "Computer Vision & Multimodal AI: Live webcam and image scanner powered by Google Gemini Vision to turn real physical objects into German vocabulary cards.",
+      "Audio & Gamification: Native German pronunciation via Web Speech API, interactive article quizzes with confetti celebrations, and XP leveling."
+    ],
+    techStack: ["Python 3.10+", "FastAPI", "React 18", "HTML5 Canvas", "Google Gemini Vision", "SQLAlchemy", "PostgreSQL", "Tailwind CSS v4"],
+    repos: [
+      { label: "Virtual Room Builder Game", url: "https://github.com/Nehal-qadeer/Virtual-Room-Builder-German-Game" }
+    ]
   }
 ];
+

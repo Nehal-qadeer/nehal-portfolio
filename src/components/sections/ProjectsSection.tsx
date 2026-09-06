@@ -626,9 +626,66 @@ export function ProjectsSection() {
         </div>
 
         {/* ========================================================================= */}
-        {/* Additional Project Cards Grid: Scraping Engine & Satellite Tracker */}
+        {/* Additional Project Cards Grid: Virtual Room Builder, Scraping, Satellite */}
         {/* ========================================================================= */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Project: Virtual Room Builder & German Vocabulary Game */}
+          <article className="rounded-xl border border-line bg-surface p-6 sm:p-7 shadow-blueprint relative overflow-hidden transition-all duration-300 hover:border-signal hover:-translate-y-1 hover:shadow-blueprint-lg flex flex-col justify-between space-y-5">
+            <div className="space-y-3.5">
+              <div className="flex justify-between items-start">
+                <span className="font-mono text-xs font-semibold text-signal uppercase tracking-wider flex items-center gap-1.5">
+                  <Sparkles size={12} className="text-amber" />
+                  Full-Stack AI & Gaming
+                </span>
+                <span className="font-mono text-xs text-ink-soft">2026</span>
+              </div>
+
+              {/* Live Game Screenshot */}
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-line bg-[#0F1829] shadow-inner group/img">
+                <Image
+                  src="/images/german-room-builder.png"
+                  alt="Virtual Room Builder & German Vocabulary Game Screenshot"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-300 group-hover/img:scale-105"
+                />
+              </div>
+
+              <div>
+                <h3 className="font-display font-bold text-xl text-ink">
+                  Virtual Room Builder & German Vocabulary Game
+                </h3>
+                <p className="mt-2 font-body text-xs sm:text-sm text-ink-soft leading-relaxed">
+                  Interactive German language learning game with real-time room design. Built with FastAPI, React 18, and a 60 FPS HTML5 Canvas grid. Features Gemini Multimodal Vision to scan real objects, map German noun genders (der, die, das), and provide native Web Speech pronunciation.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                <a
+                  href="https://github.com/Nehal-qadeer/Virtual-Room-Builder-German-Game"
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex items-center gap-1 font-mono text-xs text-signal hover:underline font-semibold"
+                >
+                  <Code2 size={12} />
+                  GitHub Repository
+                  <ExternalLink size={10} />
+                </a>
+                <span className="text-line-strong">·</span>
+                <span className="font-mono text-[11px] text-teal font-semibold">
+                  15/15 Tests
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-1.5 pt-3 border-t border-line">
+              {["FastAPI", "React 18", "Canvas", "Gemini AI", "PostgreSQL"].map((tag) => (
+                <span key={tag} className="rounded bg-signal-dim px-2 py-0.5 font-mono text-[10.5px] text-signal">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </article>
           {/* Project 2: Scraping & Ingestion */}
           <article className="rounded-xl border border-line bg-surface p-7 shadow-blueprint relative overflow-hidden transition-all duration-300 hover:border-signal hover:-translate-y-1 hover:shadow-blueprint-lg flex flex-col justify-between space-y-5">
             <div className="space-y-4">
