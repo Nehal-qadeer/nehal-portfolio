@@ -2,9 +2,117 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ExternalLink, Code2, Sparkles, Gamepad2, Eye, CheckCircle2, RefreshCw, ShieldCheck, Bot, Lock, ImageIcon, FileText, Monitor, Cpu, Database } from "lucide-react";
+import { ExternalLink, Code2, Sparkles, Gamepad2, Eye, CheckCircle2, RefreshCw, ShieldCheck, Bot, Lock, ImageIcon, FileText, Monitor, Cpu, Database, Volume2, RotateCw, Boxes, Layers } from "lucide-react";
 
 export function ProjectsSection() {
+  // --- Virtual Room Builder State ---
+  const [roomViewMode, setRoomViewMode] = useState<"screenshot" | "interactive">("screenshot");
+  const [selectedRoomIndex, setSelectedRoomIndex] = useState<number>(0);
+  const [roomItemRotation, setRoomItemRotation] = useState<number>(0);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
+  const roomItemsSample = [
+    {
+      id: "sofa",
+      german: "Sofa",
+      article: "das" as const,
+      genderLabel: "Neutrum (Green)",
+      articleColor: "text-emerald-400 bg-emerald-950/60 border-emerald-500/40",
+      english: "Sofa / Couch",
+      plural: "die Sofas",
+      exampleDe: "Das bequeme Sofa steht im Wohnzimmer.",
+      exampleEn: "The comfortable sofa is in the living room.",
+      coord: "X: 240, Y: 180",
+      conf: 99.4,
+      roomType: "Wohnzimmer (Living Room)",
+      dimensions: "120 × 60 px"
+    },
+    {
+      id: "stuhl",
+      german: "Stuhl",
+      article: "der" as const,
+      genderLabel: "Maskulin (Blue)",
+      articleColor: "text-blue-400 bg-blue-950/60 border-blue-500/40",
+      english: "Chair",
+      plural: "die Stühle",
+      exampleDe: "Der hölzerne Stuhl steht am Schreibtisch.",
+      exampleEn: "The wooden chair is at the desk.",
+      coord: "X: 140, Y: 290",
+      conf: 98.7,
+      roomType: "Esszimmer (Dining Room)",
+      dimensions: "50 × 50 px"
+    },
+    {
+      id: "lampe",
+      german: "Lampe",
+      article: "die" as const,
+      genderLabel: "Feminin (Red)",
+      articleColor: "text-rose-400 bg-rose-950/60 border-rose-500/40",
+      english: "Floor Lamp",
+      plural: "die Lampen",
+      exampleDe: "Die helle Lampe beleuchtet den Raum.",
+      exampleEn: "The bright lamp illuminates the room.",
+      coord: "X: 380, Y: 90",
+      conf: 99.1,
+      roomType: "Wohnzimmer / Büro",
+      dimensions: "40 × 40 px"
+    },
+    {
+      id: "bett",
+      german: "Bett",
+      article: "das" as const,
+      genderLabel: "Neutrum (Green)",
+      articleColor: "text-emerald-400 bg-emerald-950/60 border-emerald-500/40",
+      english: "Double Bed",
+      plural: "die Betten",
+      exampleDe: "Das große Bett hat zwei Kissen.",
+      exampleEn: "The large bed has two pillows.",
+      coord: "X: 300, Y: 240",
+      conf: 99.6,
+      roomType: "Schlafzimmer (Bedroom)",
+      dimensions: "120 × 100 px"
+    },
+    {
+      id: "schrank",
+      german: "Schrank",
+      article: "der" as const,
+      genderLabel: "Maskulin (Blue)",
+      articleColor: "text-blue-400 bg-blue-950/60 border-blue-500/40",
+      english: "Wardrobe / Cupboard",
+      plural: "die Schränke",
+      exampleDe: "Der Schrank bietet praktischen Stauraum.",
+      exampleEn: "The wardrobe offers practical storage space.",
+      coord: "X: 70, Y: 80",
+      conf: 98.2,
+      roomType: "Schlafzimmer / Flur",
+      dimensions: "100 × 50 px"
+    }
+  ];
+
+  const currentRoomItem = roomItemsSample[selectedRoomIndex]!;
+
+  const handleSelectRoomItem = (idx: number) => {
+    setSelectedRoomIndex(idx);
+    setRoomItemRotation(0);
+  };
+
+  const handleRotateRoomItem = () => {
+    setRoomItemRotation((prev) => (prev + 90) % 360);
+  };
+
+  const handleSpeakGerman = (text: string) => {
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "de-DE";
+      utterance.rate = 0.9;
+      setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = () => setIsSpeaking(false);
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
   // --- Master's Thesis CV Simulator State ---
   const [isCvSimulating, setIsCvSimulating] = useState(false);
   const [detectedObj, setDetectedObj] = useState<{ name: string; conf: number; fps: number; latency: string }>({
@@ -626,67 +734,312 @@ export function ProjectsSection() {
         </div>
 
         {/* ========================================================================= */}
-        {/* Additional Project Cards Grid: Virtual Room Builder, Scraping, Satellite */}
+        {/* SPOTLIGHT 3: Virtual Room Builder & German Vocabulary Game */}
         {/* ========================================================================= */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Project: Virtual Room Builder & German Vocabulary Game */}
-          <article className="rounded-xl border border-line bg-surface p-6 sm:p-7 shadow-blueprint relative overflow-hidden transition-all duration-300 hover:border-signal hover:-translate-y-1 hover:shadow-blueprint-lg flex flex-col justify-between space-y-5">
-            <div className="space-y-3.5">
-              <div className="flex justify-between items-start">
-                <span className="font-mono text-xs font-semibold text-signal uppercase tracking-wider flex items-center gap-1.5">
-                  <Sparkles size={12} className="text-amber" />
-                  Full-Stack AI & Gaming
-                </span>
-                <span className="font-mono text-xs text-ink-soft">2026</span>
+        <div className="rounded-xl border border-amber/40 bg-surface p-7 sm:p-10 shadow-blueprint-lg relative overflow-hidden space-y-8">
+          {/* Top Line Gradient */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber via-signal to-teal" />
+
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-5">
+            <div className="space-y-1">
+              <span className="inline-flex items-center gap-1.5 rounded bg-amber/10 border border-amber/30 px-2.5 py-1 font-mono text-xs font-semibold text-amber-800 dark:text-amber-300">
+                <Sparkles size={14} className="text-amber" />
+                FULL-STACK AI &amp; COMPUTER VISION · SPATIAL LANGUAGE LEARNING
+              </span>
+              <h3 className="font-display font-bold text-2xl sm:text-3xl text-ink mt-2 flex items-center gap-2">
+                <span>🏠</span> Virtual Room Builder &amp; German Vocabulary Game
+              </h3>
+              <p className="font-body text-sm sm:text-base text-signal font-medium">
+                Spatial room construction web application combining a 60 FPS HTML5 Canvas coordinate engine with Google Gemini Multimodal Vision AI.
+              </p>
+            </div>
+
+            <div className="font-mono text-xs text-right">
+              <span className="inline-block rounded border border-teal/40 bg-teal/10 px-3 py-1.5 text-teal font-bold text-sm tabular">
+                15/15 Pytest Passed
+              </span>
+              <div className="text-[11px] text-ink-soft mt-0.5">FastAPI + React 18 + Gemini AI</div>
+            </div>
+          </div>
+
+          {/* Project Purpose Statement */}
+          <div className="rounded-lg border border-line bg-bg p-5 space-y-2">
+            <div className="font-mono text-xs font-bold text-ink uppercase flex items-center gap-2">
+              <Sparkles size={14} className="text-amber" />
+              Project Purpose &amp; Pedagogical Architecture
+            </div>
+            <p className="font-body text-sm text-ink-soft leading-relaxed">
+              Mastering German grammatical genders (<strong className="text-blue-600 font-semibold">der</strong>, <strong className="text-rose-600 font-semibold">die</strong>, <strong className="text-emerald-600 font-semibold">das</strong>) and spatial room vocabulary is notoriously unintuitive through traditional rote memorization. This system bridges the gap by combining embodied 2D spatial placement on a <strong className="text-ink font-semibold">60 FPS HTML5 Canvas coordinate grid</strong> with real-time <strong className="text-signal font-semibold">Google Gemini Multimodal Vision</strong>. Learners drag items into their virtual floor plan or scan real physical objects with their camera, receiving instant visual gender color reinforcement, contextual bilingual example sentences, and native Web Speech pronunciation.
+            </p>
+          </div>
+
+          {/* Technical Features & Live Interactive Pipeline Console */}
+          <div className="grid lg:grid-cols-12 gap-8 items-start">
+            {/* Left: Highlights & Step Trace (5 cols) */}
+            <div className="lg:col-span-5 space-y-4 font-body text-sm text-ink-soft">
+              <div className="font-mono text-xs font-bold text-ink uppercase tracking-wider">
+                Technical Highlights
+              </div>
+              <ul className="space-y-2.5">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={15} className="text-teal shrink-0 mt-0.5" />
+                  <span><strong className="text-ink">60 FPS HTML5 Canvas Engine:</strong> Drag-and-drop 2D spatial coordinate system in React 18 with real-time boundary collision detection and 90° item rotation.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={15} className="text-teal shrink-0 mt-0.5" />
+                  <span><strong className="text-ink">Multimodal Vision Pipeline:</strong> Integrates Google Gemini Vision to classify real physical room objects from camera/image upload and generate structured vocabulary cards.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={15} className="text-teal shrink-0 mt-0.5" />
+                  <span><strong className="text-ink">Pedagogical Gender Badging:</strong> Neurological color association (<span className="text-blue-600 font-semibold">der = Blue</span>, <span className="text-rose-600 font-semibold">die = Red</span>, <span className="text-emerald-600 font-semibold">das = Green</span>) across all item cards and Canvas overlays.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={15} className="text-teal shrink-0 mt-0.5" />
+                  <span><strong className="text-ink">Speech &amp; Gamification:</strong> Native German pronunciation via Web Speech API, interactive article quizzes with confetti rewards, and XP progression.</span>
+                </li>
+              </ul>
+
+              {/* 3-Step Pipeline Flow */}
+              <div className="pt-2 border-t border-line/60">
+                <div className="font-mono text-[11px] font-bold text-ink uppercase mb-2">Multimodal AI &amp; Spatial Flow:</div>
+                <div className="space-y-1.5 font-mono text-xs text-ink-soft">
+                  <div><strong className="text-signal">Step 1:</strong> User captures image ➔ Gemini Multimodal Vision extracts object semantics.</div>
+                  <div><strong className="text-signal">Step 2:</strong> FastAPI backend assigns grammatical gender, plural forms &amp; generates bilingual examples.</div>
+                  <div><strong className="text-signal">Step 3:</strong> React Canvas renders 2D coordinate asset ➔ Web Speech triggers native German audio.</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Live Interactive Multi-Agent Working Pipeline Simulator / Screenshot View (7 cols) */}
+            <div className="lg:col-span-7 rounded-xl border border-line bg-ink p-5 space-y-4 shadow-lg select-none text-white font-sans">
+              <div className="flex items-center justify-between border-b border-white/15 pb-2.5 font-mono text-xs">
+                {/* View Switcher Tabs */}
+                <div className="flex items-center gap-1 bg-white/10 p-1 rounded-lg">
+                  <button
+                    onClick={() => setRoomViewMode("screenshot")}
+                    className={`px-3 py-1 rounded-md text-[11px] font-bold transition-all flex items-center gap-1.5 ${
+                      roomViewMode === "screenshot"
+                        ? "bg-signal text-white shadow-sm"
+                        : "text-white/70 hover:text-white"
+                    }`}
+                  >
+                    <ImageIcon size={13} />
+                    Game Screenshot
+                  </button>
+                  <button
+                    onClick={() => setRoomViewMode("interactive")}
+                    className={`px-3 py-1 rounded-md text-[11px] font-bold transition-all flex items-center gap-1.5 ${
+                      roomViewMode === "interactive"
+                        ? "bg-teal text-white shadow-sm"
+                        : "text-white/70 hover:text-white"
+                    }`}
+                  >
+                    <Boxes size={13} />
+                    Interactive Room &amp; Vision Console
+                  </button>
+                </div>
+                <span className="text-[11px] text-white/70 hidden sm:inline font-mono">FastAPI + React 18</span>
               </div>
 
-              {/* Live Game Screenshot */}
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-line bg-[#0F1829] shadow-inner group/img">
-                <Image
-                  src="/images/german-room-builder.png"
-                  alt="Virtual Room Builder & German Vocabulary Game Screenshot"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-300 group-hover/img:scale-105"
-                />
-              </div>
+              {/* View 1: Screenshot */}
+              {roomViewMode === "screenshot" && (
+                <div className="space-y-3 animate-fadeIn">
+                  <div className="relative aspect-[16/10] w-full rounded-lg overflow-hidden border border-white/20 bg-black group">
+                    <Image
+                      src="/images/german-room-builder.png"
+                      alt="Virtual Room Builder & German Vocabulary Game Screenshot"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-3">
+                      <div className="font-mono text-[11px] text-white/90">
+                        <span className="text-amber font-bold">Live UI:</span> 2D Spatial Canvas, Vocabulary Card Inventory, Camera Scanner &amp; Speech Synthesizer
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between font-mono text-[11px] text-white/70 pt-1">
+                    <span>FastAPI REST Server · 60 FPS HTML5 Canvas Engine</span>
+                    <button
+                      onClick={() => setRoomViewMode("interactive")}
+                      className="text-teal font-bold hover:underline flex items-center gap-1"
+                    >
+                      <span>⚡ Test Interactive Item Console</span>
+                    </button>
+                  </div>
+                </div>
+              )}
 
-              <div>
-                <h3 className="font-display font-bold text-xl text-ink">
-                  Virtual Room Builder & German Vocabulary Game
-                </h3>
-                <p className="mt-2 font-body text-xs sm:text-sm text-ink-soft leading-relaxed">
-                  Interactive German language learning game with real-time room design. Built with FastAPI, React 18, and a 60 FPS HTML5 Canvas grid. Features Gemini Multimodal Vision to scan real objects, map German noun genders (der, die, das), and provide native Web Speech pronunciation.
-                </p>
-              </div>
+              {/* View 2: Interactive Room & Vision Simulator */}
+              {roomViewMode === "interactive" && (
+                <div className="space-y-3 animate-fadeIn">
+                  {/* Item Presets */}
+                  <div className="space-y-1.5">
+                    <div className="font-mono text-[10.5px] text-white/60 uppercase tracking-wider">Select Sample Furniture &amp; Vision Objects:</div>
+                    <div className="flex flex-wrap gap-1.5 font-mono text-[11px]">
+                      {roomItemsSample.map((item, idx) => (
+                        <button
+                          key={item.id}
+                          onClick={() => handleSelectRoomItem(idx)}
+                          className={`px-2.5 py-1 rounded border transition-all ${
+                            selectedRoomIndex === idx
+                              ? "bg-teal text-white border-teal font-bold shadow-sm"
+                              : "bg-white/5 text-white/80 border-white/10 hover:border-white/30"
+                          }`}
+                        >
+                          <span className="opacity-70 mr-1">{item.article}</span>
+                          {item.german}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
-              <div className="flex flex-wrap items-center gap-2 pt-1">
+                  {/* 2D Canvas Viewport Simulator */}
+                  <div className="aspect-[16/9] sm:aspect-[16/8] rounded-lg bg-[#0A101D] border border-white/15 p-4 relative flex flex-col justify-between overflow-hidden">
+                    {/* Status bar */}
+                    <div className="flex items-center justify-between font-mono text-[11px] border-b border-white/10 pb-2">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
+                        <span className="text-white/90 font-semibold">
+                          GEMINI MULTIMODAL VISION: OBJECT CLASSIFIED
+                        </span>
+                      </div>
+                      <span className="text-teal font-bold">{currentRoomItem.conf}% Conf</span>
+                    </div>
+
+                    {/* Room Canvas Object Centerpiece */}
+                    <div className="py-2 flex items-center justify-between gap-4">
+                      <div className="space-y-1.5 flex-1">
+                        <div className="flex items-center gap-2">
+                          <span className={`px-2 py-0.5 rounded border text-xs font-bold font-mono uppercase ${currentRoomItem.articleColor}`}>
+                            {currentRoomItem.article} · {currentRoomItem.genderLabel}
+                          </span>
+                          <span className="font-mono text-[11px] text-white/60">
+                            {currentRoomItem.roomType}
+                          </span>
+                        </div>
+
+                        <div className="flex items-baseline gap-2">
+                          <h4 className="font-display font-bold text-2xl text-white">
+                            {currentRoomItem.german}
+                          </h4>
+                          <span className="text-sm text-white/70">
+                            ({currentRoomItem.english})
+                          </span>
+                          <span className="text-xs font-mono text-white/50">
+                            [{currentRoomItem.plural}]
+                          </span>
+                        </div>
+
+                        <p className="text-xs font-body text-amber-200/90 italic">
+                          &quot;{currentRoomItem.exampleDe}&quot;
+                        </p>
+                        <p className="text-[11px] font-body text-white/60">
+                          {currentRoomItem.exampleEn}
+                        </p>
+                      </div>
+
+                      {/* Visual Item Blueprint Representation with Rotation */}
+                      <div className="shrink-0 flex flex-col items-center gap-1">
+                        <div
+                          className="w-16 h-16 rounded border-2 border-teal/60 bg-teal/10 flex items-center justify-center transition-transform duration-300 shadow-[0_0_12px_rgba(47,158,143,0.3)]"
+                          style={{ transform: `rotate(${roomItemRotation}deg)` }}
+                        >
+                          <Boxes size={28} className="text-teal" />
+                        </div>
+                        <span className="font-mono text-[10px] text-white/60">
+                          {roomItemRotation}° Rotation
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Bottom Metadata Badges */}
+                    <div className="border-t border-white/10 pt-2 flex flex-wrap items-center justify-between font-mono text-[10px] text-white/60 gap-2">
+                      <span>Canvas Coord: <strong className="text-teal">{currentRoomItem.coord}</strong></span>
+                      <span>Dimensions: <strong className="text-white/80">{currentRoomItem.dimensions}</strong></span>
+                      <span>Engine: <strong className="text-teal">60 FPS HTML5 Canvas</strong></span>
+                    </div>
+                  </div>
+
+                  {/* Simulator Interactive Action Buttons */}
+                  <div className="flex flex-wrap items-center justify-between gap-2 pt-1 font-mono text-xs">
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => handleSpeakGerman(`${currentRoomItem.article} ${currentRoomItem.german}`)}
+                        disabled={isSpeaking}
+                        className="inline-flex items-center gap-1.5 rounded bg-teal px-3.5 py-1.5 font-bold text-white hover:bg-teal/90 transition-all active:scale-95 disabled:opacity-50"
+                      >
+                        <Volume2 size={13} className={isSpeaking ? "animate-pulse text-amber" : ""} />
+                        {isSpeaking ? "Speaking German..." : `Audio: "${currentRoomItem.article} ${currentRoomItem.german}"`}
+                      </button>
+
+                      <button
+                        onClick={handleRotateRoomItem}
+                        className="inline-flex items-center gap-1.5 rounded border border-white/20 bg-white/5 px-3 py-1.5 text-white/90 hover:bg-white/10 hover:border-white/40 transition-all active:scale-95 text-xs font-semibold"
+                      >
+                        <RotateCw size={12} />
+                        Rotate 90°
+                      </button>
+                    </div>
+
+                    <span className="text-[10px] text-white/60">Native Web Speech API (de-DE)</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Repo Architecture & Links */}
+          <div className="border-t border-line pt-5 grid sm:grid-cols-2 gap-4 font-mono text-xs">
+            <div>
+              <span className="font-bold text-ink block mb-1">Architecture &amp; Microservices:</span>
+              <div className="text-ink-soft space-y-0.5 text-[11px]">
+                <div><strong className="text-signal">/backend/app/api :</strong> FastAPI REST endpoints for room items &amp; inventory state</div>
+                <div><strong className="text-signal">/backend/app/services :</strong> Gemini Multimodal Vision &amp; German grammar service</div>
+                <div><strong className="text-signal">/backend/app/models :</strong> SQLAlchemy PostgreSQL schema with Alembic migration versioning</div>
+                <div><strong className="text-signal">/frontend/src/components :</strong> 60 FPS HTML5 Canvas engine, collision detection, Web Speech audio</div>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <span className="font-bold text-ink block mb-1">Deployment &amp; Live Verification:</span>
+              <div className="rounded border border-line bg-bg p-2.5 text-signal select-all text-[11px]">
+                <code>git clone https://github.com/Nehal-qadeer/Virtual-Room-Builder-German-Game.git &amp;&amp; npm run dev</code>
+              </div>
+              <div className="flex flex-wrap items-center gap-3 pt-1">
                 <a
                   href="https://github.com/Nehal-qadeer/Virtual-Room-Builder-German-Game"
                   target="_blank"
                   rel="noopener"
-                  className="inline-flex items-center gap-1 font-mono text-xs text-signal hover:underline font-semibold"
+                  className="inline-flex items-center gap-1 text-signal hover:underline font-bold text-[11px]"
                 >
                   <Code2 size={12} />
-                  GitHub Repository
-                  <ExternalLink size={10} />
+                  View GitHub Repo ↗
                 </a>
                 <span className="text-line-strong">·</span>
-                <span className="font-mono text-[11px] text-teal font-semibold">
-                  15/15 Tests
+                <span className="inline-flex items-center gap-1 text-teal font-bold text-[11px]">
+                  <CheckCircle2 size={12} />
+                  15/15 Pytest Suite Passing
                 </span>
               </div>
             </div>
+          </div>
 
-            <div className="flex flex-wrap gap-1.5 pt-3 border-t border-line">
-              {["FastAPI", "React 18", "Canvas", "Gemini AI", "PostgreSQL"].map((tag) => (
-                <span key={tag} className="rounded bg-signal-dim px-2 py-0.5 font-mono text-[10.5px] text-signal">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </article>
-          {/* Project 2: Scraping & Ingestion */}
+          {/* Tag Row */}
+          <div className="flex flex-wrap gap-2 pt-2 border-t border-line/60">
+            {["FastAPI", "Python 3.10+", "React 18", "HTML5 Canvas (60 FPS)", "Google Gemini Vision", "SQLAlchemy", "PostgreSQL", "Web Speech API", "Tailwind CSS v4", "15/15 Pytest Coverage"].map((t) => (
+              <span key={t} className="rounded bg-amber/10 border border-amber/30 px-2.5 py-1 font-mono text-[11px] text-amber-800 dark:text-amber-300 font-medium">
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* Additional Project Cards Grid: Scraping Engine, Satellite Tracker */}
+        {/* ========================================================================= */}
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Project 1: Scraping & Ingestion */}
           <article className="rounded-xl border border-line bg-surface p-7 shadow-blueprint relative overflow-hidden transition-all duration-300 hover:border-signal hover:-translate-y-1 hover:shadow-blueprint-lg flex flex-col justify-between space-y-5">
             <div className="space-y-4">
               <div className="flex justify-between items-start">
