@@ -217,14 +217,15 @@ export function Nav() {
                     </a>
                   );
                 })}
-                <div className="h-12 px-6 flex items-center justify-between text-sm text-ink-soft bg-surface-2">
-                  <span>{theme === "dark" ? "Dark mode active" : "Light mode active"}</span>
+                <div className="h-12 px-6 flex items-center justify-between text-sm bg-surface-2">
+                  <span className="text-ink-soft font-mono text-xs">Theme</span>
                   <button
                     type="button"
                     onClick={toggleTheme}
-                    className="font-mono text-xs text-signal font-semibold"
+                    className="flex items-center gap-1.5 font-mono text-xs text-signal font-semibold hover:text-signal-hover transition-colors"
                   >
-                    Switch to {theme === "dark" ? "Light" : "Dark"}
+                    {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
+                    <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
                   </button>
                 </div>
               </div>

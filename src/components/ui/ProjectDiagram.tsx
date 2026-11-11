@@ -50,6 +50,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
   );
 
   const dashClass = shouldReduceMotion ? "" : "animate-flow-dash";
+  const containerClass = `w-full h-auto min-h-[160px] md:min-h-[220px] p-6 rounded-xl border border-line bg-surface-2 relative overflow-hidden flex items-center justify-center ${className}`;
 
   // Render RAG Architecture Diagram
   if (type === "rag") {
@@ -57,12 +58,13 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
       <div
         role="img"
         aria-label="Multi-Agent RAG architecture flow: Documents pass through Presidio PII removal into Vector Index, then processed across Query Planner, Retriever, Verifier, and Synthesizer with audit logging into a cited answer."
-        className={`w-full aspect-[16/9] rounded-xl border border-line bg-surface-2 p-3 sm:p-5 relative overflow-hidden flex items-center justify-center ${className}`}
+        className={containerClass}
       >
         {/* Desktop View (>= 640px) */}
         <svg
           viewBox="0 0 920 480"
-          className="w-full h-full hidden sm:block select-none"
+          preserveAspectRatio="xMidYMid meet"
+          className="w-full h-auto hidden sm:block select-none"
         >
           {defs("rag-d")}
           <rect width="100%" height="100%" fill="url(#rag-d-dots)" opacity="0.6" />
@@ -71,7 +73,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Node 1: Documents */}
           <g transform="translate(30, 110)">
             <rect width="110" height="54" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="55" y="32" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">Documents</text>
+            <text x="55" y="32" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">Documents</text>
           </g>
 
           <line x1="140" y1="137" x2="175" y2="137" stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="6 6" className={dashClass} markerEnd="url(#rag-d-arrow-active)" />
@@ -79,7 +81,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Node 2: Presidio */}
           <g transform="translate(180, 110)">
             <rect width="125" height="54" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="62" y="27" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">Presidio</text>
+            <text x="62" y="27" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">Presidio</text>
             <text x="62" y="43" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10.5">PII removed</text>
           </g>
 
@@ -88,7 +90,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Node 3: Index */}
           <g transform="translate(345, 110)">
             <rect width="135" height="54" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="67" y="27" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">Vector Index</text>
+            <text x="67" y="27" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">Vector Index</text>
             <text x="67" y="43" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10.5">BM25 + vectors</text>
           </g>
 
@@ -97,7 +99,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Node 4: Planner (Highlight) */}
           <g transform="translate(525, 110)">
             <rect width="115" height="54" rx="10" fill="var(--surface)" stroke="var(--signal)" strokeWidth="1.8" />
-            <text x="57" y="27" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">Planner</text>
+            <text x="57" y="27" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">Planner</text>
             <text x="57" y="43" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10">Decompose</text>
           </g>
 
@@ -106,7 +108,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Node 5: Retriever (Highlight) */}
           <g transform="translate(680, 110)">
             <rect width="115" height="54" rx="10" fill="var(--surface)" stroke="var(--signal)" strokeWidth="1.8" />
-            <text x="57" y="27" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">Retriever</text>
+            <text x="57" y="27" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">Retriever</text>
             <text x="57" y="43" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10">Hybrid Search</text>
           </g>
 
@@ -116,7 +118,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Node 6: Verifier (Highlight) */}
           <g transform="translate(525, 208)">
             <rect width="145" height="54" rx="10" fill="var(--surface)" stroke="var(--signal)" strokeWidth="1.8" />
-            <text x="72" y="27" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">Verifier</text>
+            <text x="72" y="27" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">Verifier</text>
             <text x="72" y="43" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10.5">NLI Claim Check</text>
           </g>
 
@@ -125,7 +127,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Node 7: Synthesizer (Highlight) */}
           <g transform="translate(325, 208)">
             <rect width="145" height="54" rx="10" fill="var(--surface)" stroke="var(--signal)" strokeWidth="1.8" />
-            <text x="72" y="27" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">Synthesizer</text>
+            <text x="72" y="27" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">Synthesizer</text>
             <text x="72" y="43" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10.5">Citation Engine</text>
           </g>
 
@@ -134,7 +136,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Node 8: Cited Answer */}
           <g transform="translate(130, 208)">
             <rect width="135" height="54" rx="10" fill="var(--signal-dim)" stroke="var(--signal)" strokeWidth="1.8" />
-            <text x="67" y="27" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">Cited answer</text>
+            <text x="67" y="27" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">Cited answer</text>
             <text x="67" y="43" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10.5">94.5% Faithful</text>
           </g>
 
@@ -142,13 +144,17 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           <path d="M 397 262 L 397 325" fill="none" stroke="var(--line-strong)" strokeWidth="1.5" strokeDasharray="4 4" markerEnd="url(#rag-d-arrow)" />
           <g transform="translate(305, 325)">
             <rect width="185" height="52" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="92" y="25" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">Audit log</text>
+            <text x="92" y="25" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">Audit log</text>
             <text x="92" y="41" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10.5">SHA-256 ledger (Art. 12)</text>
           </g>
         </svg>
 
         {/* Mobile View (< 640px) */}
-        <svg viewBox="0 0 320 480" className="w-full h-full sm:hidden select-none">
+        <svg
+          viewBox="0 0 320 480"
+          preserveAspectRatio="xMidYMid meet"
+          className="w-full h-auto sm:hidden select-none"
+        >
           {defs("rag-m")}
           <rect width="100%" height="100%" fill="url(#rag-m-dots)" opacity="0.6" />
           {[
@@ -163,7 +169,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           ].map((item, idx, arr) => (
             <g key={item.label} transform={`translate(45, ${item.y})`}>
               <rect width="230" height="42" rx="8" fill="var(--surface)" stroke={item.hl ? "var(--signal)" : "var(--line-strong)"} strokeWidth={item.hl ? "1.8" : "1.2"} />
-              <text x="115" y={item.sub ? 20 : 25} textAnchor="middle" fill={item.hl ? "var(--signal)" : "var(--ink)"} fontFamily="var(--font-data)" fontSize="11" fontWeight={item.hl ? "700" : "600"}>{item.label}</text>
+              <text x="115" y={item.sub ? 20 : 25} textAnchor="middle" fill={item.hl ? "var(--signal)" : "var(--ink)"} fontFamily="var(--font-data)" fontSize="13" fontWeight={item.hl ? "700" : "600"}>{item.label}</text>
               {item.sub && <text x="115" y="34" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="9.5">{item.sub}</text>}
               {idx < arr.length - 1 && (
                 <line x1="115" y1="42" x2="115" y2={idx === 6 ? 60 : 54} stroke={idx < 6 ? "var(--signal)" : "var(--line-strong)"} strokeWidth="1.4" strokeDasharray={idx < 6 ? "4 4" : "3 3"} markerEnd={idx < 6 ? "url(#rag-m-arrow-active)" : "url(#rag-m-arrow)"} />
@@ -181,9 +187,13 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
       <div
         role="img"
         aria-label="Master's Thesis CV Game architecture: Webcam video frames feed into custom YOLOv8 model, quantized via OpenVINO for CPU inference, driving PyQt6 accessible game and displaying large visual labels."
-        className={`w-full aspect-[16/9] rounded-xl border border-line bg-surface-2 p-3 sm:p-5 relative overflow-hidden flex items-center justify-center ${className}`}
+        className={containerClass}
       >
-        <svg viewBox="0 0 920 480" className="w-full h-full hidden sm:block select-none">
+        <svg
+          viewBox="0 0 920 480"
+          preserveAspectRatio="xMidYMid meet"
+          className="w-full h-auto hidden sm:block select-none"
+        >
           {defs("thesis-d")}
           <rect width="100%" height="100%" fill="url(#thesis-d-dots)" opacity="0.6" />
 
@@ -197,7 +207,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Node 1: Webcam */}
           <g transform="translate(40, 200)">
             <rect width="130" height="60" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="65" y="35" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">Webcam</text>
+            <text x="65" y="35" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">Webcam</text>
           </g>
 
           <line x1="170" y1="230" x2="220" y2="230" stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="6 6" className={dashClass} markerEnd="url(#thesis-d-arrow-active)" />
@@ -205,7 +215,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Node 2: YOLOv8 (Highlight) */}
           <g transform="translate(225, 200)">
             <rect width="145" height="60" rx="10" fill="var(--surface)" stroke="var(--signal)" strokeWidth="1.8" />
-            <text x="72" y="30" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">YOLOv8</text>
+            <text x="72" y="30" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">YOLOv8</text>
             <text x="72" y="47" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10.5">custom model</text>
           </g>
 
@@ -214,7 +224,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Node 3: OpenVINO (Highlight) */}
           <g transform="translate(425, 200)">
             <rect width="155" height="60" rx="10" fill="var(--surface)" stroke="var(--signal)" strokeWidth="1.8" />
-            <text x="77" y="30" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">OpenVINO</text>
+            <text x="77" y="30" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">OpenVINO</text>
             <text x="77" y="47" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10.5">CPU inference</text>
           </g>
 
@@ -223,7 +233,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Node 4: PyQt6 game */}
           <g transform="translate(635, 200)">
             <rect width="125" height="60" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="62" y="35" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">PyQt6 game</text>
+            <text x="62" y="35" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">PyQt6 game</text>
           </g>
 
           <line x1="760" y1="230" x2="795" y2="230" stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="6 6" className={dashClass} markerEnd="url(#thesis-d-arrow-active)" />
@@ -231,13 +241,17 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Node 5: Large label */}
           <g transform="translate(800, 200)">
             <rect width="105" height="60" rx="10" fill="var(--signal-dim)" stroke="var(--signal)" strokeWidth="1.5" />
-            <text x="52" y="30" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">Large label</text>
+            <text x="52" y="30" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">Large label</text>
             <text x="52" y="47" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="11">&ldquo;Cup&rdquo;</text>
           </g>
         </svg>
 
         {/* Mobile View */}
-        <svg viewBox="0 0 320 420" className="w-full h-full sm:hidden select-none">
+        <svg
+          viewBox="0 0 320 420"
+          preserveAspectRatio="xMidYMid meet"
+          className="w-full h-auto sm:hidden select-none"
+        >
           {defs("thesis-m")}
           <rect width="100%" height="100%" fill="url(#thesis-m-dots)" opacity="0.6" />
           <g transform="translate(170, 15)">
@@ -253,10 +267,10 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           ].map((item, idx, arr) => (
             <g key={item.label} transform={`translate(45, ${item.y})`}>
               <rect width="230" height="48" rx="8" fill="var(--surface)" stroke={item.hl ? "var(--signal)" : "var(--line-strong)"} strokeWidth={item.hl ? "1.8" : "1.2"} />
-              <text x="115" y="24" textAnchor="middle" fill={item.hl ? "var(--signal)" : "var(--ink)"} fontFamily="var(--font-data)" fontSize="11.5" fontWeight={item.hl ? "700" : "600"}>{item.label}</text>
+              <text x="115" y="24" textAnchor="middle" fill={item.hl ? "var(--signal)" : "var(--ink)"} fontFamily="var(--font-data)" fontSize="13" fontWeight={item.hl ? "700" : "600"}>{item.label}</text>
               <text x="115" y="38" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10">{item.sub}</text>
               {idx < arr.length - 1 && (
-                <line x1="115" y1="48" x2="115" y2="74" stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="4 4" markerEnd="url(#thesis-m-arrow-active)" />
+                <line x1="115" y1="48" x2="115" y2={74} stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="4 4" markerEnd="url(#thesis-m-arrow-active)" />
               )}
             </g>
           ))}
@@ -271,9 +285,13 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
       <div
         role="img"
         aria-label="Virtual Room Builder architecture: Photo scanned by Gemini Vision connects to FastAPI and PostgreSQL; FastAPI powers React 60 FPS Canvas coordinate engine with Web Speech native audio pronunciation."
-        className={`w-full aspect-[16/9] rounded-xl border border-line bg-surface-2 p-3 sm:p-5 relative overflow-hidden flex items-center justify-center ${className}`}
+        className={containerClass}
       >
-        <svg viewBox="0 0 920 480" className="w-full h-full hidden sm:block select-none">
+        <svg
+          viewBox="0 0 920 480"
+          preserveAspectRatio="xMidYMid meet"
+          className="w-full h-auto hidden sm:block select-none"
+        >
           {defs("room-d")}
           <rect width="100%" height="100%" fill="url(#room-d-dots)" opacity="0.6" />
 
@@ -286,28 +304,28 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Row 1: Multimodal Vision Ingestion */}
           <g transform="translate(50, 110)">
             <rect width="120" height="56" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="60" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">Photo</text>
+            <text x="60" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">Photo</text>
           </g>
 
           <line x1="170" y1="138" x2="225" y2="138" stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="6 6" className={dashClass} markerEnd="url(#room-d-arrow-active)" />
 
           <g transform="translate(230, 110)">
             <rect width="165" height="56" rx="10" fill="var(--surface)" stroke="var(--signal)" strokeWidth="1.8" />
-            <text x="82" y="34" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">Gemini Vision</text>
+            <text x="82" y="34" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">Gemini Vision</text>
           </g>
 
           <line x1="395" y1="138" x2="455" y2="138" stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="6 6" className={dashClass} markerEnd="url(#room-d-arrow-active)" />
 
           <g transform="translate(460, 110)">
             <rect width="135" height="56" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="67" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">FastAPI</text>
+            <text x="67" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">FastAPI</text>
           </g>
 
           <line x1="595" y1="138" x2="665" y2="138" stroke="var(--line-strong)" strokeWidth="1.5" markerEnd="url(#room-d-arrow)" />
 
           <g transform="translate(670, 110)">
             <rect width="150" height="56" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="75" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">PostgreSQL</text>
+            <text x="75" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">PostgreSQL</text>
           </g>
 
           {/* Connection from FastAPI down to Row 2 */}
@@ -316,14 +334,14 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Row 2: Interactive Game & Canvas */}
           <g transform="translate(460, 250)">
             <rect width="135" height="56" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="67" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">FastAPI</text>
+            <text x="67" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">FastAPI</text>
           </g>
 
           <line x1="460" y1="278" x2="395" y2="278" stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="6 6" className={dashClass} markerEnd="url(#room-d-arrow-active)" />
 
           <g transform="translate(205, 250)">
             <rect width="185" height="56" rx="10" fill="var(--surface)" stroke="var(--signal)" strokeWidth="1.8" />
-            <text x="92" y="28" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">React canvas</text>
+            <text x="92" y="28" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">React canvas</text>
             <text x="92" y="44" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10.5">60 FPS Coordinate Engine</text>
           </g>
 
@@ -331,13 +349,17 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
 
           <g transform="translate(10, 250)">
             <rect width="140" height="56" rx="10" fill="var(--signal-dim)" stroke="var(--signal)" strokeWidth="1.5" />
-            <text x="70" y="28" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">Web Speech</text>
+            <text x="70" y="28" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">Web Speech</text>
             <text x="70" y="44" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10.5">pronunciation</text>
           </g>
         </svg>
 
         {/* Mobile View */}
-        <svg viewBox="0 0 320 440" className="w-full h-full sm:hidden select-none">
+        <svg
+          viewBox="0 0 320 440"
+          preserveAspectRatio="xMidYMid meet"
+          className="w-full h-auto sm:hidden select-none"
+        >
           {defs("room-m")}
           <rect width="100%" height="100%" fill="url(#room-m-dots)" opacity="0.6" />
           <g transform="translate(180, 12)">
@@ -353,7 +375,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           ].map((item, idx, arr) => (
             <g key={item.label} transform={`translate(35, ${item.y})`}>
               <rect width="250" height="46" rx="8" fill="var(--surface)" stroke={item.hl ? "var(--signal)" : "var(--line-strong)"} strokeWidth={item.hl ? "1.8" : "1.2"} />
-              <text x="125" y="22" textAnchor="middle" fill={item.hl ? "var(--signal)" : "var(--ink)"} fontFamily="var(--font-data)" fontSize="11" fontWeight={item.hl ? "700" : "600"}>{item.label}</text>
+              <text x="125" y="22" textAnchor="middle" fill={item.hl ? "var(--signal)" : "var(--ink)"} fontFamily="var(--font-data)" fontSize="13" fontWeight={item.hl ? "700" : "600"}>{item.label}</text>
               <text x="125" y="37" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="9.5">{item.sub}</text>
               {idx < arr.length - 1 && (
                 <line x1="125" y1="46" x2="125" y2="64" stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="4 4" markerEnd="url(#room-m-arrow-active)" />
@@ -371,9 +393,13 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
       <div
         role="img"
         aria-label="Workflow Automation and Data Pipelines architecture: Websites harvested via scheduled Selenium and Apify scrapers, validated with Make.com JSON, loaded into PostgreSQL; and OAuth Forms integrated across Sheets, Calendar, and Gmail via Zapier."
-        className={`w-full aspect-[16/9] rounded-xl border border-line bg-surface-2 p-3 sm:p-5 relative overflow-hidden flex items-center justify-center ${className}`}
+        className={containerClass}
       >
-        <svg viewBox="0 0 920 480" className="w-full h-full hidden sm:block select-none">
+        <svg
+          viewBox="0 0 920 480"
+          preserveAspectRatio="xMidYMid meet"
+          className="w-full h-auto hidden sm:block select-none"
+        >
           {defs("auto-d")}
           <rect width="100%" height="100%" fill="url(#auto-d-dots)" opacity="0.6" />
 
@@ -386,14 +412,14 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           {/* Row 1: Scraping Engine */}
           <g transform="translate(30, 110)">
             <rect width="110" height="56" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="55" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">Websites</text>
+            <text x="55" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">Websites</text>
           </g>
 
           <line x1="140" y1="138" x2="190" y2="138" stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="6 6" className={dashClass} markerEnd="url(#auto-d-arrow-active)" />
 
           <g transform="translate(195, 110)">
             <rect width="175" height="56" rx="10" fill="var(--surface)" stroke="var(--signal)" strokeWidth="1.8" />
-            <text x="87" y="28" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">Selenium + Apify</text>
+            <text x="87" y="28" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">Selenium + Apify</text>
             <text x="87" y="44" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10.5">scheduled cloud runs</text>
           </g>
 
@@ -401,7 +427,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
 
           <g transform="translate(425, 110)">
             <rect width="165" height="56" rx="10" fill="var(--surface)" stroke="var(--signal)" strokeWidth="1.8" />
-            <text x="82" y="28" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">Make.com</text>
+            <text x="82" y="28" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">Make.com</text>
             <text x="82" y="44" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10.5">JSON validation</text>
           </g>
 
@@ -409,47 +435,51 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
 
           <g transform="translate(640, 110)">
             <rect width="125" height="56" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="62" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">PostgreSQL</text>
+            <text x="62" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">PostgreSQL</text>
           </g>
 
           <line x1="765" y1="138" x2="805" y2="138" stroke="var(--line-strong)" strokeWidth="1.5" markerEnd="url(#auto-d-arrow)" />
 
           <g transform="translate(810, 110)">
             <rect width="95" height="56" rx="10" fill="var(--signal-dim)" stroke="var(--signal)" strokeWidth="1.5" />
-            <text x="47" y="34" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">CSV / CRM</text>
+            <text x="47" y="34" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">CSV / CRM</text>
           </g>
 
           {/* Row 2: Workflow Automation */}
           <g transform="translate(50, 260)">
             <rect width="120" height="56" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="60" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">Forms</text>
+            <text x="60" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">Forms</text>
           </g>
 
           <line x1="170" y1="288" x2="225" y2="288" stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="6 6" className={dashClass} markerEnd="url(#auto-d-arrow-active)" />
 
           <g transform="translate(230, 260)">
             <rect width="120" height="56" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="60" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">Sheets</text>
+            <text x="60" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">Sheets</text>
           </g>
 
           <line x1="350" y1="288" x2="405" y2="288" stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="6 6" className={dashClass} markerEnd="url(#auto-d-arrow-active)" />
 
           <g transform="translate(410, 260)">
             <rect width="130" height="56" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="65" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">Calendar</text>
+            <text x="65" y="34" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">Calendar</text>
           </g>
 
           <line x1="540" y1="288" x2="600" y2="288" stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="6 6" className={dashClass} markerEnd="url(#auto-d-arrow-active)" />
 
           <g transform="translate(605, 260)">
             <rect width="200" height="56" rx="10" fill="var(--surface)" stroke="var(--signal)" strokeWidth="1.8" />
-            <text x="100" y="28" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">Gmail</text>
+            <text x="100" y="28" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">Gmail</text>
             <text x="100" y="44" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10.5">Zapier + OAuth</text>
           </g>
         </svg>
 
         {/* Mobile View */}
-        <svg viewBox="0 0 320 440" className="w-full h-full sm:hidden select-none">
+        <svg
+          viewBox="0 0 320 440"
+          preserveAspectRatio="xMidYMid meet"
+          className="w-full h-auto sm:hidden select-none"
+        >
           {defs("auto-m")}
           <rect width="100%" height="100%" fill="url(#auto-m-dots)" opacity="0.6" />
           <g transform="translate(180, 10)">
@@ -466,7 +496,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           ].map((item, idx, arr) => (
             <g key={item.label} transform={`translate(30, ${item.y})`}>
               <rect width="260" height="44" rx="8" fill="var(--surface)" stroke={item.hl ? "var(--signal)" : "var(--line-strong)"} strokeWidth={item.hl ? "1.8" : "1.2"} />
-              <text x="130" y="22" textAnchor="middle" fill={item.hl ? "var(--signal)" : "var(--ink)"} fontFamily="var(--font-data)" fontSize="11" fontWeight={item.hl ? "700" : "600"}>{item.label}</text>
+              <text x="130" y="22" textAnchor="middle" fill={item.hl ? "var(--signal)" : "var(--ink)"} fontFamily="var(--font-data)" fontSize="13" fontWeight={item.hl ? "700" : "600"}>{item.label}</text>
               <text x="130" y="36" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="9.5">{item.sub}</text>
               {idx < arr.length - 1 && (
                 <line x1="130" y1="44" x2="130" y2="62" stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="4 4" markerEnd="url(#auto-m-arrow-active)" />
@@ -484,23 +514,27 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
       <div
         role="img"
         aria-label="Satellite Tracking System architecture: Orbital satellite data cached in Redis for fast access, queried via Express REST API with MongoDB persistent telemetry, visualized in real-time React and Google Maps UI."
-        className={`w-full aspect-[16/9] rounded-xl border border-line bg-surface-2 p-3 sm:p-5 relative overflow-hidden flex items-center justify-center ${className}`}
+        className={containerClass}
       >
-        <svg viewBox="0 0 920 480" className="w-full h-full hidden sm:block select-none">
+        <svg
+          viewBox="0 0 920 480"
+          preserveAspectRatio="xMidYMid meet"
+          className="w-full h-auto hidden sm:block select-none"
+        >
           {defs("sat-d")}
           <rect width="100%" height="100%" fill="url(#sat-d-dots)" opacity="0.6" />
 
           {/* Main Flow */}
           <g transform="translate(40, 160)">
             <rect width="145" height="58" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="72" y="35" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">Satellite data</text>
+            <text x="72" y="35" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">Satellite data</text>
           </g>
 
           <line x1="185" y1="189" x2="245" y2="189" stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="6 6" className={dashClass} markerEnd="url(#sat-d-arrow-active)" />
 
           <g transform="translate(250, 160)">
             <rect width="165" height="58" rx="10" fill="var(--surface)" stroke="var(--signal)" strokeWidth="1.8" />
-            <text x="82" y="28" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">Redis</text>
+            <text x="82" y="28" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">Redis</text>
             <text x="82" y="45" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10.5">latest positions</text>
           </g>
 
@@ -508,27 +542,31 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
 
           <g transform="translate(485, 160)">
             <rect width="145" height="58" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="72" y="35" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">Express API</text>
+            <text x="72" y="35" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">Express API</text>
           </g>
 
           <line x1="630" y1="189" x2="690" y2="189" stroke="var(--signal)" strokeWidth="1.5" strokeDasharray="6 6" className={dashClass} markerEnd="url(#sat-d-arrow-active)" />
 
           <g transform="translate(695, 160)">
             <rect width="185" height="58" rx="10" fill="var(--surface)" stroke="var(--signal)" strokeWidth="1.8" />
-            <text x="92" y="35" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="12" fontWeight="700">React + Google Maps</text>
+            <text x="92" y="35" textAnchor="middle" fill="var(--signal)" fontFamily="var(--font-data)" fontSize="13" fontWeight="700">React + Google Maps</text>
           </g>
 
           {/* Connected MongoDB below Express API */}
           <path d="M 557 218 L 557 285" fill="none" stroke="var(--line-strong)" strokeWidth="1.5" strokeDasharray="4 4" markerEnd="url(#sat-d-arrow)" />
           <g transform="translate(485, 285)">
             <rect width="145" height="54" rx="10" fill="var(--surface)" stroke="var(--line-strong)" strokeWidth="1.5" />
-            <text x="72" y="28" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="12" fontWeight="600">MongoDB</text>
+            <text x="72" y="28" textAnchor="middle" fill="var(--ink)" fontFamily="var(--font-data)" fontSize="13" fontWeight="600">MongoDB</text>
             <text x="72" y="43" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="10.5">Telemetry Archive</text>
           </g>
         </svg>
 
         {/* Mobile View */}
-        <svg viewBox="0 0 320 400" className="w-full h-full sm:hidden select-none">
+        <svg
+          viewBox="0 0 320 400"
+          preserveAspectRatio="xMidYMid meet"
+          className="w-full h-auto sm:hidden select-none"
+        >
           {defs("sat-m")}
           <rect width="100%" height="100%" fill="url(#sat-m-dots)" opacity="0.6" />
           {[
@@ -540,7 +578,7 @@ export function ProjectDiagram({ type, className = "" }: ProjectDiagramProps) {
           ].map((item, idx, arr) => (
             <g key={item.label} transform={`translate(35, ${item.y})`}>
               <rect width="250" height="46" rx="8" fill="var(--surface)" stroke={item.hl ? "var(--signal)" : "var(--line-strong)"} strokeWidth={item.hl ? "1.8" : "1.2"} />
-              <text x="125" y="22" textAnchor="middle" fill={item.hl ? "var(--signal)" : "var(--ink)"} fontFamily="var(--font-data)" fontSize="11" fontWeight={item.hl ? "700" : "600"}>{item.label}</text>
+              <text x="125" y="22" textAnchor="middle" fill={item.hl ? "var(--signal)" : "var(--ink)"} fontFamily="var(--font-data)" fontSize="13" fontWeight={item.hl ? "700" : "600"}>{item.label}</text>
               <text x="125" y="37" textAnchor="middle" fill="var(--muted)" fontFamily="var(--font-data)" fontSize="9.5">{item.sub}</text>
               {idx < arr.length - 1 && (
                 <line x1="125" y1="46" x2="125" y2="68" stroke={idx < 3 ? "var(--signal)" : "var(--line-strong)"} strokeWidth="1.5" strokeDasharray={idx < 3 ? "4 4" : "3 3"} markerEnd={idx < 3 ? "url(#sat-m-arrow-active)" : "url(#sat-m-arrow)"} />

@@ -14,27 +14,18 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>("light");
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    try {
-      const stored = localStorage.getItem("theme") as Theme | null;
-      if (stored === "light" || stored === "dark") {
-        setThemeState(stored);
-        document.documentElement.setAttribute("data-theme", stored);
-      } else {
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        const initial = prefersDark ? "dark" : "light";
-        setThemeState(initial);
-        document.documentElement.setAttribute("data-theme", initial);
-      }
-    } catch {}
+    const fromDom = document.documentElement.dataset.theme as Theme | undefined;
+    if (fromDom === "dark" || fromDom === "light") {
+      setThemeState(fromDom);
+    }
   }, []);
 
   const setTheme = (t: Theme) => {
     setThemeState(t);
-    document.documentElement.setAttribute("data-theme", t);
+    document.documentElement.dataset.theme = t;
+    document.documentElement.style.colorScheme = t;
     try {
       localStorage.setItem("theme", t);
     } catch {}
@@ -45,7 +36,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   const toggleTheme = () => {
-    const next = theme === "dark" ? "light" : "dark";
+    const current = (document.documentElement.dataset.theme as Theme) || theme;
+    const next = current === "dark" ? "light" : "dark";
     setTheme(next);
   };
 
