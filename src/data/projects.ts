@@ -68,7 +68,9 @@ export const projects: Project[] = [
     ],
     installCommand: "pip install opencv-python ultralytics openvino pyqt6",
     techStack: ["Python 3.10+", "Ultralytics YOLOv8", "Intel OpenVINO", "PyQt6", "OpenCV"],
-    repos: []
+    repos: [
+      { label: "Master's Thesis YOLOv8 Repository", url: "https://github.com/Nehal-qadeer/Object-Detection-Game-for-Hearing-Impaired-Children" }
+    ]
   },
   {
     slug: "scraping-engine",

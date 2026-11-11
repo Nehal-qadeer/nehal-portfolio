@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Code2, Sparkles, Gamepad2, Eye, CheckCircle2, RefreshCw, ShieldCheck, Bot, Lock, ImageIcon, FileText, Monitor, Cpu, Database, Volume2, RotateCw, Boxes, Layers, ChevronDown } from "lucide-react";
+import { ExternalLink, Code2, Sparkles, Gamepad2, Eye, CheckCircle2, RefreshCw, ShieldCheck, Bot, Lock, ImageIcon, FileText, Monitor, Cpu, Database, Volume2, RotateCw, Boxes, Layers, ChevronDown, Github } from "lucide-react";
 import { useSkillFilter } from "@/context/SkillFilterContext";
 
 function TechnicalDetailsCollapse({ children }: { children: React.ReactNode }) {
@@ -187,7 +187,7 @@ export function ProjectsSection() {
       query: "Under GDPR Article 33, what is the mandatory timeline for breach notifications?",
       answer: "Under GDPR Article 33, any security breach involving personal data must be formally reported to the European supervisory authority within 72 hours of detection. All containment logs are immutably preserved in the audit ledger.",
       citation: "Corporate Privacy Manual: Section 3",
-      faithfulness: "100.0%",
+      faithfulness: "94.5%",
       relevance: "96.4%",
       latency: "18.2ms",
       piiStatus: "0 PII exposed (Clean)",
@@ -198,7 +198,7 @@ export function ProjectsSection() {
       query: "What is the procedure when a data subject requests GDPR Article 17 Right to Erasure?",
       answer: "Upon receipt of an erasure request, the cryptographic key vault immediately shreds the dedicated AES-256 key. All vector embeddings and stored records are cryptographically tombstoned and rendered permanently unrecoverable without rebuilding index partitions.",
       citation: "Corporate Privacy Manual: Section 2",
-      faithfulness: "100.0%",
+      faithfulness: "94.5%",
       relevance: "98.1%",
       latency: "16.4ms",
       piiStatus: "0 PII exposed (Encrypted Key Destroyed)",
@@ -209,7 +209,7 @@ export function ProjectsSection() {
       query: "Who is the designated Data Protection Officer and what are their official contact & tax details?",
       answer: "The designated Data Protection Officer is <PERSON_01> (email: <EMAIL_ADDRESS_01>, phone: <PHONE_NUMBER_01>). Official compliance correspondence references Tax ID: <EU_TAX_ID_01> and IBAN: <IBAN_CODE_01>.",
       citation: "Corporate Privacy Manual: Section 1",
-      faithfulness: "100.0%",
+      faithfulness: "94.5%",
       relevance: "94.8%",
       latency: "17.8ms",
       piiStatus: "5 Entities Pseudonymized (<PERSON>, <EMAIL>, <PHONE>, <TAX_ID>, <IBAN>)",
@@ -220,7 +220,7 @@ export function ProjectsSection() {
       query: "What is the proprietary formula for hyper-velocity quantum rocket fuel?",
       answer: "Insufficient context in verified enterprise documents to answer this query truthfully. No matching policies or records meet the required confidence threshold. Groundedness gate triggered safe fallback.",
       citation: "0 Citations (Hallucination Blocked)",
-      faithfulness: "100.0%",
+      faithfulness: "94.5%",
       relevance: "0.0%",
       latency: "4.2ms",
       piiStatus: "0 PII exposed",
@@ -311,6 +311,28 @@ export function ProjectsSection() {
               <p className="font-body text-sm sm:text-base text-signal font-medium">
                 Autonomous 4-agent RAG engine with Presidio PII pseudonymization, AES-256-GCM cryptographic shredding, and EU AI Act record-keeping.
               </p>
+              <div className="flex flex-wrap items-center gap-2 pt-2">
+                <a
+                  href="https://github.com/Nehal-qadeer/eu-compliant-multiagent-rag"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-md border border-line bg-surface px-3 py-1.5 font-mono text-xs font-semibold text-ink hover:border-signal hover:text-signal transition-colors shadow-sm"
+                >
+                  <Github size={13} />
+                  View Repository
+                  <ExternalLink size={12} className="opacity-70" />
+                </a>
+                <a
+                  href="https://github.com/Nehal-qadeer/eu-compliant-multiagent-rag/blob/main/docs/EU_Compliant_MultiAgent_RAG_Comprehensive_Guide.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-md border border-line bg-surface px-3 py-1.5 font-mono text-xs font-semibold text-teal hover:border-teal hover:bg-teal/5 transition-colors shadow-sm"
+                >
+                  <FileText size={13} />
+                  Architecture Guide (PDF)
+                  <ExternalLink size={12} className="opacity-70" />
+                </a>
+              </div>
             </div>
 
             <div className="font-mono text-xs text-right">
@@ -456,7 +478,7 @@ export function ProjectsSection() {
                         }`}
                       >
                         <Lock size={10} />
-                        {isCryptoShredded ? "Key Revoked (Click to Restore)" : "💥 Test GDPR Art. 17 Shredding"}
+                        {isCryptoShredded ? "Key Revoked (Click to Restore)" : "Test GDPR Art. 17 Shredding"}
                       </button>
                     </div>
                   </div>
@@ -670,6 +692,18 @@ export function ProjectsSection() {
               <p className="font-body text-sm sm:text-base text-signal font-medium">
                 An interactive educational tool using AI to bridge the communication gap through visual recognition.
               </p>
+              <div className="flex flex-wrap items-center gap-2 pt-2">
+                <a
+                  href="https://github.com/Nehal-qadeer/Object-Detection-Game-for-Hearing-Impaired-Children"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-md border border-line bg-surface px-3 py-1.5 font-mono text-xs font-semibold text-ink hover:border-signal hover:text-signal transition-colors shadow-sm"
+                >
+                  <Github size={13} />
+                  View Repository
+                  <ExternalLink size={12} className="opacity-70" />
+                </a>
+              </div>
             </div>
 
             <div className="font-mono text-xs text-right">
@@ -832,6 +866,18 @@ export function ProjectsSection() {
               <p className="font-body text-sm sm:text-base text-signal font-medium">
                 Spatial room construction web application combining a 60 FPS HTML5 Canvas coordinate engine with Google Gemini Multimodal Vision AI.
               </p>
+              <div className="flex flex-wrap items-center gap-2 pt-2">
+                <a
+                  href="https://github.com/Nehal-qadeer/Virtual-Room-Builder-German-Game"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-md border border-line bg-surface px-3 py-1.5 font-mono text-xs font-semibold text-ink hover:border-signal hover:text-signal transition-colors shadow-sm"
+                >
+                  <Github size={13} />
+                  View Repository
+                  <ExternalLink size={12} className="opacity-70" />
+                </a>
+              </div>
             </div>
 
             <div className="font-mono text-xs text-right">
