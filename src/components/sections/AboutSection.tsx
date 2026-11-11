@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sparkles, MapPin, GraduationCap, Code2, Globe } from "lucide-react";
 
 export function AboutSection() {
   return (
@@ -11,7 +10,7 @@ export function AboutSection() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
+          viewport={{ once: true, amount: 0.1, margin: "0px" }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
@@ -39,27 +38,27 @@ export function AboutSection() {
           </div>
 
           {/* Quick Factbox */}
-          <dl className="rounded-xl border border-line bg-surface p-6 font-mono text-xs shadow-blueprint space-y-3.5">
+          <dl className="rounded-2xl border border-line bg-surface p-6 font-mono text-xs shadow-card space-y-3.5">
             <div>
-              <dt className="text-ink-soft text-[11px] uppercase tracking-wider">Focus</dt>
+              <dt className="text-muted text-[11px] uppercase tracking-wider">Focus</dt>
               <dd className="font-semibold text-ink text-sm mt-0.5">AI · Automation · Computer Vision</dd>
             </div>
-            <div className="border-t border-line/60 pt-3">
-              <dt className="text-ink-soft text-[11px] uppercase tracking-wider">Education</dt>
+            <div className="border-t border-line pt-3">
+              <dt className="text-muted text-[11px] uppercase tracking-wider">Education</dt>
               <dd className="font-semibold text-ink text-sm mt-0.5">M.Sc. Applied CS (2025)</dd>
             </div>
-            <div className="border-t border-line/60 pt-3">
-              <dt className="text-ink-soft text-[11px] uppercase tracking-wider">Based in</dt>
+            <div className="border-t border-line pt-3">
+              <dt className="text-muted text-[11px] uppercase tracking-wider">Based in</dt>
               <dd className="font-semibold text-ink text-sm mt-0.5">Mannheim, Germany</dd>
             </div>
-            <div className="border-t border-line/60 pt-3">
-              <dt className="text-ink-soft text-[11px] uppercase tracking-wider">Languages</dt>
+            <div className="border-t border-line pt-3">
+              <dt className="text-muted text-[11px] uppercase tracking-wider">Languages</dt>
               <dd className="font-semibold text-ink text-sm mt-0.5">English (full professional) · German (A1, learning)</dd>
             </div>
-            <div className="border-t border-line/60 pt-3">
-              <dt className="text-ink-soft text-[11px] uppercase tracking-wider">Status</dt>
-              <dd className="font-semibold text-teal text-sm mt-0.5 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-teal animate-pulse-blip" />
+            <div className="border-t border-line pt-3">
+              <dt className="text-muted text-[11px] uppercase tracking-wider">Status</dt>
+              <dd className="font-semibold text-signal text-sm mt-0.5 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-signal animate-pulse" />
                 Open to opportunities
               </dd>
             </div>

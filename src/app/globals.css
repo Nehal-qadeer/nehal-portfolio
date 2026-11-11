@@ -3,18 +3,47 @@
 @tailwind utilities;
 
 :root {
-  --bg: #0B1120;
-  --surface: #111A2E;
-  --ink: #F1F5F9;
-  --ink-soft: #94A3B8;
-  --line: #1E293B;
-  --line-strong: #334155;
-  --signal: #3B82F6;
-  --signal-dim: rgba(59, 130, 246, 0.15);
-  --amber: #F59E0B;
-  --teal: #14B8A6;
-  --grid: rgba(59, 130, 246, 0.08);
-  --glow: rgba(59, 130, 246, 0.25);
+  --bg: #F4F6F8;
+  --surface: #FFFFFF;
+  --surface-2: #F8FAFC;
+  --ink: #1E293B;
+  --ink-soft: #475569;
+  --muted: #5E6B7D;
+  --line: #E2E8F0;
+  --line-strong: #CBD5E1;
+  --signal: #0F766E;
+  --signal-hover: #115E59;
+  --signal-dim: #D5F5EF;
+  --signal-ink: #FFFFFF;
+  --teal: #0369A1;
+  --teal-dim: #E0F2FE;
+  --amber: #B45309;
+  --amber-dim: #FEF3C7;
+  --glow: rgba(15, 118, 110, 0.10);
+  --grid: rgba(30, 41, 59, 0.07);
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+html[data-theme="dark"] {
+  --bg: #22272E;
+  --surface: #2D333B;
+  --surface-2: #262C34;
+  --ink: #E2E8F0;
+  --ink-soft: #ADBAC7;
+  --muted: #8B98A6;
+  --line: #3A424D;
+  --line-strong: #4B5563;
+  --signal: #5EEAD4;
+  --signal-hover: #99F6E4;
+  --signal-dim: #1F3B3A;
+  --signal-ink: #1C2128;
+  --teal: #7DD3FC;
+  --teal-dim: #0C3A52;
+  --amber: #FBBF24;
+  --amber-dim: #3A2E14;
+  --glow: rgba(94, 234, 212, 0.10);
+  --grid: rgba(173, 186, 199, 0.07);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.25), 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 * {
@@ -31,32 +60,38 @@ html {
 }
 
 body {
-  background:
-    radial-gradient(ellipse 900px 500px at 15% -5%, rgba(59, 130, 246, 0.14), transparent 60%),
-    radial-gradient(ellipse 700px 500px at 100% 30%, rgba(20, 184, 166, 0.1), transparent 60%),
-    var(--bg);
+  background-color: var(--bg);
   color: var(--ink);
   font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.7;
   overflow-x: hidden;
   position: relative;
+  transition: background-color 200ms, color 200ms, border-color 200ms;
+}
+
+p {
+  max-width: 68ch;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Card transition on theme change */
+.bg-surface, .bg-surface-2, .bg-bg {
+  transition: background-color 200ms, color 200ms, border-color 200ms;
 }
 
 ::selection {
   background-color: var(--signal);
-  color: #FFFFFF;
+  color: var(--signal-ink);
 }
 
 :focus-visible {
   outline: 2px solid var(--signal);
   outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-border-beam {
-    animation: none !important;
-    display: none !important;
-  }
 }
 
 /* Custom scrollbar */
@@ -112,7 +147,7 @@ body {
   position: absolute;
   font-family: var(--font-data), monospace;
   font-size: 9.5px;
-  color: var(--ink-soft);
+  color: var(--muted);
   letter-spacing: 0.05em;
   opacity: 0.7;
   white-space: nowrap;
@@ -144,4 +179,17 @@ body {
 
 .animate-cursor-blink {
   animation: cursorBlink 1s steps(1) infinite;
+}
+
+/* Reduced motion disables all animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-border-beam {
+    display: none !important;
+  }
 }

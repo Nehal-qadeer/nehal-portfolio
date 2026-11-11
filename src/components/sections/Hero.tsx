@@ -7,7 +7,7 @@ import { DotPattern } from "@/components/magicui/DotPattern";
 const AgentNetwork = dynamic(() => import("@/components/ui/AgentNetwork"), {
   ssr: false,
   loading: () => (
-    <div className="w-full rounded-2xl border border-line bg-surface p-6 shadow-blueprint h-[460px] flex items-center justify-center">
+    <div className="w-full rounded-2xl border border-line bg-surface p-6 shadow-card h-[460px] flex items-center justify-center">
       <div className="font-mono text-xs text-signal animate-pulse">Loading Agent Network...</div>
     </div>
   ),
@@ -19,7 +19,7 @@ export function Hero() {
       {/* Background Dot Pattern */}
       <DotPattern className="opacity-35" />
 
-      {/* Technical Blueprint Crosshairs & Coordinates */}
+      {/* Blueprint Crosshairs & Coordinates */}
       <span className="crosshair top-6 left-6 md:top-8 md:left-10" />
       <span className="coord top-4 left-12 md:top-6 md:left-16">
         49.4875°N 8.4660°E · MANNHEIM_DE
@@ -30,8 +30,8 @@ export function Hero() {
           {/* Left Column: Bio & Identity */}
           <div className="space-y-6">
             {/* Status Pill */}
-            <div className="inline-flex items-center gap-2 font-mono text-[11px] text-teal bg-teal/10 border border-teal/30 px-3 py-1 rounded-full tracking-wide">
-              <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse-blip" />
+            <div className="inline-flex items-center gap-2 font-mono text-xs text-signal bg-signal-dim border border-signal/20 px-3.5 py-1.5 rounded-full tracking-wide">
+              <span className="w-1.5 h-1.5 rounded-full bg-signal animate-pulse" />
               OPEN TO AI &amp; AUTOMATION ROLES · GERMANY / REMOTE EU
             </div>
 
@@ -50,8 +50,8 @@ export function Hero() {
             </p>
 
             {/* High-Resolution Portrait Card */}
-            <div className="flex items-center gap-4 rounded-xl border border-line bg-surface p-3.5 shadow-blueprint max-w-sm">
-              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-line-strong bg-bg group">
+            <div className="flex items-center gap-4 rounded-2xl border border-line bg-surface p-3.5 shadow-card max-w-sm">
+              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border border-line-strong bg-surface-2 group">
                 <Image
                   src="/images/nehal-portrait.jpg"
                   alt="Portrait of Nehal Qadeer"
@@ -68,29 +68,29 @@ export function Hero() {
               <div className="space-y-0.5 text-xs font-mono">
                 <div className="font-bold text-ink flex items-center gap-1">
                   Nehal Qadeer
-                  <span className="text-teal font-normal text-[10px]">· Grade 2.2</span>
+                  <span className="text-signal font-normal text-[11px]">· Grade 2.2</span>
                 </div>
                 <div className="text-ink-soft text-[11px]">M.Sc. Applied CS · 2025</div>
-                <div className="text-signal text-[10px] flex items-center gap-1">
-                  <MapPin size={10} /> Mannheim, Germany
+                <div className="text-signal text-[11px] flex items-center gap-1">
+                  <MapPin size={11} /> Mannheim, Germany
                 </div>
               </div>
             </div>
 
             {/* Action CTA Row */}
-            <div className="flex flex-wrap items-center gap-3 pt-1 font-mono text-xs">
+            <div className="flex flex-wrap items-center gap-3 pt-1">
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 rounded bg-ink px-5 py-3 text-bg font-semibold transition-all hover:bg-signal hover:shadow-glow hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 rounded-[10px] bg-signal px-[18px] py-[10px] text-signal-ink font-sans font-medium text-sm transition-colors hover:bg-signal-hover shadow-sm"
               >
                 View projects
-                <ArrowRight size={13} />
+                <ArrowRight size={14} />
               </a>
 
               <a
                 href="/Nehal_Qadeer_CV.pdf"
                 download
-                className="inline-flex items-center gap-1.5 rounded border border-ink px-4 py-3 text-ink font-medium hover:border-signal hover:text-signal hover:-translate-y-0.5 transition-all"
+                className="inline-flex items-center gap-1.5 rounded-[10px] border border-line-strong bg-surface px-4 py-2.5 text-ink font-mono text-xs hover:border-signal transition-colors shadow-sm"
               >
                 <Download size={14} />
                 Download CV
@@ -98,7 +98,7 @@ export function Hero() {
 
               <a
                 href="#contact"
-                className="inline-flex items-center gap-1.5 rounded border border-ink px-4 py-3 text-ink font-medium hover:border-signal hover:text-signal hover:-translate-y-0.5 transition-all"
+                className="inline-flex items-center gap-1.5 rounded-[10px] border border-line-strong bg-surface px-4 py-2.5 text-ink font-mono text-xs hover:border-signal transition-colors shadow-sm"
               >
                 <Mail size={13} />
                 Get in touch
@@ -108,7 +108,7 @@ export function Hero() {
                 href={profile.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded border border-line-strong px-3.5 py-3 text-ink-soft hover:border-signal hover:text-signal transition-all"
+                className="inline-flex items-center gap-1 rounded-[10px] border border-line-strong bg-surface px-3.5 py-2.5 text-ink-soft hover:border-signal hover:text-signal transition-colors font-mono text-xs shadow-sm"
               >
                 <Github size={13} />
                 GitHub
@@ -118,7 +118,7 @@ export function Hero() {
                 href={profile.links.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded border border-line-strong px-3.5 py-3 text-ink-soft hover:border-signal hover:text-signal transition-all"
+                className="inline-flex items-center gap-1 rounded-[10px] border border-line-strong bg-surface px-3.5 py-2.5 text-ink-soft hover:border-signal hover:text-signal transition-colors font-mono text-xs shadow-sm"
               >
                 <Linkedin size={13} />
                 LinkedIn
@@ -126,8 +126,15 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right Column: 3D Agent Network */}
-          <div className="w-full flex items-center justify-center">
+          {/* Right Column: 3D Agent Network with 480px radial glow circle */}
+          <div className="w-full flex items-center justify-center relative">
+            <div
+              className="absolute w-[480px] h-[480px] rounded-full pointer-events-none -z-10"
+              style={{
+                background: "var(--glow)",
+                filter: "blur(80px)",
+              }}
+            />
             <AgentNetwork />
           </div>
         </div>

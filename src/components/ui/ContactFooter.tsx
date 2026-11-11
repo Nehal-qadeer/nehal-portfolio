@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
-import { Mail, Phone, Linkedin, Github, MapPin, Copy, Check, Send, Sparkles, MessageSquare } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, MapPin, Copy, Check, Send } from "lucide-react";
 
 export function ContactFooter() {
   const [copied, setCopied] = useState(false);
@@ -16,7 +16,7 @@ export function ContactFooter() {
     "AI & Automation Engineer role",
     "Python / Backend Developer role",
     "Computer Vision role",
-    "Project collaboration"
+    "Project collaboration",
   ];
 
   const copyEmail = () => {
@@ -46,7 +46,7 @@ export function ContactFooter() {
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
+              viewport={{ once: true, amount: 0.1, margin: "0px" }}
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
               <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-2">
@@ -54,7 +54,7 @@ export function ContactFooter() {
                 06 · CONTACT
               </div>
               <h2 className="font-display font-bold text-3xl sm:text-4xl text-ink tracking-tight">
-                Let&apos;s build something.
+                Get in touch
               </h2>
               <p className="mt-2 font-body text-sm text-ink-soft leading-relaxed">
                 Open to AI &amp; Automation Engineer, Python and Computer Vision roles in Mannheim, across Germany, or remote within the EU. I usually reply within a day.
@@ -74,7 +74,7 @@ export function ContactFooter() {
                     onClick={() => setSelectedSubject(preset)}
                     className={`rounded-lg border px-3 py-1.5 font-mono text-xs transition-all ${
                       selectedSubject === preset
-                        ? "border-signal bg-signal text-white font-semibold shadow-sm"
+                        ? "border-signal bg-signal text-signal-ink font-semibold shadow-sm"
                         : "border-line bg-surface text-ink-soft hover:border-line-strong hover:text-ink"
                     }`}
                   >
@@ -85,56 +85,56 @@ export function ContactFooter() {
             </div>
 
             {/* Interactive Composer Form */}
-            <form onSubmit={handleSend} className="rounded-xl border border-line bg-surface p-5 shadow-blueprint space-y-3.5">
-              <div className="grid sm:grid-cols-2 gap-3">
+            <form onSubmit={handleSend} className="rounded-2xl border border-line bg-surface p-6 shadow-card space-y-4">
+              <div className="grid sm:grid-cols-2 gap-3.5">
                 <div>
-                  <label className="block font-mono text-[11px] text-ink-soft mb-1">Your Name</label>
+                  <label className="block font-mono text-xs text-ink-soft mb-1">Your Name</label>
                   <input
                     type="text"
                     value={senderName}
                     onChange={(e) => setSenderName(e.target.value)}
                     placeholder="e.g. Sarah Schmidt"
-                    className="w-full rounded-lg border border-line bg-bg px-3 py-2 font-mono text-xs text-ink placeholder:text-line-strong focus:border-signal focus:outline-none"
+                    className="w-full rounded-lg border border-line-strong bg-surface px-3 py-2 font-mono text-xs text-ink placeholder:text-muted focus:border-signal focus:outline-none transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block font-mono text-[11px] text-ink-soft mb-1">Your Email</label>
+                  <label className="block font-mono text-xs text-ink-soft mb-1">Your Email</label>
                   <input
                     type="email"
                     value={senderEmail}
                     onChange={(e) => setSenderEmail(e.target.value)}
                     placeholder="sarah@company.de"
-                    className="w-full rounded-lg border border-line bg-bg px-3 py-2 font-mono text-xs text-ink placeholder:text-line-strong focus:border-signal focus:outline-none"
+                    className="w-full rounded-lg border border-line-strong bg-surface px-3 py-2 font-mono text-xs text-ink placeholder:text-muted focus:border-signal focus:outline-none transition-colors"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-mono text-[11px] text-ink-soft mb-1">Message / Requirements</label>
+                <label className="block font-mono text-xs text-ink-soft mb-1">Message / Requirements</label>
                 <textarea
-                  rows={2}
+                  rows={3}
                   value={senderMessage}
                   onChange={(e) => setSenderMessage(e.target.value)}
                   placeholder="Hi Nehal, we would like to interview you for our team..."
-                  className="w-full rounded-lg border border-line bg-bg px-3 py-2 font-mono text-xs text-ink placeholder:text-line-strong focus:border-signal focus:outline-none"
+                  className="w-full rounded-lg border border-line-strong bg-surface px-3 py-2 font-mono text-xs text-ink placeholder:text-muted focus:border-signal focus:outline-none transition-colors"
                 />
               </div>
 
               <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 rounded bg-ink px-6 py-2.5 font-mono text-xs font-bold text-bg transition-all hover:bg-signal hover:shadow-glow hover:-translate-y-0.5 active:scale-95"
+                  className="inline-flex items-center gap-2 rounded-[10px] bg-signal px-[18px] py-[10px] text-signal-ink font-sans font-medium text-sm transition-colors hover:bg-signal-hover shadow-sm"
                 >
-                  <Send size={13} />
+                  <Send size={14} />
                   Send via email
                 </button>
 
                 <button
                   type="button"
                   onClick={copyEmail}
-                  className="inline-flex items-center gap-1.5 rounded border border-line px-3.5 py-2 font-mono text-xs font-medium text-ink hover:border-signal hover:text-signal transition-all"
+                  className="inline-flex items-center gap-1.5 rounded-[10px] border border-line-strong bg-surface px-4 py-2 text-ink font-mono text-xs hover:border-signal transition-colors shadow-sm"
                 >
-                  {copied ? <Check size={13} className="text-teal" /> : <Copy size={13} />}
+                  {copied ? <Check size={13} className="text-signal" /> : <Copy size={13} />}
                   {copied ? "Copied nehal.q.s@gmail.com!" : "Copy Email"}
                 </button>
               </div>
@@ -142,7 +142,7 @@ export function ContactFooter() {
           </div>
 
           {/* Right Column: Direct Channels & Telemetry */}
-          <div className="rounded-xl border border-line bg-surface p-6 shadow-blueprint space-y-6">
+          <div className="rounded-2xl border border-line bg-surface p-6 shadow-card space-y-6">
             <div className="font-mono text-xs font-bold text-ink uppercase tracking-wider border-b border-line pb-3">
               Direct Channels
             </div>
@@ -150,26 +150,26 @@ export function ContactFooter() {
             <div className="space-y-4 font-mono text-xs text-ink-soft">
               <a
                 href={`mailto:${profile.email}`}
-                className="flex items-center gap-3 hover:text-signal transition-colors group p-2 rounded-lg hover:bg-bg"
+                className="flex items-center gap-3 hover:text-signal transition-colors group p-2 rounded-xl hover:bg-surface-2"
               >
-                <div className="w-8 h-8 rounded-lg bg-signal-dim flex items-center justify-center text-signal group-hover:scale-105 transition-transform">
-                  <Mail size={15} />
+                <div className="w-9 h-9 rounded-lg bg-signal-dim flex items-center justify-center text-signal group-hover:scale-105 transition-transform">
+                  <Mail size={16} />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase text-line-strong">Direct Email</div>
+                  <div className="text-[10px] uppercase text-muted">Direct Email</div>
                   <div className="font-bold text-ink">{profile.email}</div>
                 </div>
               </a>
 
               <a
                 href={`tel:${profile.phone.replace(/\s+/g, "")}`}
-                className="flex items-center gap-3 hover:text-signal transition-colors group p-2 rounded-lg hover:bg-bg"
+                className="flex items-center gap-3 hover:text-signal transition-colors group p-2 rounded-xl hover:bg-surface-2"
               >
-                <div className="w-8 h-8 rounded-lg bg-signal-dim flex items-center justify-center text-signal group-hover:scale-105 transition-transform">
-                  <Phone size={15} />
+                <div className="w-9 h-9 rounded-lg bg-signal-dim flex items-center justify-center text-signal group-hover:scale-105 transition-transform">
+                  <Phone size={16} />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase text-line-strong">Phone / WhatsApp</div>
+                  <div className="text-[10px] uppercase text-muted">Direct Mobile</div>
                   <div className="font-bold text-ink">{profile.phone}</div>
                 </div>
               </a>
@@ -178,14 +178,14 @@ export function ContactFooter() {
                 href={profile.links.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 hover:text-signal transition-colors group p-2 rounded-lg hover:bg-bg"
+                className="flex items-center gap-3 hover:text-signal transition-colors group p-2 rounded-xl hover:bg-surface-2"
               >
-                <div className="w-8 h-8 rounded-lg bg-signal-dim flex items-center justify-center text-signal group-hover:scale-105 transition-transform">
-                  <Linkedin size={15} />
+                <div className="w-9 h-9 rounded-lg bg-signal-dim flex items-center justify-center text-signal group-hover:scale-105 transition-transform">
+                  <Linkedin size={16} />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase text-line-strong">Professional Profile</div>
-                  <div className="font-bold text-ink">linkedin.com/in/nehalqadeer</div>
+                  <div className="text-[10px] uppercase text-muted">Professional Network</div>
+                  <div className="font-bold text-ink">linkedin.com/in/nehal-qadeer</div>
                 </div>
               </a>
 
@@ -193,39 +193,38 @@ export function ContactFooter() {
                 href={profile.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 hover:text-signal transition-colors group p-2 rounded-lg hover:bg-bg"
+                className="flex items-center gap-3 hover:text-signal transition-colors group p-2 rounded-xl hover:bg-surface-2"
               >
-                <div className="w-8 h-8 rounded-lg bg-signal-dim flex items-center justify-center text-signal group-hover:scale-105 transition-transform">
-                  <Github size={15} />
+                <div className="w-9 h-9 rounded-lg bg-signal-dim flex items-center justify-center text-signal group-hover:scale-105 transition-transform">
+                  <Github size={16} />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase text-line-strong">Code Repositories</div>
+                  <div className="text-[10px] uppercase text-muted">Open Source Code</div>
                   <div className="font-bold text-ink">github.com/Nehal-qadeer</div>
                 </div>
               </a>
+            </div>
 
-              <div className="flex items-center gap-3 p-2 rounded-lg">
-                <div className="w-8 h-8 rounded-lg bg-teal/10 flex items-center justify-center text-teal">
-                  <MapPin size={15} />
-                </div>
-                <div>
-                  <div className="text-[10px] uppercase text-line-strong">Location Base</div>
-                  <div className="font-bold text-ink">Mannheim, Germany (Remote EU)</div>
-                </div>
+            <div className="rounded-xl border border-line bg-surface-2 p-4 font-mono text-[11px] text-muted space-y-2">
+              <div className="flex items-center gap-2 text-ink font-semibold">
+                <MapPin size={13} className="text-signal" />
+                Physical Base
+              </div>
+              <p>Mannheim / Rhine-Neckar Metropolitan Region, Germany</p>
+              <div className="text-signal font-medium pt-1">
+                EU Work Permit &amp; Residency Active
               </div>
             </div>
           </div>
         </div>
 
-        {/* Footer Bottom Bar with Attribution */}
-        <div className="pt-6 border-t border-line flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] text-ink-soft">
+        {/* Bottom Colophon */}
+        <div className="pt-8 border-t border-line flex flex-wrap items-center justify-between text-xs font-mono text-muted gap-4">
           <div>
-            <span>© 2026 Nehal Qadeer · </span>
-            <span className="text-teal font-semibold">status: available</span>
+            © 2026 Nehal Qadeer. Built with Next.js, Tailwind CSS &amp; Framer Motion.
           </div>
-
-          <div className="text-right text-[10.5px]">
-            This portfolio was created from scratch with the help of Claude and Antigravity.
+          <div>
+            Mannheim, Germany · Lat 49.4875° N, Lon 8.4660° E
           </div>
         </div>
       </div>

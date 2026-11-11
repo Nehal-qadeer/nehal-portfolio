@@ -1,48 +1,50 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: "class",
+  darkMode: ["class", '[data-theme="dark"]'],
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        bg: {
-          DEFAULT: "var(--bg)",
-          dark: "#0B1120"
-        },
+        bg: "var(--bg)",
         surface: {
           DEFAULT: "var(--surface)",
-          dark: "#111A2E"
+          2: "var(--surface-2)"
         },
         ink: {
           DEFAULT: "var(--ink)",
-          soft: "var(--ink-soft)",
-          light: "var(--line-strong)"
+          soft: "var(--ink-soft)"
         },
+        muted: "var(--muted)",
         line: {
           DEFAULT: "var(--line)",
-          strong: "var(--line-strong)",
-          subtle: "rgba(30, 41, 59, 0.6)"
+          strong: "var(--line-strong)"
         },
         signal: {
           DEFAULT: "var(--signal)",
+          hover: "var(--signal-hover)",
           dim: "var(--signal-dim)",
-          hover: "#2563EB"
+          ink: "var(--signal-ink)"
         },
         teal: {
           DEFAULT: "var(--teal)",
-          dim: "rgba(20, 184, 166, 0.15)"
+          dim: "var(--teal-dim)"
         },
         amber: {
           DEFAULT: "var(--amber)",
-          dim: "rgba(245, 158, 11, 0.15)"
+          dim: "var(--amber-dim)"
         }
       },
       fontFamily: {
-        display: ["var(--font-display)", "Space Grotesk", "sans-serif"],
+        display: ["var(--font-display)", "Plus Jakarta Sans", "sans-serif"],
         body: ["var(--font-body)", "Inter", "sans-serif"],
         mono: ["var(--font-data)", "JetBrains Mono", "monospace"],
         data: ["var(--font-data)", "JetBrains Mono", "monospace"]
+      },
+      boxShadow: {
+        card: "var(--shadow-card)",
+        blueprint: "var(--shadow-card)",
+        "blueprint-lg": "var(--shadow-card)"
       },
       keyframes: {
         "border-beam": {
@@ -54,11 +56,6 @@ const config: Config = {
       animation: {
         "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
       },
-      boxShadow: {
-        blueprint: "0 4px 20px -8px rgba(22, 35, 61, 0.12)",
-        "blueprint-lg": "0 14px 32px -12px rgba(22, 35, 61, 0.18)",
-        glow: "0 0 24px -4px rgba(43, 108, 176, 0.25)"
-      }
     }
   },
   plugins: [require("tailwindcss-animate")]

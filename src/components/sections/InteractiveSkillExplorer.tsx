@@ -56,7 +56,7 @@ export function InteractiveSkillExplorer() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
+          viewport={{ once: true, amount: 0.1, margin: "0px" }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
@@ -72,12 +72,14 @@ export function InteractiveSkillExplorer() {
           </p>
         </motion.div>
 
-        {/* 5-Group Grid */}
+        {/* 5-Group Grid: 5th card gets lg:col-span-2 at >=1024px */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {GROUPS.map((group) => (
+          {GROUPS.map((group, idx) => (
             <div
               key={group.title}
-              className="bg-surface border border-line rounded-xl p-5 shadow-blueprint space-y-3"
+              className={`bg-surface border border-line rounded-2xl p-6 shadow-card space-y-3.5 transition-all duration-200 ${
+                idx === 4 ? "lg:col-span-2" : ""
+              }`}
             >
               <h3 className="font-mono text-xs uppercase text-signal font-semibold tracking-wider">
                 {group.title}
@@ -90,10 +92,10 @@ export function InteractiveSkillExplorer() {
                       key={chip}
                       type="button"
                       onClick={() => toggleSkill(chip)}
-                      className={`font-body text-[13px] rounded-full border px-2.5 py-1 transition-all duration-200 ${
+                      className={`font-mono text-xs rounded-full border px-3 py-1.5 transition-all duration-200 ${
                         isSelected
-                          ? "bg-signal text-white border-signal"
-                          : "bg-signal-dim text-ink border-line hover:border-signal"
+                          ? "bg-signal text-signal-ink border-signal font-semibold shadow-sm"
+                          : "bg-surface-2 text-ink-soft border-line hover:border-signal hover:text-signal"
                       }`}
                     >
                       {chip}

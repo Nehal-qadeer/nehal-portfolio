@@ -27,7 +27,7 @@ export function ExperienceEducation() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
+            viewport={{ once: true, amount: 0.1, margin: "0px" }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
@@ -63,12 +63,12 @@ export function ExperienceEducation() {
               className="relative group"
             >
               {/* Node Marker: 12px circle with pulsing ring for Sereact */}
-              <div className="absolute -left-[27px] md:left-[-35px] top-1.5 w-3 h-3 rounded-full bg-teal border-2 border-bg flex items-center justify-center">
+              <div className="absolute -left-[27px] md:left-[-35px] top-1.5 w-3 h-3 rounded-full bg-signal border-2 border-bg flex items-center justify-center">
                 {!shouldReduceMotion && (
                   <motion.span
                     animate={{ scale: [1, 1.8], opacity: [0.5, 0] }}
                     transition={{ repeat: Infinity, duration: 2, ease: "easeOut" }}
-                    className="absolute -inset-0.5 rounded-full border border-teal"
+                    className="absolute -inset-0.5 rounded-full border border-signal"
                   />
                 )}
               </div>
@@ -76,7 +76,7 @@ export function ExperienceEducation() {
               <div className="space-y-2">
                 <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
                   <span className="text-signal font-semibold">Oct 2026 – Present</span>
-                  <span className="rounded bg-teal px-2 py-0.5 font-mono text-[10px] font-bold text-white uppercase tracking-wider">
+                  <span className="rounded-md bg-signal px-2 py-0.5 font-mono text-[10px] font-bold text-signal-ink uppercase tracking-wider">
                     CURRENT
                   </span>
                 </div>
@@ -176,7 +176,7 @@ export function ExperienceEducation() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
+            viewport={{ once: true, amount: 0.1, margin: "0px" }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
@@ -190,8 +190,8 @@ export function ExperienceEducation() {
 
           <div className="grid sm:grid-cols-2 gap-6">
             {/* Master's Card */}
-            <div className="rounded-xl border border-line bg-surface p-6 shadow-blueprint space-y-3 transition-all hover:shadow-blueprint-lg hover:-translate-y-0.5">
-              <span className="inline-block rounded bg-signal-dim px-2.5 py-1 font-mono text-xs font-semibold text-signal">
+            <div className="rounded-2xl border border-line bg-surface p-6 sm:p-7 shadow-card space-y-3 transition-all hover:border-line-strong hover:-translate-y-0.5">
+              <span className="inline-block rounded-lg bg-signal-dim px-2.5 py-1 font-mono text-xs font-semibold text-signal">
                 Grade 2.2
               </span>
               <h3 className="font-display font-bold text-lg text-ink">
@@ -209,8 +209,8 @@ export function ExperienceEducation() {
             </div>
 
             {/* Bachelor's Card */}
-            <div className="rounded-xl border border-line bg-surface p-6 shadow-blueprint space-y-3 transition-all hover:shadow-blueprint-lg hover:-translate-y-0.5">
-              <span className="inline-block rounded bg-signal-dim px-2.5 py-1 font-mono text-xs font-semibold text-signal">
+            <div className="rounded-2xl border border-line bg-surface p-6 sm:p-7 shadow-card space-y-3 transition-all hover:border-line-strong hover:-translate-y-0.5">
+              <span className="inline-block rounded-lg bg-signal-dim px-2.5 py-1 font-mono text-xs font-semibold text-signal">
                 Grade 2.65
               </span>
               <h3 className="font-display font-bold text-lg text-ink">

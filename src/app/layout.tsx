@@ -1,19 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from "next/font/google";
 import { Nav } from "@/components/ui/Nav";
 import { ContactFooter } from "@/components/ui/ContactFooter";
 import { BlueprintParticleCanvas } from "@/components/canvas/BlueprintParticleCanvas";
-import { profile } from "@/data/profile";
+import { ThemeProvider } from "@/context/ThemeContext";
 import "./globals.css";
 
-const display = Space_Grotesk({
+const display = Plus_Jakarta_Sans({
   subsets: ["latin"],
+  weight: ["600", "700"],
   variable: "--font-display",
   display: "swap"
 });
 
 const body = Inter({
   subsets: ["latin"],
+  weight: ["400", "500"],
   variable: "--font-body",
   display: "swap"
 });
@@ -36,27 +38,18 @@ export const metadata: Metadata = {
       "AI & Automation Engineer with an M.Sc. in Applied Computer Science (SRH Heidelberg). I build GenAI applications, AI agents, computer vision and workflow automations in Python.",
     url: "https://nehal-portfolio-one.vercel.app",
     siteName: "Nehal Qadeer",
-    type: "website",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Nehal Qadeer | AI & Automation Engineer"
-      }
-    ]
+    type: "website"
   },
   twitter: {
     card: "summary_large_image",
     title: "Nehal Qadeer | AI & Automation Engineer",
     description:
-      "AI & Automation Engineer with an M.Sc. in Applied Computer Science (SRH Heidelberg). I build GenAI applications, AI agents, computer vision and workflow automations in Python.",
-    images: ["/og-image.png"]
+      "AI & Automation Engineer with an M.Sc. in Applied Computer Science (SRH Heidelberg). I build GenAI applications, AI agents, computer vision and workflow automations in Python."
   }
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0B1120",
+  themeColor: "#F4F6F8",
   width: "device-width",
   initialScale: 1
 };
@@ -80,15 +73,32 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${display.variable} ${body.variable} ${data.variable}`}>
       <head>
         <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var stored = localStorage.getItem('theme');
+                  var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                  document.documentElement.setAttribute('data-theme', theme);
+                  var meta = document.querySelector('meta[name="theme-color"]');
+                  if (meta) meta.setAttribute('content', theme === 'dark' ? '#22272E' : '#F4F6F8');
+                } catch(e) {}
+              })();
+            `
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-bg font-body text-ink antialiased selection:bg-signal selection:text-white relative">
-        <BlueprintParticleCanvas />
-        <Nav />
-        <main className="relative z-10">{children}</main>
-        <ContactFooter />
+      <body className="bg-bg font-body text-ink antialiased selection:bg-signal selection:text-signal-ink relative">
+        <ThemeProvider>
+          <BlueprintParticleCanvas />
+          <Nav />
+          <main className="relative z-10">{children}</main>
+          <ContactFooter />
+        </ThemeProvider>
       </body>
     </html>
   );
