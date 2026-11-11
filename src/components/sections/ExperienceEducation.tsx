@@ -1,69 +1,163 @@
 "use client";
 
-import { MapPin, GraduationCap, Briefcase, Globe, Check } from "lucide-react";
+import React, { useRef } from "react";
+import { motion, useScroll, useReducedMotion } from "framer-motion";
+import { useSkillFilter } from "@/context/SkillFilterContext";
 
 export function ExperienceEducation() {
-  const experiences = [
-    {
-      period: "Feb 2023 – Nov 2023",
-      role: "Software Project Coordinator / Agile Specialist",
-      org: "Zelle Solutions",
-      points: [
-        "Tracked sprint backlogs, REST API specifications, and release cycles across Scrum sprints.",
-        "Documented backend API interfaces and user acceptance criteria so devs and product owners stayed aligned.",
-        "Tested release builds against QA criteria to maintain high software stability and zero regressions."
-      ]
-    },
-    {
-      period: "Jun 2020 – Oct 2022",
-      role: "Technical Support & Backend Operations Specialist",
-      org: "Breakthru (Blazeo / ApexChat)",
-      points: [
-        "Troubleshot backend crashes by reading server logs and diagnosing failing HTTP requests over the Linux CLI.",
-        "Ran structured SQL queries against staging and production databases to verify transaction data integrity.",
-        "Collaborated with core engineering to reproduce bugs, test edge cases, and validate hotfix patches."
-      ]
-    }
-  ];
+  const sectionRef = useRef<HTMLElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const { isHighlighted } = useSkillFilter();
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 70%", "end 50%"],
+  });
 
   return (
     <>
       {/* Experience Section */}
-      <section id="experience" className="py-20 border-t border-line relative overflow-hidden">
+      <section
+        id="experience"
+        ref={sectionRef}
+        className="py-20 border-t border-line relative overflow-hidden"
+      >
         <div className="max-w-[1040px] mx-auto px-6 md:px-10">
           <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
             <span className="w-4 h-px bg-signal" />
-            04 — Experience
+            04 · Experience
           </div>
-          <h2 className="font-display font-semibold text-2xl sm:text-3xl text-ink mb-10 tracking-tight">
+          <h2 className="font-display font-semibold text-2xl sm:text-3xl text-ink mb-12 tracking-tight">
             Where I&apos;ve worked
           </h2>
 
-          {/* Timeline */}
-          <div className="relative pl-7 border-l border-line-strong space-y-10">
-            {experiences.map((exp, idx) => (
-              <div key={idx} className="relative group">
-                {/* Node marker */}
-                <div className="absolute -left-[34px] top-1.5 w-3 h-3 rounded-full bg-surface border-2 border-signal transition-transform group-hover:scale-125" />
+          {/* Timeline Wrapper */}
+          <div className="relative pl-8 md:pl-10 space-y-12">
+            {/* Background vertical line (2px, --line) */}
+            <div className="absolute left-[11px] md:left-[11px] top-2 bottom-2 w-[2px] bg-line" />
 
-                <div className="space-y-1.5">
-                  <span className="font-mono text-xs text-signal font-semibold">
-                    {exp.period}
-                  </span>
-                  <h3 className="font-display font-bold text-lg text-ink">
-                    {exp.role}
-                  </h3>
-                  <div className="font-body text-sm font-medium text-ink-soft">
-                    {exp.org}
-                  </div>
-                  <ul className="pt-2 space-y-1.5 font-body text-sm text-ink-soft list-disc pl-4 leading-relaxed">
-                    {exp.points.map((p, i) => (
-                      <li key={i}>{p}</li>
-                    ))}
-                  </ul>
-                </div>
+            {/* Scroll-filling animated line (2px, --signal) */}
+            <motion.div
+              style={{
+                scaleY: shouldReduceMotion ? 1 : scrollYProgress,
+                transformOrigin: "top",
+              }}
+              className="absolute left-[11px] md:left-[11px] top-2 bottom-2 w-[2px] bg-signal"
+            />
+
+            {/* Entry 1: Sereact */}
+            <div
+              id="exp-sereact"
+              style={{
+                opacity: isHighlighted("exp-sereact") ? 1 : 0.35,
+                transition: "opacity 200ms ease",
+              }}
+              className="relative group"
+            >
+              {/* Node Marker: 12px circle with pulsing ring for Sereact */}
+              <div className="absolute -left-[27px] md:left-[-35px] top-1.5 w-3 h-3 rounded-full bg-teal border-2 border-white flex items-center justify-center">
+                {!shouldReduceMotion && (
+                  <motion.span
+                    animate={{ scale: [1, 1.8], opacity: [0.5, 0] }}
+                    transition={{ repeat: Infinity, duration: 2, ease: "easeOut" }}
+                    className="absolute -inset-0.5 rounded-full border border-teal"
+                  />
+                )}
               </div>
-            ))}
+
+              <div className="space-y-2">
+                <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
+                  <span className="text-signal font-semibold">Oct 2026 – Present</span>
+                  <span className="rounded bg-teal px-2 py-0.5 font-mono text-[10px] font-bold text-white uppercase tracking-wider">
+                    CURRENT
+                  </span>
+                </div>
+
+                <h3 className="font-display font-bold text-lg text-ink">
+                  Teleoperation &amp; Data Labeling Intern · Sereact GmbH (Robotics AI), Stuttgart
+                </h3>
+
+                <ul className="space-y-1.5 font-body text-sm text-ink-soft list-disc pl-4 leading-relaxed">
+                  <li>
+                    Record robot imitation-learning demonstrations via teleoperation and quality-check each episode before it is used for AI model training.
+                  </li>
+                  <li>
+                    Debug Python and Bash data-collection scripts, isolate edge cases and write structured incident reports for the engineering team.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Entry 2: ZELLE */}
+            <div
+              id="exp-zelle"
+              style={{
+                opacity: isHighlighted("exp-zelle") ? 1 : 0.35,
+                transition: "opacity 200ms ease",
+              }}
+              className="relative group"
+            >
+              {/* Node Marker: 12px circle */}
+              <div className="absolute -left-[27px] md:left-[-35px] top-1.5 w-3 h-3 rounded-full bg-signal border-2 border-white" />
+
+              <div className="space-y-2">
+                <span className="font-mono text-xs text-signal font-semibold block">
+                  Oct 2022 – Nov 2023
+                </span>
+
+                <h3 className="font-display font-bold text-lg text-ink">
+                  Project Manager · ZELLE Solutions, Karachi (hybrid)
+                </h3>
+
+                <ul className="space-y-1.5 font-body text-sm text-ink-soft list-disc pl-4 leading-relaxed">
+                  <li>
+                    Led a cross-functional team of 7 developers and UI/UX designers through Agile/Scrum delivery, from requirements to deployment.
+                  </li>
+                  <li>
+                    Ran stand-ups and stakeholder meetings, refined requirements into user stories and maintained the backlog.
+                  </li>
+                  <li>
+                    Wrote REST API documentation and coordinated release QA against acceptance criteria.
+                  </li>
+                </ul>
+
+                <p className="font-body text-sm text-ink-soft pt-1">
+                  Earlier at ZELLE: Brand Development Executive (May 2022 – Oct 2022), analyzing user behavior data and campaign performance.
+                </p>
+              </div>
+            </div>
+
+            {/* Entry 3: Breakthru */}
+            <div
+              id="exp-breakthru"
+              style={{
+                opacity: isHighlighted("exp-breakthru") ? 1 : 0.35,
+                transition: "opacity 200ms ease",
+              }}
+              className="relative group"
+            >
+              {/* Node Marker: 12px circle */}
+              <div className="absolute -left-[27px] md:left-[-35px] top-1.5 w-3 h-3 rounded-full bg-signal border-2 border-white" />
+
+              <div className="space-y-2">
+                <span className="font-mono text-xs text-signal font-semibold block">
+                  Jun 2020 – Oct 2022
+                </span>
+
+                <h3 className="font-display font-bold text-lg text-ink">
+                  Customer Support Representative · Breakthru (ApexChat), Karachi
+                </h3>
+
+                <ul className="space-y-1.5 font-body text-sm text-ink-soft list-disc pl-4 leading-relaxed">
+                  <li>
+                    Supported a global base of 3,000+ customers, handling 350–450 interactions per 7.5-hour shift across 3–4 parallel live chats.
+                  </li>
+                  <li>
+                    Worked to daily KPI targets (response time, handling time, quality scores) and documented every case in the eCRM system.
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -74,7 +168,7 @@ export function ExperienceEducation() {
           <div>
             <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
               <span className="w-4 h-px bg-signal" />
-              05 — Education
+              05 · Education
             </div>
             <h2 className="font-display font-semibold text-2xl sm:text-3xl text-ink tracking-tight">
               Academic background
@@ -97,7 +191,7 @@ export function ExperienceEducation() {
                 Focus: Distributed Systems, Software Engineering, Cloud Architectures.
               </p>
               <div className="border-t border-line pt-3 font-body text-xs text-ink-soft">
-                <strong className="text-ink">Thesis:</strong> Object Detection Game for Hearing-Impaired Children — AI visual tool utilizing custom YOLOv8, Intel OpenVINO (25+ FPS CPU optimization), and PyQt6.
+                <strong className="text-ink">Thesis:</strong> Object Detection Game for Hearing-Impaired Children, AI visual tool utilizing custom YOLOv8, Intel OpenVINO (25+ FPS CPU optimization), and PyQt6.
               </div>
             </div>
 
@@ -113,7 +207,7 @@ export function ExperienceEducation() {
                 IQRA University · 2015 – 2019 · Karachi, Pakistan
               </div>
               <p className="font-body text-sm text-ink-soft">
-                Core coursework: Algorithms, Data Structures, Object-Oriented Programming (C++ & Python), Relational Database Systems.
+                Core coursework: Algorithms, Data Structures, object-oriented programming (Python, basics of C#), Relational Database Systems.
               </p>
             </div>
           </div>
@@ -122,11 +216,11 @@ export function ExperienceEducation() {
           <div className="flex flex-wrap gap-10 pt-2 border-t border-line">
             <div>
               <span className="font-display font-bold text-base text-ink block">English</span>
-              <span className="font-mono text-xs text-ink-soft">Full Professional Working Proficiency</span>
+              <span className="font-mono text-xs text-ink-soft">Full professional working proficiency</span>
             </div>
             <div>
               <span className="font-display font-bold text-base text-ink block">German</span>
-              <span className="font-mono text-xs text-ink-soft">A2 — Actively Improving</span>
+              <span className="font-mono text-xs text-ink-soft">A1, currently learning</span>
             </div>
           </div>
         </div>

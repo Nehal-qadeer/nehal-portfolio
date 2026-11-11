@@ -80,7 +80,7 @@ export const projects: Project[] = [
     summary:
       "High-throughput automated data harvesting infrastructure. Deploys custom Python Selenium scrapers as cloud Apify Actors with automated cron triggers, Make.com JSON validation, and direct PostgreSQL relational database storage.",
     features: [
-      "Deployed custom Python Selenium scrapers as cloud Apify Actors with dynamic pagination & anti-bot bypass.",
+      "Deployed custom Python Selenium scrapers as cloud Apify Actors with dynamic pagination & robust handling of dynamic pages.",
       "Engineered Make.com scenarios with JSON transformation logic to parse, clean, and validate payloads.",
       "Wired storage directly into PostgreSQL relational databases to power analytical dashboards."
     ],

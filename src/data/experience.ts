@@ -10,7 +10,7 @@ export const experience: ExperienceEntry[] = [
   {
     role: "Freelance Automation & Data Engineer",
     org: "Self-Employed · Remote",
-    period: "2025 — 2026",
+    period: "2025 – 2026",
     focus: "Independent / client projects",
     bullets: [
       "Built multi-stage scraping and lead-generation pipelines in Python + Selenium, harvesting 2,000–4,000 commercial records per run across North America.",
@@ -22,7 +22,7 @@ export const experience: ExperienceEntry[] = [
   {
     role: "Software Project Coordinator / Agile Specialist",
     org: "Zelle Solutions",
-    period: "Feb 2023 — Nov 2023",
+    period: "Feb 2023 – Nov 2023",
     focus: "Agile sprints & API specifications",
     bullets: [
       "Ran Agile/Scrum ceremonies and owned sprint backlogs covering REST API specs and release cycles.",
@@ -33,10 +33,10 @@ export const experience: ExperienceEntry[] = [
   {
     role: "Technical Support & Backend Operations Specialist",
     org: "Breakthru (Blazeo / ApexChat)",
-    period: "Jun 2020 — Oct 2022",
+    period: "Jun 2020 – Oct 2022",
     focus: "Production diagnostics & SQL verification",
     bullets: [
-      "Diagnosed production incidents via server logs, HTTP payloads, and Linux CLI — cutting MTTR significantly.",
+      "Diagnosed production incidents via server logs, HTTP payloads, and Linux CLI, cutting MTTR significantly.",
       "Wrote and ran complex PostgreSQL/MySQL queries across staging and prod to isolate data-flow defects.",
       "Reproduced defects and validated hotfixes directly with core engineering before deployment."
     ]

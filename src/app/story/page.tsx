@@ -4,7 +4,7 @@ import { profile } from "@/data/profile";
 import { ArrowLeft, Sparkles, MapPin, Mail, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "The Engine Behind the Automation — Nehal Qadeer",
+  title: "The Engine Behind the Automation · Nehal Qadeer",
   description:
     "The story behind the automation: navigating relocation to Germany, forging resilience, and engineering deep learning inference and data pipelines."
 };
@@ -15,7 +15,7 @@ export default function StoryPage() {
       index: "01",
       title: "B.Sc. CS Foundation",
       institution: "IQRA University · Grade 2.65",
-      period: "2015 — 2019",
+      period: "2015 – 2019",
       location: "Pakistan",
       summary:
         "Rigorous foundation in computer science core principles: algorithms, data structures, object-oriented programming (C++ / Python), and relational database systems.",
@@ -35,7 +35,7 @@ export default function StoryPage() {
       index: "03",
       title: "M.Sc. Computer Vision & Production Systems",
       institution: "SRH Hochschule Heidelberg · Grade 2.2",
-      period: "2023 — 2025",
+      period: "2023 – 2025",
       location: "Mannheim / Heidelberg",
       summary:
         "Master of Science degree focusing on distributed systems and cloud architectures. Engineered Master's Thesis: an interactive Object Detection Game for Hearing-Impaired Children using YOLOv8 optimized via Intel OpenVINO for 25+ FPS on standard CPUs.",
@@ -45,7 +45,7 @@ export default function StoryPage() {
       index: "04",
       title: "Production Automation & Cloud Pipelines",
       institution: "Independent Systems & Deployments",
-      period: "2025 — 2026",
+      period: "2025 – 2026",
       location: "Mannheim, Germany",
       summary:
         "Architecting high-throughput cloud scraping engines (2,000–4,000 records/run), automated Make.com & PostgreSQL storage pipelines, and multi-app Zapier workflow automations.",

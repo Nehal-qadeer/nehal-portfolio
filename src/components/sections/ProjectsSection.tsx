@@ -2,7 +2,43 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ExternalLink, Code2, Sparkles, Gamepad2, Eye, CheckCircle2, RefreshCw, ShieldCheck, Bot, Lock, ImageIcon, FileText, Monitor, Cpu, Database, Volume2, RotateCw, Boxes, Layers } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink, Code2, Sparkles, Gamepad2, Eye, CheckCircle2, RefreshCw, ShieldCheck, Bot, Lock, ImageIcon, FileText, Monitor, Cpu, Database, Volume2, RotateCw, Boxes, Layers, ChevronDown } from "lucide-react";
+import { useSkillFilter } from "@/context/SkillFilterContext";
+
+function TechnicalDetailsCollapse({ children }: { children: React.ReactNode }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="border-t border-line pt-4">
+      <button
+        type="button"
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 font-mono text-xs font-semibold text-ink hover:text-signal transition-colors"
+      >
+        <span>Technical details</span>
+        <ChevronDown
+          size={16}
+          className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+        />
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            <div className="pt-4">{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export function ProjectsSection() {
   // --- Virtual Room Builder State ---
@@ -217,6 +253,7 @@ export function ProjectsSection() {
   };
 
   const activePreset = ragPresets[activeRagPreset as keyof typeof ragPresets];
+  const { selectedSkill, setSelectedSkill, isHighlighted } = useSkillFilter();
 
   return (
     <section id="projects" className="py-20 border-t border-line relative overflow-hidden">
@@ -229,17 +266,36 @@ export function ProjectsSection() {
         <div>
           <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
             <span className="w-4 h-px bg-signal" />
-            03 — Featured Projects
+            03 · Selected Projects
           </div>
           <h2 className="font-display font-semibold text-2xl sm:text-3xl text-ink tracking-tight">
-            Shipped Systems &amp; Autonomous Architectures
+            Selected projects
           </h2>
         </div>
 
+        {/* Sticky Filter Active Bar */}
+        {selectedSkill && (
+          <div className="sticky top-20 z-30 flex items-center justify-between rounded-lg border border-signal bg-surface/95 px-4 py-2.5 backdrop-blur shadow-md transition-all duration-200">
+            <span className="font-mono text-xs text-ink">
+              Showing work that uses <strong className="text-signal font-semibold">{selectedSkill}</strong>
+            </span>
+            <button
+              onClick={() => setSelectedSkill(null)}
+              className="font-mono text-xs text-signal hover:underline font-semibold"
+            >
+              Clear
+            </button>
+          </div>
+        )}
+
         {/* ========================================================================= */}
-        {/* SPOTLIGHT 1: Enterprise EU-Compliant Multi-Agent RAG System */}
+        {/* SPOTLIGHT 1: Enterprise Multi-Agent RAG System */}
         {/* ========================================================================= */}
-        <div className="rounded-xl border border-teal/40 bg-surface p-7 sm:p-10 shadow-blueprint-lg relative overflow-hidden space-y-8">
+        <div
+          id="project-rag"
+          style={{ opacity: isHighlighted("project-rag") ? 1 : 0.35, transition: "opacity 200ms ease" }}
+          className="rounded-xl border border-teal/40 bg-surface p-7 sm:p-10 shadow-blueprint-lg relative overflow-hidden space-y-8 transition-all duration-200 lg:hover:-translate-y-1 lg:hover:shadow-[0_12px_28px_rgba(22,35,61,0.08)]"
+        >
           {/* Top Line Gradient */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-teal via-signal to-amber" />
 
@@ -250,7 +306,7 @@ export function ProjectsSection() {
                 FLAGSHIP PROJECT · SOVEREIGN MULTI-AGENT AI &amp; GDPR GOVERNANCE
               </span>
               <h3 className="font-display font-bold text-2xl sm:text-3xl text-ink mt-2 flex items-center gap-2">
-                <span>🛡️</span> Enterprise EU-Compliant Multi-Agent RAG System
+                Enterprise Multi-Agent RAG System (GDPR &amp; EU AI Act ready)
               </h3>
               <p className="font-body text-sm sm:text-base text-signal font-medium">
                 Autonomous 4-agent RAG engine with Presidio PII pseudonymization, AES-256-GCM cryptographic shredding, and EU AI Act record-keeping.
@@ -272,7 +328,7 @@ export function ProjectsSection() {
               Project Purpose &amp; Enterprise Impact
             </div>
             <p className="font-body text-sm text-ink-soft leading-relaxed">
-              Standard enterprise LLM deployments expose corporations to severe privacy fines (up to <strong className="text-ink font-semibold">€35 Million or 7% global turnover under GDPR</strong>) and hallucination liabilities. This system solves both by deploying a sovereign EU-bounded 4-agent team (<strong className="text-ink font-semibold">Query Planner, Hybrid Retriever, Verifier, Synthesizer</strong>) that cross-examines every claim, sanitizes PII before vector indexing, and executes <strong className="text-signal font-semibold">instant cryptographic shredding (GDPR Art. 17)</strong> upon user erasure requests without expensive vector re-indexing.
+              Companies want to use LLMs on internal documents but cannot risk leaking personal data or giving answers nobody can trace. Under GDPR, data protection fines can reach €20 million or 4% of global turnover, and the EU AI Act adds strict record-keeping duties. This system uses a team of four agents (Query Planner, Hybrid Retriever, Verifier, Synthesizer) that cross-check every claim, removes personal data before indexing, and can delete a user&apos;s data on request without rebuilding the index.
             </p>
           </div>
 
@@ -308,7 +364,7 @@ export function ProjectsSection() {
                 <div className="space-y-1.5 font-mono text-xs text-ink-soft">
                   <div><strong className="text-signal">Step 1:</strong> Presidio scans &amp; pseudonymizes PII before vectorization.</div>
                   <div><strong className="text-signal">Step 2:</strong> Planner decomposes query ➔ Hybrid search ➔ Cross-Encoder rerank.</div>
-                  <div><strong className="text-signal">Step 3:</strong> Verifier validates factual entailment (100% Faithfulness) ➔ Synthesizer adds EU citations.</div>
+                  <div><strong className="text-signal">Step 3:</strong> Verifier checks each claim against the sources ➔ Synthesizer adds EU citations.</div>
                 </div>
               </div>
             </div>
@@ -457,7 +513,12 @@ export function ProjectsSection() {
                             : "VERIFIED GROUNDED OUTPUT (SUCCESS)"}
                         </span>
                       </div>
-                      <span className="text-teal font-bold">{activePreset.latency}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-teal font-bold">{activePreset.latency}</span>
+                        <span className="font-mono text-[10px] bg-[#fdf3e1] text-[#9a6516] border border-[#e8a33d] px-2 py-0.5 rounded font-semibold">
+                          SIMULATED DEMO
+                        </span>
+                      </div>
                     </div>
 
                     {/* Main answer readout */}
@@ -533,46 +594,48 @@ export function ProjectsSection() {
             </div>
           </div>
 
-          {/* Repo Architecture & Links */}
-          <div className="border-t border-line pt-5 grid sm:grid-cols-2 gap-4 font-mono text-xs">
-            <div>
-              <span className="font-bold text-ink block mb-1">Architecture &amp; Microservices:</span>
-              <div className="text-ink-soft space-y-0.5 text-[11px]">
-                <div><strong className="text-signal">/core :</strong> Security (AES-256-GCM), PII Sanitizer, SHA-256 Ledger</div>
-                <div><strong className="text-signal">/rag :</strong> Chunking, Sovereign Embeddings, Hybrid Search, Reranker</div>
-                <div><strong className="text-signal">/agents :</strong> Query Planner, Verifier (NLI Guard), Synthesizer, Supervisor</div>
-                <div><strong className="text-signal">/eval :</strong> RAGAS Quantitative Metric Evaluation Suite</div>
+          {/* Collapsible Technical Details */}
+          <TechnicalDetailsCollapse>
+            <div className="grid sm:grid-cols-2 gap-4 font-mono text-xs">
+              <div>
+                <span className="font-bold text-ink block mb-1">Architecture &amp; Microservices:</span>
+                <div className="text-ink-soft space-y-0.5 text-[11px]">
+                  <div><strong className="text-signal">/core :</strong> Security (AES-256-GCM), PII Sanitizer, SHA-256 Ledger</div>
+                  <div><strong className="text-signal">/rag :</strong> Chunking, Sovereign Embeddings, Hybrid Search, Reranker</div>
+                  <div><strong className="text-signal">/agents :</strong> Query Planner, Verifier (NLI Guard), Synthesizer, Supervisor</div>
+                  <div><strong className="text-signal">/eval :</strong> RAGAS Quantitative Metric Evaluation Suite</div>
+                </div>
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <span className="font-bold text-ink block mb-1">Deployment &amp; Live Artifacts:</span>
-              <div className="rounded border border-line bg-bg p-2.5 text-signal select-all text-[11px]">
-                <code>git clone https://github.com/Nehal-qadeer/eu-compliant-multiagent-rag.git &amp;&amp; docker-compose up -d</code>
-              </div>
-              <div className="flex flex-wrap items-center gap-3 pt-1">
-                <a
-                  href="https://github.com/Nehal-qadeer/eu-compliant-multiagent-rag"
-                  target="_blank"
-                  rel="noopener"
-                  className="inline-flex items-center gap-1 text-signal hover:underline font-bold text-[11px]"
-                >
-                  <Code2 size={12} />
-                  View GitHub Repo ↗
-                </a>
-                <span className="text-line-strong">·</span>
-                <a
-                  href="https://github.com/Nehal-qadeer/eu-compliant-multiagent-rag/blob/main/docs/EU_Compliant_MultiAgent_RAG_Comprehensive_Guide.pdf"
-                  target="_blank"
-                  rel="noopener"
-                  className="inline-flex items-center gap-1 text-teal hover:underline font-bold text-[11px]"
-                >
-                  <FileText size={12} />
-                  PDF Architecture Guide ↗
-                </a>
+              <div className="space-y-2">
+                <span className="font-bold text-ink block mb-1">Deployment &amp; Live Artifacts:</span>
+                <div className="rounded border border-line bg-bg p-2.5 text-signal select-all text-[11px]">
+                  <code>git clone https://github.com/Nehal-qadeer/eu-compliant-multiagent-rag.git &amp;&amp; docker-compose up -d</code>
+                </div>
+                <div className="flex flex-wrap items-center gap-3 pt-1">
+                  <a
+                    href="https://github.com/Nehal-qadeer/eu-compliant-multiagent-rag"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-signal hover:underline font-bold text-[11px]"
+                  >
+                    <Code2 size={12} />
+                    View GitHub Repo ↗
+                  </a>
+                  <span className="text-line-strong">·</span>
+                  <a
+                    href="https://github.com/Nehal-qadeer/eu-compliant-multiagent-rag/blob/main/docs/EU_Compliant_MultiAgent_RAG_Comprehensive_Guide.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-teal hover:underline font-bold text-[11px]"
+                  >
+                    <FileText size={12} />
+                    PDF Architecture Guide ↗
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
+          </TechnicalDetailsCollapse>
 
           {/* Tag Row */}
           <div className="flex flex-wrap gap-2 pt-2 border-t border-line/60">
@@ -587,7 +650,11 @@ export function ProjectsSection() {
         {/* ========================================================================= */}
         {/* SPOTLIGHT 2: Master's Thesis Computer Vision Project Spotlight Card */}
         {/* ========================================================================= */}
-        <div className="rounded-xl border border-line-strong bg-surface p-7 sm:p-10 shadow-blueprint-lg relative overflow-hidden space-y-8">
+        <div
+          id="project-thesis"
+          style={{ opacity: isHighlighted("project-thesis") ? 1 : 0.35, transition: "opacity 200ms ease" }}
+          className="rounded-xl border border-line-strong bg-surface p-7 sm:p-10 shadow-blueprint-lg relative overflow-hidden space-y-8 transition-all duration-200 lg:hover:-translate-y-1 lg:hover:shadow-[0_12px_28px_rgba(22,35,61,0.08)]"
+        >
           {/* Top Line Gradient */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-signal via-teal to-amber" />
 
@@ -598,7 +665,7 @@ export function ProjectsSection() {
                 MASTER&apos;S THESIS PROJECT · SRH HEIDELBERG
               </span>
               <h3 className="font-display font-bold text-2xl sm:text-3xl text-ink mt-2">
-                🎮 Object Detection Game for Hearing-Impaired Children
+                Object Detection Game for Hearing-Impaired Children (Master&apos;s Thesis)
               </h3>
               <p className="font-body text-sm sm:text-base text-signal font-medium">
                 An interactive educational tool using AI to bridge the communication gap through visual recognition.
@@ -673,6 +740,13 @@ export function ProjectsSection() {
 
               {/* Viewport Screen */}
               <div className="aspect-[16/10] rounded-lg bg-[#0F1829] border border-white/10 relative flex flex-col items-center justify-center p-4">
+                {/* Simulated Demo Badge */}
+                <div className="absolute top-2.5 right-2.5 z-20">
+                  <span className="font-mono text-[10px] bg-[#fdf3e1] text-[#9a6516] border border-[#e8a33d] px-2 py-0.5 rounded font-semibold">
+                    SIMULATED DEMO
+                  </span>
+                </div>
+
                 {/* Laser scan line */}
                 <div className="absolute inset-x-0 top-1/2 h-0.5 bg-teal shadow-[0_0_8px_rgba(47,158,143,0.8)]" />
 
@@ -704,24 +778,26 @@ export function ProjectsSection() {
             </div>
           </div>
 
-          {/* Repo Architecture & Command */}
-          <div className="border-t border-line pt-5 grid sm:grid-cols-2 gap-4 font-mono text-xs">
-            <div>
-              <span className="font-bold text-ink block mb-1">Architecture:</span>
-              <div className="text-ink-soft space-y-0.5 text-[11px]">
-                <div><strong className="text-signal">/Object-Detector :</strong> Core CV logic &amp; inference pipeline</div>
-                <div><strong className="text-signal">/frontend :</strong> Accessible desktop UI in PyQt6</div>
-                <div><strong className="text-signal">/models :</strong> Trained YOLOv8 weights &amp; OpenVINO IR files</div>
+          {/* Collapsible Technical Details */}
+          <TechnicalDetailsCollapse>
+            <div className="grid sm:grid-cols-2 gap-4 font-mono text-xs">
+              <div>
+                <span className="font-bold text-ink block mb-1">Architecture:</span>
+                <div className="text-ink-soft space-y-0.5 text-[11px]">
+                  <div><strong className="text-signal">/Object-Detector :</strong> Core CV logic &amp; inference pipeline</div>
+                  <div><strong className="text-signal">/frontend :</strong> Accessible desktop UI in PyQt6</div>
+                  <div><strong className="text-signal">/models :</strong> Trained YOLOv8 weights &amp; OpenVINO IR files</div>
+                </div>
               </div>
-            </div>
 
-            <div>
-              <span className="font-bold text-ink block mb-1">Requirements &amp; Command:</span>
-              <div className="rounded border border-line bg-bg p-2.5 text-signal select-all text-[11px]">
-                <code>pip install opencv-python ultralytics openvino pyqt6</code>
+              <div>
+                <span className="font-bold text-ink block mb-1">Requirements &amp; Command:</span>
+                <div className="rounded border border-line bg-bg p-2.5 text-signal select-all text-[11px]">
+                  <code>pip install opencv-python ultralytics openvino pyqt6</code>
+                </div>
               </div>
             </div>
-          </div>
+          </TechnicalDetailsCollapse>
 
           {/* Tag Row */}
           <div className="flex flex-wrap gap-2 pt-2 border-t border-line/60">
@@ -736,7 +812,11 @@ export function ProjectsSection() {
         {/* ========================================================================= */}
         {/* SPOTLIGHT 3: Virtual Room Builder & German Vocabulary Game */}
         {/* ========================================================================= */}
-        <div className="rounded-xl border border-amber/40 bg-surface p-7 sm:p-10 shadow-blueprint-lg relative overflow-hidden space-y-8">
+        <div
+          id="project-roombuilder"
+          style={{ opacity: isHighlighted("project-roombuilder") ? 1 : 0.35, transition: "opacity 200ms ease" }}
+          className="rounded-xl border border-amber/40 bg-surface p-7 sm:p-10 shadow-blueprint-lg relative overflow-hidden space-y-8 transition-all duration-200 lg:hover:-translate-y-1 lg:hover:shadow-[0_12px_28px_rgba(22,35,61,0.08)]"
+        >
           {/* Top Line Gradient */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber via-signal to-teal" />
 
@@ -747,7 +827,7 @@ export function ProjectsSection() {
                 FULL-STACK AI &amp; COMPUTER VISION · SPATIAL LANGUAGE LEARNING
               </span>
               <h3 className="font-display font-bold text-2xl sm:text-3xl text-ink mt-2 flex items-center gap-2">
-                <span>🏠</span> Virtual Room Builder &amp; German Vocabulary Game
+                Virtual Room Builder &amp; German Vocabulary Game
               </h3>
               <p className="font-body text-sm sm:text-base text-signal font-medium">
                 Spatial room construction web application combining a 60 FPS HTML5 Canvas coordinate engine with Google Gemini Multimodal Vision AI.
@@ -989,41 +1069,43 @@ export function ProjectsSection() {
             </div>
           </div>
 
-          {/* Repo Architecture & Links */}
-          <div className="border-t border-line pt-5 grid sm:grid-cols-2 gap-4 font-mono text-xs">
-            <div>
-              <span className="font-bold text-ink block mb-1">Architecture &amp; Microservices:</span>
-              <div className="text-ink-soft space-y-0.5 text-[11px]">
-                <div><strong className="text-signal">/backend/app/api :</strong> FastAPI REST endpoints for room items &amp; inventory state</div>
-                <div><strong className="text-signal">/backend/app/services :</strong> Gemini Multimodal Vision &amp; German grammar service</div>
-                <div><strong className="text-signal">/backend/app/models :</strong> SQLAlchemy PostgreSQL schema with Alembic migration versioning</div>
-                <div><strong className="text-signal">/frontend/src/components :</strong> 60 FPS HTML5 Canvas engine, collision detection, Web Speech audio</div>
+          {/* Collapsible Technical Details */}
+          <TechnicalDetailsCollapse>
+            <div className="grid sm:grid-cols-2 gap-4 font-mono text-xs">
+              <div>
+                <span className="font-bold text-ink block mb-1">Architecture &amp; Microservices:</span>
+                <div className="text-ink-soft space-y-0.5 text-[11px]">
+                  <div><strong className="text-signal">/backend/app/api :</strong> FastAPI REST endpoints for room items &amp; inventory state</div>
+                  <div><strong className="text-signal">/backend/app/services :</strong> Gemini Multimodal Vision &amp; German grammar service</div>
+                  <div><strong className="text-signal">/backend/app/models :</strong> SQLAlchemy PostgreSQL schema with Alembic migration versioning</div>
+                  <div><strong className="text-signal">/frontend/src/components :</strong> 60 FPS HTML5 Canvas engine, collision detection, Web Speech audio</div>
+                </div>
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <span className="font-bold text-ink block mb-1">Deployment &amp; Live Verification:</span>
-              <div className="rounded border border-line bg-bg p-2.5 text-signal select-all text-[11px]">
-                <code>git clone https://github.com/Nehal-qadeer/Virtual-Room-Builder-German-Game.git &amp;&amp; npm run dev</code>
-              </div>
-              <div className="flex flex-wrap items-center gap-3 pt-1">
-                <a
-                  href="https://github.com/Nehal-qadeer/Virtual-Room-Builder-German-Game"
-                  target="_blank"
-                  rel="noopener"
-                  className="inline-flex items-center gap-1 text-signal hover:underline font-bold text-[11px]"
-                >
-                  <Code2 size={12} />
-                  View GitHub Repo ↗
-                </a>
-                <span className="text-line-strong">·</span>
-                <span className="inline-flex items-center gap-1 text-teal font-bold text-[11px]">
-                  <CheckCircle2 size={12} />
-                  15/15 Pytest Suite Passing
-                </span>
+              <div className="space-y-2">
+                <span className="font-bold text-ink block mb-1">Deployment &amp; Live Verification:</span>
+                <div className="rounded border border-line bg-bg p-2.5 text-signal select-all text-[11px]">
+                  <code>git clone https://github.com/Nehal-qadeer/Virtual-Room-Builder-German-Game.git &amp;&amp; npm run dev</code>
+                </div>
+                <div className="flex flex-wrap items-center gap-3 pt-1">
+                  <a
+                    href="https://github.com/Nehal-qadeer/Virtual-Room-Builder-German-Game"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-signal hover:underline font-bold text-[11px]"
+                  >
+                    <Code2 size={12} />
+                    View GitHub Repo ↗
+                  </a>
+                  <span className="text-line-strong">·</span>
+                  <span className="inline-flex items-center gap-1 text-teal font-bold text-[11px]">
+                    <CheckCircle2 size={12} />
+                    15/15 Pytest Suite Passing
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
+          </TechnicalDetailsCollapse>
 
           {/* Tag Row */}
           <div className="flex flex-wrap gap-2 pt-2 border-t border-line/60">
@@ -1039,31 +1121,34 @@ export function ProjectsSection() {
         {/* Additional Project Cards Grid: Scraping Engine, Satellite Tracker */}
         {/* ========================================================================= */}
         <div className="grid md:grid-cols-2 gap-6">
-          {/* Project 1: Scraping & Ingestion */}
-          <article className="rounded-xl border border-line bg-surface p-7 shadow-blueprint relative overflow-hidden transition-all duration-300 hover:border-signal hover:-translate-y-1 hover:shadow-blueprint-lg flex flex-col justify-between space-y-5">
+          {/* Project Automation */}
+          <article
+            id="project-automation"
+            style={{ opacity: isHighlighted("project-automation") ? 1 : 0.35, transition: "opacity 200ms ease" }}
+            className="rounded-xl border border-line bg-surface p-7 shadow-blueprint relative overflow-hidden transition-all duration-200 lg:hover:-translate-y-1 lg:hover:shadow-[0_12px_28px_rgba(22,35,61,0.08)] flex flex-col justify-between space-y-5"
+          >
             <div className="space-y-4">
               <div className="flex justify-between items-start">
                 <span className="font-mono text-xs font-semibold text-signal uppercase tracking-wider">
-                  Production Data Pipeline
+                  CLIENT &amp; PERSONAL PROJECTS · 2025–26
                 </span>
-                <span className="font-mono text-xs text-ink-soft">2025–26</span>
               </div>
 
               <div>
                 <h3 className="font-display font-bold text-xl text-ink">
-                  Multi-Platform Scraping &amp; Ingestion Engine
+                  Workflow Automation &amp; Data Pipelines
                 </h3>
                 <p className="mt-2.5 font-body text-sm text-ink-soft leading-relaxed">
-                  Python and Selenium scrapers deployed as cloud Apify Actors with dynamic pagination and anti-bot bypass. Automated Make.com JSON validation transforms messy payloads before direct ingestion into PostgreSQL relational databases.
+                  Python and Selenium scrapers deployed as scheduled Apify Actors that collect 2,000 to 4,000 records per run from dynamic, JavaScript-heavy websites, such as hotel pricing and ratings from Booking.com. Make.com validates and transforms the JSON before it is loaded into PostgreSQL. For a client, I turned a 40-hour manual lead-research task into a 1-hour script with CRM-ready CSV export. I also built a 4-app Zapier automation with OAuth (Forms → Sheets → Calendar → Gmail).
                 </p>
               </div>
 
-              <div className="flex flex-wrap gap-2 pt-1">
+              <div className="flex flex-wrap gap-2 pt-1 font-mono text-xs">
                 <a
                   href="https://github.com/Nehal-qadeer/Booking-Automation-Selenium"
                   target="_blank"
-                  rel="noopener"
-                  className="inline-flex items-center gap-1 font-mono text-xs text-signal hover:underline font-semibold"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-signal hover:underline font-semibold"
                 >
                   <Code2 size={12} />
                   Booking.com Scraper
@@ -1073,8 +1158,8 @@ export function ProjectsSection() {
                 <a
                   href="https://github.com/Nehal-qadeer/Yell-Business-Data-Extractor"
                   target="_blank"
-                  rel="noopener"
-                  className="inline-flex items-center gap-1 font-mono text-xs text-signal hover:underline font-semibold"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-signal hover:underline font-semibold"
                 >
                   <Code2 size={12} />
                   Lead-Gen Extractor
@@ -1084,50 +1169,53 @@ export function ProjectsSection() {
             </div>
 
             <div className="flex flex-wrap gap-1.5 pt-3 border-t border-line">
-              {["Python 3", "Selenium", "Apify API", "Make.com", "PostgreSQL", "JSON"].map((tag) => (
-                <span key={tag} className="rounded bg-signal-dim px-2 py-0.5 font-mono text-[10.5px] text-signal">
+              {["Python", "Selenium", "Apify", "Make.com", "Zapier", "PostgreSQL", "OAuth 2.0"].map((tag) => (
+                <span key={tag} className="rounded bg-signal-dim px-2 py-0.5 font-mono text-[10.5px] text-signal font-medium">
                   {tag}
                 </span>
               ))}
             </div>
           </article>
 
-          {/* Project 3: Automated Multi-Tier Tracker & Satellite Tracker */}
-          <article className="rounded-xl border border-line bg-surface p-7 shadow-blueprint relative overflow-hidden transition-all duration-300 hover:border-signal hover:-translate-y-1 hover:shadow-blueprint-lg flex flex-col justify-between space-y-5">
+          {/* Project Satellite */}
+          <article
+            id="project-satellite"
+            style={{ opacity: isHighlighted("project-satellite") ? 1 : 0.35, transition: "opacity 200ms ease" }}
+            className="rounded-xl border border-line bg-surface p-7 shadow-blueprint relative overflow-hidden transition-all duration-200 lg:hover:-translate-y-1 lg:hover:shadow-[0_12px_28px_rgba(22,35,61,0.08)] flex flex-col justify-between space-y-5"
+          >
             <div className="space-y-4">
               <div className="flex justify-between items-start">
                 <span className="font-mono text-xs font-semibold text-signal uppercase tracking-wider">
-                  Full-Stack Caching &amp; Automation
+                  UNIVERSITY PROJECT · 2024
                 </span>
-                <span className="font-mono text-xs text-ink-soft">2026</span>
               </div>
 
               <div>
                 <h3 className="font-display font-bold text-xl text-ink">
-                  Application Tracker &amp; Satellite Tracking System
+                  Satellite Tracking System
                 </h3>
                 <p className="mt-2.5 font-body text-sm text-ink-soft leading-relaxed">
-                  Dual systems: A 4-step Zapier automation with OAuth webhooks (Forms ➔ Sheets ➔ Calendar ➔ Gmail) combined with a full-stack real-time Satellite Tracker built in Node.js, React, and Redis as the shared distributed state and caching layer.
+                  A full-stack app that shows live satellite positions on a Google Map. A Node.js and Express backend serves the latest positions from a Redis cache, with MongoDB for stored data, and a React frontend built with Vite displays them on the map.
                 </p>
               </div>
 
-              <div className="pt-1">
+              <div className="pt-1 font-mono text-xs">
                 <a
                   href="https://github.com/Nehal-qadeer/satellite-trackingsystem"
                   target="_blank"
-                  rel="noopener"
-                  className="inline-flex items-center gap-1 font-mono text-xs text-signal hover:underline font-semibold"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-signal hover:underline font-semibold"
                 >
                   <Code2 size={12} />
-                  Satellite Tracking System Repo
+                  View GitHub Repo ↗
                   <ExternalLink size={10} />
                 </a>
               </div>
             </div>
 
             <div className="flex flex-wrap gap-1.5 pt-3 border-t border-line">
-              {["Zapier", "OAuth 2.0", "Node.js", "React", "Redis", "Google APIs"].map((tag) => (
-                <span key={tag} className="rounded bg-signal-dim px-2 py-0.5 font-mono text-[10.5px] text-signal">
+              {["Node.js", "Express", "Redis", "MongoDB", "React", "Vite", "Google Maps API"].map((tag) => (
+                <span key={tag} className="rounded bg-signal-dim px-2 py-0.5 font-mono text-[10.5px] text-signal font-medium">
                   {tag}
                 </span>
               ))}

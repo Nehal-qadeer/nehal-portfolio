@@ -70,7 +70,7 @@ export function PipelineStatusPanel() {
         {/* Eyebrow */}
         <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
           <span className="w-4 h-px bg-signal" />
-          02 — Stack
+          02 · Stack
         </div>
 
         <h2 className="font-display font-semibold text-2xl sm:text-3xl text-ink mb-8 tracking-tight">

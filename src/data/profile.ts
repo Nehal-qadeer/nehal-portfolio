@@ -16,13 +16,13 @@ export const profile = {
   email: "nehal.q.s@gmail.com",
   phone: "+49 155 66441747",
   links: {
-    linkedin: "https://linkedin.com/in/nehalqadeer",
-    github: "https://github.com/nehalqadeer",
+    linkedin: "https://www.linkedin.com/in/nehalqadeer",
+    github: "https://github.com/Nehal-qadeer",
     portfolio: "https://nehal-qadeer.github.io"
   },
   languages: [
-    { lang: "English", level: "Full Professional" },
-    { lang: "German", level: "A2 (Actively Improving)" }
+    { lang: "English", level: "Full professional working proficiency" },
+    { lang: "German", level: "A1, currently learning" }
   ],
   readouts: [
     { label: "CV Inference Latency", value: "-30%", unit: "Intel OpenVINO Optimization" },

@@ -6,16 +6,16 @@ import { Mail, Phone, Linkedin, Github, MapPin, Copy, Check, Send, Sparkles, Mes
 
 export function ContactFooter() {
   const [copied, setCopied] = useState(false);
-  const [selectedSubject, setSelectedSubject] = useState("Junior AI & Automation Engineer Role");
+  const [selectedSubject, setSelectedSubject] = useState("AI & Automation Engineer role");
   const [senderName, setSenderName] = useState("");
   const [senderEmail, setSenderEmail] = useState("");
   const [senderMessage, setSenderMessage] = useState("");
 
   const subjectPresets = [
-    "Junior AI & Automation Engineer Role",
-    "Junior Python Developer Opportunity",
-    "Computer Vision Specialist Inquiry",
-    "Project Collaboration"
+    "AI & Automation Engineer role",
+    "Python / Backend Developer role",
+    "Computer Vision role",
+    "Project collaboration"
   ];
 
   const copyEmail = () => {
@@ -26,11 +26,10 @@ export function ContactFooter() {
 
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
-    const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(
-      selectedSubject
-    )}&body=${encodeURIComponent(
-      `Name: ${senderName || "Recruiter / Collaborator"}\nEmail: ${senderEmail || "N/A"}\n\nMessage:\n${senderMessage || "Hi Nehal, let's discuss an engineering opportunity..."}`
-    )}`;
+    const bodyContent = `Name: ${senderName}\nEmail: ${senderEmail}\n\nMessage:\n${senderMessage}`;
+    const mailto = `mailto:nehal.q.s@gmail.com?subject=${encodeURIComponent(
+      `${selectedSubject}: message from portfolio`
+    )}&body=${encodeURIComponent(bodyContent)}`;
     window.location.href = mailto;
   };
 
@@ -38,7 +37,6 @@ export function ContactFooter() {
     <footer id="contact" className="py-20 border-t border-line relative overflow-hidden bg-bg">
       {/* Blueprint Coordinates */}
       <span className="crosshair bottom-6 right-6" />
-      <span className="coord bottom-3 right-14">EOF · build v1.3.0</span>
 
       <div className="max-w-[1040px] mx-auto px-6 md:px-10 space-y-12">
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start justify-between">
@@ -47,13 +45,13 @@ export function ContactFooter() {
             <div>
               <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-2">
                 <span className="w-4 h-px bg-signal" />
-                06 — Interactive Connect
+                06 · CONTACT
               </div>
               <h2 className="font-display font-bold text-3xl sm:text-4xl text-ink tracking-tight">
                 Let&apos;s build something.
               </h2>
               <p className="mt-2 font-body text-sm text-ink-soft leading-relaxed">
-                Open to <strong className="text-ink">Junior AI/Automation Engineer, Python Developer, and QA Engineering</strong> roles in Mannheim, across Germany, and remote EU. Reach out — I reply fast.
+                Open to AI &amp; Automation Engineer, Python and Computer Vision roles in Mannheim, across Germany, or remote within the EU. I usually reply within a day.
               </p>
             </div>
 
@@ -122,7 +120,7 @@ export function ContactFooter() {
                   className="inline-flex items-center gap-2 rounded bg-ink px-6 py-2.5 font-mono text-xs font-bold text-bg transition-all hover:bg-signal hover:shadow-glow hover:-translate-y-0.5 active:scale-95"
                 >
                   <Send size={13} />
-                  Dispatch Message
+                  Send via email
                 </button>
 
                 <button
@@ -173,7 +171,7 @@ export function ContactFooter() {
               <a
                 href={profile.links.linkedin}
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 className="flex items-center gap-3 hover:text-signal transition-colors group p-2 rounded-lg hover:bg-bg"
               >
                 <div className="w-8 h-8 rounded-lg bg-signal-dim flex items-center justify-center text-signal group-hover:scale-105 transition-transform">
@@ -188,7 +186,7 @@ export function ContactFooter() {
               <a
                 href={profile.links.github}
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 className="flex items-center gap-3 hover:text-signal transition-colors group p-2 rounded-lg hover:bg-bg"
               >
                 <div className="w-8 h-8 rounded-lg bg-signal-dim flex items-center justify-center text-signal group-hover:scale-105 transition-transform">

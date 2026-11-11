@@ -9,7 +9,7 @@ export function AboutSection() {
         {/* Eyebrow */}
         <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
           <span className="w-4 h-px bg-signal" />
-          01 — About
+          01 · About
         </div>
 
         <h2 className="font-display font-semibold text-2xl sm:text-3xl text-ink mb-8 tracking-tight">
@@ -20,13 +20,13 @@ export function AboutSection() {
           {/* Bio Paragraphs */}
           <div className="space-y-4 font-body text-base text-ink-soft leading-relaxed">
             <p>
-              I graduated with an M.Sc. in Applied Computer Science from <strong className="text-ink font-semibold">SRH Hochschule Heidelberg (Grade 2.2)</strong>, where my Master&apos;s Thesis was an accessible <strong className="text-ink font-semibold">Object Detection Game for Hearing-Impaired Children</strong> — utilizing custom YOLOv8 models, quantized via <strong className="text-signal font-semibold">Intel OpenVINO for 25+ FPS on standard CPU laptops</strong> without a GPU, and wrapped in a responsive PyQt6 interface.
+              I&apos;m an AI and automation engineer with an M.Sc. in Applied Computer Science from SRH Hochschule Heidelberg (Grade 2.2, 2025). I build GenAI applications, AI agents and automated workflows in Python, and connect them to real systems through REST APIs, JSON and webhooks.
             </p>
             <p>
-              Since then, I have focused on high-throughput backend services and automations: deploying Python Selenium scrapers as cloud <strong className="text-ink font-semibold">Apify Actors</strong>, processing payloads through <strong className="text-ink font-semibold">Make.com JSON pipelines</strong>, and syncing relational <strong className="text-ink font-semibold">PostgreSQL</strong> databases.
+              My Master&apos;s thesis was an object detection game for hearing-impaired children: a custom YOLOv8 model, optimized with Intel OpenVINO to run at 25+ FPS on ordinary laptop CPUs. Since then I&apos;ve built a multi-agent RAG assistant for regulated environments, a language-learning app with Google Gemini Vision, and data pipelines that load thousands of records per run.
             </p>
             <p>
-              Prior to my Master&apos;s, I spent three years in technical support and agile coordination roles — reading server logs over the Linux CLI, running structured SQL queries against production databases, and validating release acceptance criteria. That foundation is why I engineer systems that hold up reliably in production, outside the notebook.
+              Before moving into AI, I spent two years in customer support and a year leading a development team. That taught me to build things people actually use. I&apos;m currently a Teleoperation &amp; Data Labeling Intern at Sereact, collecting training data for robot learning.
             </p>
           </div>
 
@@ -34,7 +34,7 @@ export function AboutSection() {
           <dl className="rounded-xl border border-line bg-surface p-6 font-mono text-xs shadow-blueprint space-y-3.5">
             <div>
               <dt className="text-ink-soft text-[11px] uppercase tracking-wider">Focus</dt>
-              <dd className="font-semibold text-ink text-sm mt-0.5">AI/CV · Automation · Backend</dd>
+              <dd className="font-semibold text-ink text-sm mt-0.5">AI · Automation · Computer Vision</dd>
             </div>
             <div className="border-t border-line/60 pt-3">
               <dt className="text-ink-soft text-[11px] uppercase tracking-wider">Education</dt>
@@ -46,7 +46,7 @@ export function AboutSection() {
             </div>
             <div className="border-t border-line/60 pt-3">
               <dt className="text-ink-soft text-[11px] uppercase tracking-wider">Languages</dt>
-              <dd className="font-semibold text-ink text-sm mt-0.5">English (Full Pro) · German (A2)</dd>
+              <dd className="font-semibold text-ink text-sm mt-0.5">English (full professional) · German (A1, learning)</dd>
             </div>
             <div className="border-t border-line/60 pt-3">
               <dt className="text-ink-soft text-[11px] uppercase tracking-wider">Status</dt>

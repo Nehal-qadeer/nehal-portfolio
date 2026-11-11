@@ -15,7 +15,7 @@ export function CaseStudies() {
       summary:
         "High-throughput automated data harvesting infrastructure. Deploys custom Python Selenium scrapers as cloud Apify Actors with automated cron triggers, Make.com JSON validation, and direct PostgreSQL relational database storage.",
       highlights: [
-        "Deployed custom Python Selenium scrapers as cloud Apify Actors with dynamic pagination & anti-bot bypass.",
+        "Deployed custom Python Selenium scrapers as cloud Apify Actors with dynamic pagination & robust handling of dynamic pages.",
         "Engineered Make.com scenarios with JSON transformation logic to parse, clean, and validate payloads.",
         "Wired storage directly into PostgreSQL relational databases to power analytical dashboards."
       ],
@@ -132,7 +132,7 @@ export function CaseStudies() {
                           key={repo.url}
                           href={repo.url}
                           target="_blank"
-                          rel="noreferrer"
+                          rel="noopener noreferrer"
                           className="inline-flex items-center gap-1 rounded-lg border border-amber/40 bg-amber/10 px-3 py-1.5 font-mono text-xs font-semibold text-amber hover:bg-amber hover:text-graphite transition-all"
                         >
                           <Code2 size={13} />

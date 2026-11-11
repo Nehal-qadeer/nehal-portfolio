@@ -15,7 +15,7 @@ export function ArchitectureFlowCard() {
       subtitle: "Webcam stream or web scrapers",
       tech: "OpenCV · Selenium · Apify",
       details:
-        "Captures real-time camera frames or harvests dynamic web data across multiple SaaS platforms with anti-bot handling."
+        "Captures real-time camera frames or harvests dynamic web data across multiple SaaS platforms with robust handling of dynamic pages."
     },
     {
       id: 1,

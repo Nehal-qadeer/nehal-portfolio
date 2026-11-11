@@ -1,9 +1,16 @@
-"use client";
-
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { MorphingPipelineVisualizer } from "@/components/ui/MorphingPipelineVisualizer";
 import { profile } from "@/data/profile";
-import { MapPin, ArrowRight, Github, Linkedin, Mail } from "lucide-react";
+import { MapPin, ArrowRight, Github, Linkedin, Mail, Download } from "lucide-react";
+
+const AgentNetwork = dynamic(() => import("@/components/ui/AgentNetwork"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full rounded-2xl border border-line bg-surface p-6 shadow-blueprint h-[460px] flex items-center justify-center">
+      <div className="font-mono text-xs text-signal animate-pulse">Loading Agent Network...</div>
+    </div>
+  ),
+});
 
 export function Hero() {
   return (
@@ -21,7 +28,7 @@ export function Hero() {
             {/* Status Pill */}
             <div className="inline-flex items-center gap-2 font-mono text-[11px] text-teal bg-teal/10 border border-teal/30 px-3 py-1 rounded-full tracking-wide">
               <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse-blip" />
-              AVAILABLE FOR HIRE · JUNIOR & FULL-TIME ROLES
+              OPEN TO AI &amp; AUTOMATION ROLES · GERMANY / REMOTE EU
             </div>
 
             <div>
@@ -29,13 +36,13 @@ export function Hero() {
                 Nehal Qadeer
               </h1>
               <div className="mt-2 font-mono text-sm sm:text-base text-signal font-medium flex items-center gap-1.5 min-h-[24px]">
-                <span>AI & Automation Engineer / Python Backend Dev</span>
+                <span>AI &amp; Automation Engineer · Python · GenAI</span>
                 <span className="inline-block w-2 h-4 bg-signal animate-cursor-blink" />
               </div>
             </div>
 
             <p className="font-body text-base text-ink-soft leading-relaxed max-w-xl">
-              M.Sc. Applied Computer Science graduate (SRH Heidelberg, 2025). I build the pipelines between systems — computer vision inference models (YOLOv8 + OpenVINO for 25+ FPS on CPU), scalable scraping engines (Selenium, Apify, PostgreSQL), and automations that turn manual busywork into scripts that run themselves.
+              M.Sc. Applied Computer Science graduate (SRH Heidelberg, 2025). I build GenAI applications, AI agents and automations in Python: a multi-agent RAG assistant for regulated environments, real-time computer vision that runs at 25+ FPS on ordinary laptop CPUs, and data pipelines that load thousands of records per run.
             </p>
 
             {/* High-Resolution Portrait Card */}
@@ -77,6 +84,15 @@ export function Hero() {
               </a>
 
               <a
+                href="/Nehal_Qadeer_CV.pdf"
+                download
+                className="inline-flex items-center gap-1.5 rounded border border-ink px-4 py-3 text-ink font-medium hover:border-signal hover:text-signal hover:-translate-y-0.5 transition-all"
+              >
+                <Download size={14} />
+                Download CV
+              </a>
+
+              <a
                 href="#contact"
                 className="inline-flex items-center gap-1.5 rounded border border-ink px-4 py-3 text-ink font-medium hover:border-signal hover:text-signal hover:-translate-y-0.5 transition-all"
               >
@@ -87,7 +103,7 @@ export function Hero() {
               <a
                 href={profile.links.github}
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 rounded border border-line-strong px-3.5 py-3 text-ink-soft hover:border-signal hover:text-signal transition-all"
               >
                 <Github size={13} />
@@ -97,7 +113,7 @@ export function Hero() {
               <a
                 href={profile.links.linkedin}
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 rounded border border-line-strong px-3.5 py-3 text-ink-soft hover:border-signal hover:text-signal transition-all"
               >
                 <Linkedin size={13} />
@@ -106,9 +122,9 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right Column: Interactive Morphing Pipeline Visualizer */}
+          {/* Right Column: 3D Agent Network */}
           <div className="w-full flex items-center justify-center">
-            <MorphingPipelineVisualizer />
+            <AgentNetwork />
           </div>
         </div>
       </div>

@@ -269,7 +269,7 @@ export function TerminalContact() {
                 <a
                   href={profile.links.linkedin}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="font-mono text-xs text-ash hover:text-amber transition-colors flex items-center gap-1"
                 >
                   <Linkedin size={13} /> LinkedIn
@@ -277,7 +277,7 @@ export function TerminalContact() {
                 <a
                   href={profile.links.github}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="font-mono text-xs text-ash hover:text-amber transition-colors flex items-center gap-1"
                 >
                   <Github size={13} /> GitHub
