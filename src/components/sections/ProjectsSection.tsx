@@ -5,6 +5,8 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Code2, Sparkles, Gamepad2, Eye, CheckCircle2, RefreshCw, ShieldCheck, Bot, Lock, ImageIcon, FileText, Monitor, Cpu, Database, Volume2, RotateCw, Boxes, Layers, ChevronDown, Github } from "lucide-react";
 import { useSkillFilter } from "@/context/SkillFilterContext";
+import { BorderBeam } from "@/components/magicui/BorderBeam";
+import { NumberTicker } from "@/components/magicui/NumberTicker";
 
 function TechnicalDetailsCollapse({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -263,7 +265,12 @@ export function ProjectsSection() {
 
       <div className="max-w-[1040px] mx-auto px-6 md:px-10 space-y-14">
         {/* Section Header */}
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
           <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
             <span className="w-4 h-px bg-signal" />
             03 · Selected Projects
@@ -271,7 +278,7 @@ export function ProjectsSection() {
           <h2 className="font-display font-semibold text-2xl sm:text-3xl text-ink tracking-tight">
             Selected projects
           </h2>
-        </div>
+        </motion.div>
 
         {/* Sticky Filter Active Bar */}
         {selectedSkill && (
@@ -296,6 +303,9 @@ export function ProjectsSection() {
           style={{ opacity: isHighlighted("project-rag") ? 1 : 0.35, transition: "opacity 200ms ease" }}
           className="rounded-xl border border-teal/40 bg-surface p-7 sm:p-10 shadow-blueprint-lg relative overflow-hidden space-y-8 transition-all duration-200 lg:hover:-translate-y-1 lg:hover:shadow-[0_12px_28px_rgba(22,35,61,0.08)]"
         >
+          {/* Moving light beam around RAG card only */}
+          <BorderBeam size={280} duration={12} colorFrom="#3b82f6" colorTo="#14b8a6" />
+
           {/* Top Line Gradient */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-teal via-signal to-amber" />
 
@@ -337,7 +347,7 @@ export function ProjectsSection() {
 
             <div className="font-mono text-xs text-right">
               <span className="inline-block rounded border border-teal/40 bg-teal/10 px-3 py-1.5 text-teal font-bold text-sm tabular">
-                94.5% RAGAS Faithfulness
+                <NumberTicker value={94.5} decimalPlaces={1} suffix="% RAGAS Faithfulness" />
               </span>
               <div className="text-[11px] text-ink-soft mt-0.5">EU AI Act High-Risk Ready</div>
             </div>
@@ -708,7 +718,7 @@ export function ProjectsSection() {
 
             <div className="font-mono text-xs text-right">
               <span className="inline-block rounded border border-teal/40 bg-teal/10 px-3 py-1.5 text-teal font-bold text-sm tabular">
-                25+ FPS on CPU
+                <NumberTicker value={25} decimalPlaces={0} suffix="+ FPS on CPU" />
               </span>
               <div className="text-[11px] text-ink-soft mt-0.5">Intel OpenVINO Quantized</div>
             </div>

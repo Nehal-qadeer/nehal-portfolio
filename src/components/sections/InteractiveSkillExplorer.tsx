@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { useSkillFilter } from "@/context/SkillFilterContext";
 
 interface SkillGroup {
@@ -51,19 +52,25 @@ export function InteractiveSkillExplorer() {
   return (
     <section id="stack" className="py-20 border-t border-line relative overflow-hidden">
       <div className="max-w-[1040px] mx-auto px-6 md:px-10">
-        {/* Eyebrow */}
-        <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
-          <span className="w-4 h-px bg-signal" />
-          02 · SKILLS &amp; PROJECT PROOF
-        </div>
+        {/* Eyebrow & Heading with soft fade-in */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
+            <span className="w-4 h-px bg-signal" />
+            02 · SKILLS &amp; PROJECT PROOF
+          </div>
 
-        {/* Heading & Sub-text */}
-        <h2 className="font-display font-semibold text-2xl sm:text-3xl text-ink tracking-tight">
-          What I work with
-        </h2>
-        <p className="mt-2 font-body text-sm text-ink-soft mb-8">
-          Click a skill to highlight the projects and roles where I used it.
-        </p>
+          <h2 className="font-display font-semibold text-2xl sm:text-3xl text-ink tracking-tight">
+            What I work with
+          </h2>
+          <p className="mt-2 font-body text-sm text-ink-soft mb-8">
+            Click a skill to highlight the projects and roles where I used it.
+          </p>
+        </motion.div>
 
         {/* 5-Group Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

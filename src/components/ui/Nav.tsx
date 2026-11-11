@@ -73,7 +73,7 @@ export function Nav() {
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="relative w-8 h-8 rounded-md border-2 border-ink bg-surface flex items-center justify-center font-mono font-bold text-xs text-ink shadow-sm">
               NQ
-              <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-teal shadow-[0_0_0_2px_#EDF1F6] animate-pulse-blip" />
+              <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-teal shadow-[0_0_0_2px_var(--bg)] animate-pulse-blip" />
             </div>
             <div className="font-mono font-bold text-sm tracking-tight text-ink">
               NEHAL<span className="text-signal">_</span>QADEER

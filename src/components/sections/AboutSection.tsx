@@ -1,20 +1,28 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Sparkles, MapPin, GraduationCap, Code2, Globe } from "lucide-react";
 
 export function AboutSection() {
   return (
     <section id="about" className="py-20 border-t border-line relative overflow-hidden">
       <div className="max-w-[1040px] mx-auto px-6 md:px-10">
-        {/* Eyebrow */}
-        <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
-          <span className="w-4 h-px bg-signal" />
-          01 · About
-        </div>
+        {/* Eyebrow & Heading with soft fade-in */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
+            <span className="w-4 h-px bg-signal" />
+            01 · About
+          </div>
 
-        <h2 className="font-display font-semibold text-2xl sm:text-3xl text-ink mb-8 tracking-tight">
-          Built to connect the pieces
-        </h2>
+          <h2 className="font-display font-semibold text-2xl sm:text-3xl text-ink mb-8 tracking-tight">
+            Built to connect the pieces
+          </h2>
+        </motion.div>
 
         <div className="grid md:grid-cols-[2fr_1fr] gap-10 items-start">
           {/* Bio Paragraphs */}

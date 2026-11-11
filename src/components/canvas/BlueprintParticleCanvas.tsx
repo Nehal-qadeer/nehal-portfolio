@@ -63,7 +63,7 @@ export function BlueprintParticleCanvas() {
           const dist = Math.hypot(dx, dy);
 
           if (dist < 130) {
-            ctx.strokeStyle = `rgba(43, 108, 176, ${0.16 * (1 - dist / 130)})`;
+            ctx.strokeStyle = `rgba(59, 130, 246, ${0.18 * (1 - dist / 130)})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -76,7 +76,7 @@ export function BlueprintParticleCanvas() {
       for (const p of particles) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(43, 108, 176, 0.4)";
+        ctx.fillStyle = "rgba(59, 130, 246, 0.45)";
         ctx.fill();
       }
 

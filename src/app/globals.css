@@ -3,18 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --bg: #EDF1F6;
-  --surface: #FFFFFF;
-  --ink: #16233D;
-  --ink-soft: #4A5A76;
-  --line: #C7D3E0;
-  --line-strong: #A6B6C9;
-  --signal: #2B6CB0;
-  --signal-dim: #E4ECF6;
-  --amber: #E8A33D;
-  --teal: #2F9E8F;
-  --grid: rgba(43, 108, 176, 0.08);
-  --glow: rgba(43, 108, 176, 0.16);
+  --bg: #0B1120;
+  --surface: #111A2E;
+  --ink: #F1F5F9;
+  --ink-soft: #94A3B8;
+  --line: #1E293B;
+  --line-strong: #334155;
+  --signal: #3B82F6;
+  --signal-dim: rgba(59, 130, 246, 0.15);
+  --amber: #F59E0B;
+  --teal: #14B8A6;
+  --grid: rgba(59, 130, 246, 0.08);
+  --glow: rgba(59, 130, 246, 0.25);
 }
 
 * {
@@ -32,8 +32,8 @@ html {
 
 body {
   background:
-    radial-gradient(ellipse 900px 500px at 15% -5%, rgba(43, 108, 176, 0.07), transparent 60%),
-    radial-gradient(ellipse 700px 500px at 100% 30%, rgba(47, 158, 143, 0.06), transparent 60%),
+    radial-gradient(ellipse 900px 500px at 15% -5%, rgba(59, 130, 246, 0.14), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 30%, rgba(20, 184, 166, 0.1), transparent 60%),
     var(--bg);
   color: var(--ink);
   font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
@@ -50,6 +50,13 @@ body {
 :focus-visible {
   outline: 2px solid var(--signal);
   outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-border-beam {
+    animation: none !important;
+    display: none !important;
+  }
 }
 
 /* Custom scrollbar */

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
 import { Mail, Phone, Linkedin, Github, MapPin, Copy, Check, Send, Sparkles, MessageSquare } from "lucide-react";
 
@@ -42,7 +43,12 @@ export function ContactFooter() {
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start justify-between">
           {/* Left Column: Interactive Contact Composer */}
           <div className="space-y-6">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
               <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-2">
                 <span className="w-4 h-px bg-signal" />
                 06 · CONTACT
@@ -53,7 +59,7 @@ export function ContactFooter() {
               <p className="mt-2 font-body text-sm text-ink-soft leading-relaxed">
                 Open to AI &amp; Automation Engineer, Python and Computer Vision roles in Mannheim, across Germany, or remote within the EU. I usually reply within a day.
               </p>
-            </div>
+            </motion.div>
 
             {/* Quick Role Subject Selector */}
             <div className="space-y-2">

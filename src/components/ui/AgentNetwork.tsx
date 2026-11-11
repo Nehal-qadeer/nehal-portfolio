@@ -91,14 +91,14 @@ function NodeMesh({
           style={{
             fontFamily: "var(--font-data), 'JetBrains Mono', monospace",
             fontSize: "11px",
-            color: "#16233d",
-            backgroundColor: "#ffffff",
+            color: "var(--ink)",
+            backgroundColor: "var(--surface)",
             padding: "2px 5px",
-            border: "1px solid #c7d3e0",
+            border: "1px solid var(--line-strong)",
             borderRadius: "3px",
             cursor: "pointer",
             whiteSpace: "nowrap",
-            boxShadow: "0 1px 3px rgba(22, 35, 61, 0.08)",
+            boxShadow: "0 1px 3px rgba(0, 0, 0, 0.3)",
             userSelect: "none",
           }}
         >
@@ -296,15 +296,15 @@ export default function AgentNetwork() {
                   width="60"
                   height="16"
                   rx="3"
-                  fill="#ffffff"
-                  stroke="#c7d3e0"
+                  fill="var(--surface)"
+                  stroke="var(--line-strong)"
                   strokeWidth="1"
                 />
                 <text
                   x={node.x}
                   y={node.y - 16}
                   textAnchor="middle"
-                  fill="#16233d"
+                  fill="var(--ink)"
                   fontFamily="var(--font-data), 'JetBrains Mono', monospace"
                   fontSize="10"
                   fontWeight="600"

@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { profile } from "@/data/profile";
 import { MapPin, ArrowRight, Github, Linkedin, Mail, Download } from "lucide-react";
+import { DotPattern } from "@/components/magicui/DotPattern";
 
 const AgentNetwork = dynamic(() => import("@/components/ui/AgentNetwork"), {
   ssr: false,
@@ -15,6 +16,9 @@ const AgentNetwork = dynamic(() => import("@/components/ui/AgentNetwork"), {
 export function Hero() {
   return (
     <header className="relative pt-24 pb-16 md:pt-32 md:pb-20 overflow-hidden">
+      {/* Background Dot Pattern */}
+      <DotPattern className="opacity-35" />
+
       {/* Technical Blueprint Crosshairs & Coordinates */}
       <span className="crosshair top-6 left-6 md:top-8 md:left-10" />
       <span className="coord top-4 left-12 md:top-6 md:left-16">

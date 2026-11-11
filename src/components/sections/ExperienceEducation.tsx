@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useReducedMotion } from "framer-motion";
 import { useSkillFilter } from "@/context/SkillFilterContext";
+import { NumberTicker } from "@/components/magicui/NumberTicker";
 
 export function ExperienceEducation() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -23,13 +24,20 @@ export function ExperienceEducation() {
         className="py-20 border-t border-line relative overflow-hidden"
       >
         <div className="max-w-[1040px] mx-auto px-6 md:px-10">
-          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
-            <span className="w-4 h-px bg-signal" />
-            04 · Experience
-          </div>
-          <h2 className="font-display font-semibold text-2xl sm:text-3xl text-ink mb-12 tracking-tight">
-            Where I&apos;ve worked
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
+              <span className="w-4 h-px bg-signal" />
+              04 · Experience
+            </div>
+            <h2 className="font-display font-semibold text-2xl sm:text-3xl text-ink mb-12 tracking-tight">
+              Where I&apos;ve worked
+            </h2>
+          </motion.div>
 
           {/* Timeline Wrapper */}
           <div className="relative pl-8 md:pl-10 space-y-12">
@@ -55,7 +63,7 @@ export function ExperienceEducation() {
               className="relative group"
             >
               {/* Node Marker: 12px circle with pulsing ring for Sereact */}
-              <div className="absolute -left-[27px] md:left-[-35px] top-1.5 w-3 h-3 rounded-full bg-teal border-2 border-white flex items-center justify-center">
+              <div className="absolute -left-[27px] md:left-[-35px] top-1.5 w-3 h-3 rounded-full bg-teal border-2 border-bg flex items-center justify-center">
                 {!shouldReduceMotion && (
                   <motion.span
                     animate={{ scale: [1, 1.8], opacity: [0.5, 0] }}
@@ -98,7 +106,7 @@ export function ExperienceEducation() {
               className="relative group"
             >
               {/* Node Marker: 12px circle */}
-              <div className="absolute -left-[27px] md:left-[-35px] top-1.5 w-3 h-3 rounded-full bg-signal border-2 border-white" />
+              <div className="absolute -left-[27px] md:left-[-35px] top-1.5 w-3 h-3 rounded-full bg-signal border-2 border-bg" />
 
               <div className="space-y-2">
                 <span className="font-mono text-xs text-signal font-semibold block">
@@ -137,7 +145,7 @@ export function ExperienceEducation() {
               className="relative group"
             >
               {/* Node Marker: 12px circle */}
-              <div className="absolute -left-[27px] md:left-[-35px] top-1.5 w-3 h-3 rounded-full bg-signal border-2 border-white" />
+              <div className="absolute -left-[27px] md:left-[-35px] top-1.5 w-3 h-3 rounded-full bg-signal border-2 border-bg" />
 
               <div className="space-y-2">
                 <span className="font-mono text-xs text-signal font-semibold block">
@@ -150,7 +158,7 @@ export function ExperienceEducation() {
 
                 <ul className="space-y-1.5 font-body text-sm text-ink-soft list-disc pl-4 leading-relaxed">
                   <li>
-                    Supported a global base of 3,000+ customers, handling 350–450 interactions per 7.5-hour shift across 3–4 parallel live chats.
+                    Supported a global base of <NumberTicker value={3000} suffix="+ customers" />, handling 350–450 interactions per 7.5-hour shift across 3–4 parallel live chats.
                   </li>
                   <li>
                     Worked to daily KPI targets (response time, handling time, quality scores) and documented every case in the eCRM system.
@@ -165,7 +173,12 @@ export function ExperienceEducation() {
       {/* Education Section */}
       <section id="education" className="py-20 border-t border-line relative overflow-hidden">
         <div className="max-w-[1040px] mx-auto px-6 md:px-10 space-y-10">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
             <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-signal font-semibold mb-3">
               <span className="w-4 h-px bg-signal" />
               05 · Education
@@ -173,7 +186,7 @@ export function ExperienceEducation() {
             <h2 className="font-display font-semibold text-2xl sm:text-3xl text-ink tracking-tight">
               Academic background
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid sm:grid-cols-2 gap-6">
             {/* Master's Card */}

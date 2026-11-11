@@ -7,35 +7,35 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          DEFAULT: "#EDF1F6",
-          dark: "#0D1420"
+          DEFAULT: "var(--bg)",
+          dark: "#0B1120"
         },
         surface: {
-          DEFAULT: "#FFFFFF",
-          dark: "#141C2B"
+          DEFAULT: "var(--surface)",
+          dark: "#111A2E"
         },
         ink: {
-          DEFAULT: "#16233D",
-          soft: "#4A5A76",
-          light: "#A6B6C9"
+          DEFAULT: "var(--ink)",
+          soft: "var(--ink-soft)",
+          light: "var(--line-strong)"
         },
         line: {
-          DEFAULT: "#C7D3E0",
-          strong: "#A6B6C9",
-          subtle: "rgba(199, 211, 224, 0.6)"
+          DEFAULT: "var(--line)",
+          strong: "var(--line-strong)",
+          subtle: "rgba(30, 41, 59, 0.6)"
         },
         signal: {
-          DEFAULT: "#2B6CB0",
-          dim: "#E4ECF6",
-          hover: "#1A4971"
+          DEFAULT: "var(--signal)",
+          dim: "var(--signal-dim)",
+          hover: "#2563EB"
         },
         teal: {
-          DEFAULT: "#2F9E8F",
-          dim: "rgba(47, 158, 143, 0.12)"
+          DEFAULT: "var(--teal)",
+          dim: "rgba(20, 184, 166, 0.15)"
         },
         amber: {
-          DEFAULT: "#E8A33D",
-          dim: "rgba(232, 163, 61, 0.15)"
+          DEFAULT: "var(--amber)",
+          dim: "rgba(245, 158, 11, 0.15)"
         }
       },
       fontFamily: {
@@ -43,6 +43,16 @@ const config: Config = {
         body: ["var(--font-body)", "Inter", "sans-serif"],
         mono: ["var(--font-data)", "JetBrains Mono", "monospace"],
         data: ["var(--font-data)", "JetBrains Mono", "monospace"]
+      },
+      keyframes: {
+        "border-beam": {
+          "100%": {
+            "offset-distance": "100%",
+          },
+        },
+      },
+      animation: {
+        "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
       },
       boxShadow: {
         blueprint: "0 4px 20px -8px rgba(22, 35, 61, 0.12)",
