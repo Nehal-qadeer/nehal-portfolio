@@ -18,7 +18,7 @@ export default async function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#F4F6F8",
+          backgroundColor: "#F7F5F0",
           padding: "80px 100px",
           borderLeft: "6px solid #0F766E",
           fontFamily: "sans-serif"
@@ -29,7 +29,7 @@ export default async function Image() {
             style={{
               fontSize: "72px",
               fontWeight: 700,
-              color: "#1E293B",
+              color: "#1F2428",
               lineHeight: 1.1,
               letterSpacing: "-0.02em"
             }}

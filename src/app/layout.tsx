@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F4F6F8",
+  themeColor: "#F7F5F0",
   width: "device-width",
   initialScale: 1
 };
@@ -81,7 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
                   document.documentElement.setAttribute('data-theme', theme);
                   var meta = document.querySelector('meta[name="theme-color"]');
-                  if (meta) meta.setAttribute('content', theme === 'dark' ? '#22272E' : '#F4F6F8');
+                  if (meta) meta.setAttribute('content', theme === 'dark' ? '#22272E' : '#F7F5F0');
                 } catch(e) {}
               })();
             `

@@ -3,25 +3,26 @@
 @tailwind utilities;
 
 :root {
-  --bg: #F4F6F8;
-  --surface: #FFFFFF;
-  --surface-2: #F8FAFC;
-  --ink: #1E293B;
-  --ink-soft: #475569;
-  --muted: #5E6B7D;
-  --line: #E2E8F0;
-  --line-strong: #CBD5E1;
+  /* Warm Light Theme (Base) */
+  --bg: #F7F5F0;
+  --surface: #FCFAF6;
+  --surface-2: #F0ECE3;
+  --ink: #1F2428;
+  --ink-soft: #4D535A;
+  --muted: #6A717B;
+  --line: #E6E1D5;
+  --line-strong: #D0C8B8;
   --signal: #0F766E;
   --signal-hover: #115E59;
-  --signal-dim: #D5F5EF;
+  --signal-dim: #D7F4ED;
   --signal-ink: #FFFFFF;
   --teal: #0369A1;
-  --teal-dim: #E0F2FE;
+  --teal-dim: #DFEFF9;
   --amber: #B45309;
-  --amber-dim: #FEF3C7;
-  --glow: rgba(15, 118, 110, 0.10);
-  --grid: rgba(30, 41, 59, 0.07);
-  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+  --amber-dim: #FDF1CE;
+  --glow: rgba(15, 118, 110, 0.08);
+  --grid: rgba(45, 38, 25, 0.05);
+  --shadow-card: 0 1px 2px rgba(35, 28, 20, 0.04), 0 8px 24px rgba(35, 28, 20, 0.06);
 }
 
 html[data-theme="dark"] {
