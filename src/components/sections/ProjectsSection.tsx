@@ -20,10 +20,10 @@ import {
   RotateCw,
   Boxes,
   ChevronDown,
-  Github,
   Maximize2,
   Workflow,
 } from "lucide-react";
+import { GitHubIcon } from "@/components/ui/Icons";
 import { useSkillFilter } from "@/context/SkillFilterContext";
 import { BorderBeam } from "@/components/magicui/BorderBeam";
 import { NumberTicker } from "@/components/magicui/NumberTicker";
@@ -347,21 +347,6 @@ export function ProjectsSection() {
           </div>
         </motion.div>
 
-        {/* Sticky Filter Active Bar */}
-        {selectedSkill && (
-          <div className="sticky top-20 z-30 flex items-center justify-between rounded-xl border border-signal bg-surface/95 px-4 py-2.5 backdrop-blur shadow-card transition-all duration-200">
-            <span className="font-mono text-xs text-ink">
-              Showing work that uses <strong className="text-signal font-semibold">{selectedSkill}</strong>
-            </span>
-            <button
-              onClick={() => setSelectedSkill(null)}
-              className="font-mono text-xs text-signal hover:underline font-semibold"
-            >
-              Clear
-            </button>
-          </div>
-        )}
-
         {/* ========================================================================= */}
         {/* PROJECT 1: Multi-Agent RAG System for Regulated Environments */}
         {/* ========================================================================= */}
@@ -397,7 +382,7 @@ export function ProjectsSection() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 rounded-[10px] border border-line-strong bg-surface px-3.5 py-2 font-mono text-xs font-semibold text-ink hover:border-signal hover:text-signal transition-colors shadow-sm"
                 >
-                  <Github size={13} />
+                  <GitHubIcon size={16} />
                   View Repository
                   <ExternalLink size={12} className="opacity-70" />
                 </a>
@@ -811,7 +796,7 @@ export function ProjectsSection() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 rounded-[10px] border border-line-strong bg-surface px-3.5 py-2 font-mono text-xs font-semibold text-ink hover:border-signal hover:text-signal transition-colors shadow-sm"
                 >
-                  <Github size={13} />
+                  <GitHubIcon size={16} />
                   View Repository
                   <ExternalLink size={12} className="opacity-70" />
                 </a>
@@ -1042,7 +1027,7 @@ export function ProjectsSection() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 rounded-[10px] border border-line-strong bg-surface px-3.5 py-2 font-mono text-xs font-semibold text-ink hover:border-signal hover:text-signal transition-colors shadow-sm"
                 >
-                  <Github size={13} />
+                  <GitHubIcon size={16} />
                   View Repository
                   <ExternalLink size={12} className="opacity-70" />
                 </a>

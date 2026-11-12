@@ -1,7 +1,8 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { profile } from "@/data/profile";
-import { MapPin, ArrowRight, Github, Linkedin, Mail, Download } from "lucide-react";
+import { MapPin, ArrowRight, Mail, Download } from "lucide-react";
+import { GitHubIcon, LinkedInIcon } from "@/components/ui/Icons";
 import { DotPattern } from "@/components/magicui/DotPattern";
 
 const AgentNetwork = dynamic(() => import("@/components/ui/AgentNetwork"), {
@@ -108,9 +109,9 @@ export function Hero() {
                 href={profile.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded-[10px] border border-line-strong bg-surface px-3.5 py-2.5 text-ink-soft hover:border-signal hover:text-signal transition-colors font-mono text-xs shadow-sm"
+                className="inline-flex items-center gap-1.5 rounded-[10px] border border-line-strong bg-surface px-3.5 py-2.5 text-ink-soft hover:border-signal hover:text-signal transition-colors font-mono text-xs shadow-sm"
               >
-                <Github size={13} />
+                <GitHubIcon size={16} />
                 GitHub
               </a>
 
@@ -118,9 +119,9 @@ export function Hero() {
                 href={profile.links.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded-[10px] border border-line-strong bg-surface px-3.5 py-2.5 text-ink-soft hover:border-signal hover:text-signal transition-colors font-mono text-xs shadow-sm"
+                className="inline-flex items-center gap-1.5 rounded-[10px] border border-line-strong bg-surface px-3.5 py-2.5 text-ink-soft hover:border-signal hover:text-signal transition-colors font-mono text-xs shadow-sm"
               >
-                <Linkedin size={13} />
+                <LinkedInIcon size={16} />
                 LinkedIn
               </a>
             </div>

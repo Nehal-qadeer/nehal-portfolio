@@ -182,6 +182,21 @@ h1, h2, h3, h4, h5, h6 {
   animation: cursorBlink 1s steps(1) infinite;
 }
 
+@keyframes cardFlash {
+  0% {
+    outline: 2px solid var(--signal);
+    outline-offset: 4px;
+  }
+  100% {
+    outline: 2px solid transparent;
+    outline-offset: 4px;
+  }
+}
+
+.flash-highlight {
+  animation: cardFlash 1.2s ease-out forwards;
+}
+
 /* Reduced motion disables all animations */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

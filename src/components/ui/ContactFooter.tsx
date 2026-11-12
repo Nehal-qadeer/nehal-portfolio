@@ -3,10 +3,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
-import { Mail, Phone, Linkedin, Github, MapPin, Copy, Check, Send } from "lucide-react";
+import { Phone, MapPin, Copy, Check, Send } from "lucide-react";
+import { GitHubIcon, LinkedInIcon, GmailIcon, WhatsAppIcon } from "@/components/ui/Icons";
 
 export function ContactFooter() {
   const [copied, setCopied] = useState(false);
+  const [directCopied, setDirectCopied] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState("AI & Automation Engineer role");
   const [senderName, setSenderName] = useState("");
   const [senderEmail, setSenderEmail] = useState("");
@@ -23,6 +25,14 @@ export function ContactFooter() {
     navigator.clipboard.writeText(profile.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2400);
+  };
+
+  const copyDirectEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(profile.email);
+    setDirectCopied(true);
+    setTimeout(() => setDirectCopied(false), 1500);
   };
 
   const handleSend = (e: React.FormEvent) => {
@@ -148,58 +158,88 @@ export function ContactFooter() {
             </div>
 
             <div className="space-y-4 font-mono text-xs text-ink-soft">
-              <a
-                href={`mailto:${profile.email}`}
-                className="flex items-center gap-3 hover:text-signal transition-colors group p-2 rounded-xl hover:bg-surface-2"
-              >
-                <div className="w-9 h-9 rounded-lg bg-signal-dim flex items-center justify-center text-signal group-hover:scale-105 transition-transform">
-                  <Mail size={16} />
-                </div>
-                <div>
-                  <div className="text-[10px] uppercase text-muted">Direct Email</div>
-                  <div className="font-bold text-ink">{profile.email}</div>
-                </div>
-              </a>
+              {/* DIRECT EMAIL */}
+              <div className="flex items-center justify-between p-2 rounded-xl hover:bg-surface-2 transition-colors">
+                <a
+                  href={`mailto:${profile.email}`}
+                  className="flex items-center gap-3 hover:text-signal transition-colors group flex-1 min-w-0"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-surface border border-line flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                    <GmailIcon size={20} />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-[10px] uppercase text-muted tracking-wider">Direct Email</div>
+                    <div className="font-bold text-ink truncate">{profile.email}</div>
+                  </div>
+                </a>
+                <button
+                  type="button"
+                  onClick={copyDirectEmail}
+                  className="shrink-0 ml-2 font-mono text-xs text-signal hover:underline px-2 py-1"
+                >
+                  {directCopied ? "Copied" : "Copy"}
+                </button>
+              </div>
 
-              <a
-                href={`tel:${profile.phone.replace(/\s+/g, "")}`}
-                className="flex items-center gap-3 hover:text-signal transition-colors group p-2 rounded-xl hover:bg-surface-2"
-              >
-                <div className="w-9 h-9 rounded-lg bg-signal-dim flex items-center justify-center text-signal group-hover:scale-105 transition-transform">
-                  <Phone size={16} />
+              {/* PHONE & WHATSAPP */}
+              <div className="p-2 rounded-xl hover:bg-surface-2 transition-colors space-y-2.5">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-surface border border-line flex items-center justify-center shrink-0">
+                    <WhatsAppIcon size={20} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] uppercase text-muted tracking-wider">PHONE &amp; WHATSAPP</div>
+                    <div className="font-bold text-ink">{profile.phone}</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-[10px] uppercase text-muted">Direct Mobile</div>
-                  <div className="font-bold text-ink">{profile.phone}</div>
+                <div className="flex items-center gap-2 pl-12">
+                  <a
+                    href={`tel:${profile.phone.replace(/\s+/g, "")}`}
+                    className="inline-flex items-center gap-1.5 h-8 px-3 rounded-[8px] border border-line bg-surface text-ink hover:border-line-strong hover:text-signal font-mono text-xs transition-colors shadow-sm"
+                  >
+                    <Phone size={14} className="text-current" />
+                    Call
+                  </a>
+                  <a
+                    href="https://wa.me/4915566441747"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 h-8 px-3 rounded-[8px] border border-line bg-surface text-ink hover:border-line-strong hover:text-[#25D366] font-mono text-xs transition-colors shadow-sm"
+                  >
+                    <WhatsAppIcon size={14} color="#25D366" />
+                    WhatsApp
+                  </a>
                 </div>
-              </a>
+              </div>
 
+              {/* PROFESSIONAL NETWORK */}
               <a
                 href={profile.links.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 hover:text-signal transition-colors group p-2 rounded-xl hover:bg-surface-2"
               >
-                <div className="w-9 h-9 rounded-lg bg-signal-dim flex items-center justify-center text-signal group-hover:scale-105 transition-transform">
-                  <Linkedin size={16} />
+                <div className="w-9 h-9 rounded-lg bg-surface border border-line flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <LinkedInIcon size={20} />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase text-muted">Professional Network</div>
-                  <div className="font-bold text-ink">linkedin.com/in/nehal-qadeer</div>
+                  <div className="text-[10px] uppercase text-muted tracking-wider">Professional Network</div>
+                  <div className="font-bold text-ink">linkedin.com/in/nehalqadeer</div>
                 </div>
               </a>
 
+              {/* OPEN SOURCE CODE */}
               <a
                 href={profile.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 hover:text-signal transition-colors group p-2 rounded-xl hover:bg-surface-2"
               >
-                <div className="w-9 h-9 rounded-lg bg-signal-dim flex items-center justify-center text-signal group-hover:scale-105 transition-transform">
-                  <Github size={16} />
+                <div className="w-9 h-9 rounded-lg bg-surface border border-line flex items-center justify-center text-ink shrink-0 group-hover:scale-105 transition-transform">
+                  <GitHubIcon size={20} />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase text-muted">Open Source Code</div>
+                  <div className="text-[10px] uppercase text-muted tracking-wider">Open Source Code</div>
                   <div className="font-bold text-ink">github.com/Nehal-qadeer</div>
                 </div>
               </a>
@@ -207,7 +247,7 @@ export function ContactFooter() {
 
             <div className="rounded-xl border border-line bg-surface-2 p-4 font-mono text-[11px] text-muted space-y-2">
               <div className="flex items-center gap-2 text-ink font-semibold">
-                <MapPin size={13} className="text-signal" />
+                <MapPin size={20} className="text-signal shrink-0" />
                 Physical Base
               </div>
               <p>Mannheim / Rhine-Neckar Metropolitan Region, Germany</p>
